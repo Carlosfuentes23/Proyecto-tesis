@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LiderComponent } from './lider.component';
+import { LeaderComponent } from './leader.component';
 
-describe('LiderComponent', () => {
-  let component: LiderComponent;
-  let fixture: ComponentFixture<LiderComponent>;
+describe('LeaderComponent', () => {
+  let component: LeaderComponent;
+  let fixture: ComponentFixture<LeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LiderComponent ]
+      declarations: [ LeaderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LiderComponent);
+    fixture = TestBed.createComponent(LeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
