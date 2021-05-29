@@ -5,9 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
   { path: '', redirectTo:'login', pathMatch:'full'},
   { path: 'login', component: LoginComponent },
-  { path: 'admin', loadChildren: ()=>import('./components/admin/admin.module').then(m => m.AdminModule)},
-  { path: 'member', loadChildren: ()=>import('./components/miembro/miembro.module').then(m => m.MiembroModule)},
-  { path: 'leader', loadChildren: ()=>import('./components/lider/lider.module').then(m => m.LiderModule)},
+  { path: 'users', loadChildren: ()=> import('./components/users/users.module').then(m => m.UsersModule)},
   { path: '**', redirectTo:'login', pathMatch:'full'}
 ];
 
