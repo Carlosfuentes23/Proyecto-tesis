@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -27,6 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatSidenavModule,
+    MatDividerModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -39,6 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatSidenavModule,
+    MatDividerModule,
   ]
 })
 export class SharedModule { }
