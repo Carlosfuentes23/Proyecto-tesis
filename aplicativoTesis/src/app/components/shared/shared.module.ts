@@ -14,9 +14,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatChipsModule } from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  
+    NavbarComponent
+  ],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -31,6 +39,9 @@ import { MatDividerModule } from '@angular/material/divider';
     ReactiveFormsModule,
     MatSidenavModule,
     MatDividerModule,
+    MatChipsModule,
+    MatAutocompleteModule
+
   ],
   exports: [
     MatFormFieldModule,
@@ -45,6 +56,9 @@ import { MatDividerModule } from '@angular/material/divider';
     ReactiveFormsModule,
     MatSidenavModule,
     MatDividerModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    NavbarComponent
   ]
 })
 export class SharedModule { }

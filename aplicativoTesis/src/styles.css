@@ -9,3 +9,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: 5px;
 }
 
+.mat-drawer-inner-container::-webkit-scrollbar {
+	width: 7px;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar-thumb {
+	background: #ffffff;
+	border-radius: 5px;
+}

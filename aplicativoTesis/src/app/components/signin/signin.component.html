@@ -1,0 +1,94 @@
+<div>
+    <app-navbar></app-navbar>
+</div>
+
+<div class="body">
+    <div class="login">
+        <mat-card>
+            <form>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                          <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">Nombre Completo</div>
+                        </div>
+                        <div class="col">
+                          <label for="exampleInputEmail1" class="form-label">Correo Electronico</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label for="exampleInputEmail1" class="form-label">Nombre De Ususario</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="col">
+                          <label for="exampleInputEmail1" class="form-label">Telefono</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">Usuario que suaras dentro de la app</div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label for="exampleInputEmail1" class="form-label">Contraseña</label>
+                          <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label for="exampleInputEmail1" class="form-label">Seleccione su habilidad </label>
+                        <mat-form-field class="example-chip-list ancho" appearance="fill" >
+                            <mat-label>Favorite Fruits</mat-label>
+                            <mat-chip-list #chipList aria-label="Fruit selection">
+                              <mat-chip
+                                *ngFor="let fruit of fruits"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="remove(fruit)">
+                                {{fruit}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                              </mat-chip>
+                              <input
+                                placeholder="New fruit..."
+                                #fruitInput
+                                [formControl]="fruitCtrl"
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="add($event)">
+                            </mat-chip-list>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                                {{fruit}}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                            <button routerLink="/Login" type="button"  mat-raised-button color="warn" class="float-star">
+                                Login
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button type="submit" mat-raised-button color="primary" class="float-end">
+                                Registrar
+                              </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card>
+    </div>        
+</div>
+
+  
+  
