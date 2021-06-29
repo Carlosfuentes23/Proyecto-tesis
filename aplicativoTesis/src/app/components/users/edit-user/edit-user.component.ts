@@ -7,24 +7,19 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css']
 })
-export class SigninComponent implements OnInit {
+export class EditUserComponent implements OnInit {
 
- 
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  //fruitCtrl = new FormControl();
   skillCtrl = new FormControl();
-  //filteredFruits: Observable<string[]>;
   filteredSkills: Observable<string[]>;
-  //fruits: string[] = ['Lemon'];
   skills: string[] = ['Programacion'];
   allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos','UI/UX'];
-  //allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
@@ -72,6 +67,5 @@ export class SigninComponent implements OnInit {
 
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
-  
 
 }

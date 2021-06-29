@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
-import { LeaderComponent } from './leader/leader.component';
-import { MemberComponent } from './member/member.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { UsersComponent } from './users.component';
+
 
 const routes: Routes = [
-  { path: 'admin', component: AdminComponent },
-  { path: 'leader', component: LeaderComponent },
-  { path: 'member', component: MemberComponent },
+  { path:'', component: UsersComponent, children:[
+    { path: '', component: InicioComponent },
+    { path: 'edit-user', component: EditUserComponent}
+  ]},
+
 ];
 
 @NgModule({

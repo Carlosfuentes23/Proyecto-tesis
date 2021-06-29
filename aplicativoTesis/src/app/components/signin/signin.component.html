@@ -46,28 +46,28 @@
                       <div class="row">
                         <label for="exampleInputEmail1" class="form-label">Seleccione su habilidad </label>
                         <mat-form-field class="example-chip-list ancho" appearance="fill" >
-                            <mat-label>Favorite Fruits</mat-label>
-                            <mat-chip-list #chipList aria-label="Fruit selection">
+                            <mat-label>Habilidades</mat-label>
+                            <mat-chip-list #chipList aria-label="seleccion de habilidades">
                               <mat-chip
-                                *ngFor="let fruit of fruits"
+                                *ngFor="let skill of skills"
                                 [selectable]="selectable"
                                 [removable]="removable"
-                                (removed)="remove(fruit)">
-                                {{fruit}}
+                                (removed)="remove(skill)">
+                                {{skill}}
                                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                               </mat-chip>
                               <input
-                                placeholder="New fruit..."
-                                #fruitInput
-                                [formControl]="fruitCtrl"
+                                placeholder="Agregar habilidad..."
+                                #skillInput
+                                [formControl]="skillCtrl"
                                 [matAutocomplete]="auto"
                                 [matChipInputFor]="chipList"
                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                 (matChipInputTokenEnd)="add($event)">
                             </mat-chip-list>
                             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-                                {{fruit}}
+                              <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                                {{skill}}
                               </mat-option>
                             </mat-autocomplete>
                           </mat-form-field>
@@ -81,7 +81,7 @@
                         <div class="col">
                             <button type="submit" mat-raised-button color="primary" class="float-end">
                                 Registrar
-                              </button>
+                            </button>
                         </div>
                     </div>
                 </div>

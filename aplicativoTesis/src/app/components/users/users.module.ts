@@ -3,16 +3,15 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 
 import { UsersRoutingModule } from './users-routing.module';
-import { AdminComponent } from './admin/admin.component';
-import { MemberComponent } from './member/member.component';
-import { LeaderComponent } from './leader/leader.component';
+
+import { UsersComponent } from './users.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 @NgModule({
   declarations: [
-    AdminComponent,
-    MemberComponent,
-    LeaderComponent
+    UsersComponent,
+    EditUserComponent,
   ],
   imports: [
     CommonModule,

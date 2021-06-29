@@ -29,12 +29,7 @@ export class LoginComponent implements OnInit {
 
     //Priemras pruebas para la redireccion del login
     if(usuario=="admin1" && password=="admin123"){
-      this.router.navigate(['users/admin']);
-    }else if (usuario=="leader1" && password=="leader123"){
-      this.router.navigate(['users/leader']);
-    }else if(usuario=="member1" && password=="member123"){
-      const url = 'users/member';
-      this.router.navigate(['users/member']);
+      this.router.navigate(['User']);
     }else{
       this.error();
       this.form.reset();
