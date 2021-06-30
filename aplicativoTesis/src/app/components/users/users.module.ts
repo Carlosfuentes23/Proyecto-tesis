@@ -6,12 +6,14 @@ import { UsersRoutingModule } from './users-routing.module';
 
 import { UsersComponent } from './users.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
     EditUserComponent,
+    InicioComponent
   ],
   imports: [
     CommonModule,

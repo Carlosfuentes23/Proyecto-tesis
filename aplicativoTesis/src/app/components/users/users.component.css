@@ -19,7 +19,7 @@ mat-toolbar {
     border-radius: 10px;
     margin: 16px;
     margin-left: 32px;
-  
+    
     /*display: flex;
     justify-content: center;
     align-items: center;
@@ -72,3 +72,8 @@ mat-toolbar {
     flex: 1 1 auto;
   }
   
+  @media ( max-width: 680px) {
+    .content{
+      overflow: auto;
+    }
+  }

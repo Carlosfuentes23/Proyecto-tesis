@@ -13,18 +13,13 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class SigninComponent implements OnInit {
 
- 
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  //fruitCtrl = new FormControl();
   skillCtrl = new FormControl();
-  //filteredFruits: Observable<string[]>;
   filteredSkills: Observable<string[]>;
-  //fruits: string[] = ['Lemon'];
   skills: string[] = ['Programacion'];
   allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos','UI/UX'];
-  //allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
