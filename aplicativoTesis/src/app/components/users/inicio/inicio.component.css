@@ -2,8 +2,13 @@
     padding: 5%;
 }
 
+.centrar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .avatar {
-    margin-top: 16px;
     width: 100px;
     height: 100px;
     border-radius: 50%;

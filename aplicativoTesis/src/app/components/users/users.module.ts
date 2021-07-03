@@ -7,13 +7,15 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { CreateProyectComponent } from './create-proyect/create-proyect.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
     EditUserComponent,
-    InicioComponent
+    InicioComponent,
+    CreateProyectComponent
   ],
   imports: [
     CommonModule,

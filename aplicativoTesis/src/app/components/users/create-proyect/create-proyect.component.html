@@ -1,0 +1,69 @@
+<form class="cont">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+              <label for="exampleInputEmail1" class="form-label">Nombre del Proyecto</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">Descripción</div>
+            </div>
+            <div class="col">
+              <label for="exampleInputEmail1" class="form-label">Duración Estimada</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="exampleInputEmail1" class="form-label">Organización</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="col">
+              <label for="exampleInputEmail1" class="form-label">Telefono</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">Usuario que suaras dentro de la app</div>
+            </div>
+          </div>
+          <div class="row">
+            <label for="exampleInputEmail1" class="form-label">Seleccione su habilidad </label>
+            <mat-form-field class="example-chip-list ancho" appearance="fill" >
+                <mat-label>Habilidades</mat-label>
+                <mat-chip-list #chipList aria-label="seleccion de habilidades">
+                  <mat-chip
+                    *ngFor="let skill of skills"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(skill)">
+                    {{skill}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Agregar habilidad..."
+                    #skillInput
+                    [formControl]="skillCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                    {{skill}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col">
+                <button [routerLink]="['/User']" type="button"  mat-raised-button color="warn" class="float-star">
+                    Volver
+                </button>
+            </div>
+            <div class="col">
+                <button type="submit" mat-raised-button color="primary" class="float-end">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

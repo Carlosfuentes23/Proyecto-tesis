@@ -2,14 +2,25 @@
   <div class="row mb-3">
     <div class="col">
       <mat-card>
-        <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
-
-        <h4 class="name">John Smith</h4>
-        <p class="designation">Software Engineer</p>
+        <div class="row cont" >
+          <div class="col-6 col-md-4 centrar">
+            <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+          </div>
+          <div class="col-12 col-sm-6 col-md-8">
+            <p class="designation">Usuario</p>
+            <p class="designation">Correo</p>
+            <p class="designation">Habilidades</p>
+            <mat-chip-list aria-label="Fish selection">
+              <mat-chip>Skill 1</mat-chip>
+              <mat-chip>Skill 2</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+        
       </mat-card>
     </div>
     <div class="col">
-      <mat-card>
+      <mat-card style="height: 100%;">
         <div class="row">
           <div class="col">
             <h3>
@@ -22,24 +33,11 @@
             <a class="btn btn-primary float-end">Nuevo</a>
           </div>
         </div>
-       
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">proyecto1</div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Proyecto2</div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">proyecto3</div>
-        </div>
-
+        <mat-tab-group>
+          <mat-tab label="Manager"> Content 1 </mat-tab>
+          <mat-tab label="Leader"> Content 2 </mat-tab>
+          <mat-tab label="Developer"> Content 3 </mat-tab>
+        </mat-tab-group>
       </mat-card>
     </div>
   </div>

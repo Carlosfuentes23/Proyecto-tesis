@@ -10,9 +10,18 @@
     Aplicacion
     <span class="example-spacer"></span>
     <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>people_alt</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>email</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>notifications</mat-icon>
+    </button>
     <button routerLink="/logout" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>logout</mat-icon>
-    </button>
+    </button>   
   </mat-toolbar>
   
   
@@ -52,7 +61,7 @@
     </button>
     </mat-sidenav>
     <mat-sidenav-content>
-      <div class="content mat-elevation-z8">
+      <div class="content mat-elevation-z8" style="overflow: auto;">
             <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
