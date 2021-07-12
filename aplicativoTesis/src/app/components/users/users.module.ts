@@ -8,6 +8,9 @@ import { UsersComponent } from './users.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { CreateProyectComponent } from './create-proyect/create-proyect.component';
+import { CreatePhaseComponent } from './create-phase/create-phase.component';
+import { ProjectComponent } from './project/project.component';
+import { PhaseComponent } from './phase/phase.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { CreateProyectComponent } from './create-proyect/create-proyect.componen
     UsersComponent,
     EditUserComponent,
     InicioComponent,
-    CreateProyectComponent
+    CreateProyectComponent,
+    CreatePhaseComponent,
+    ProjectComponent,
+    PhaseComponent
   ],
   imports: [
     CommonModule,
