@@ -1,31 +1,42 @@
 <div class="cont">
   <div class="row mt-3">
     <div class="col">
-      <mat-card class="datosFase">
+      <mat-card class="tergeta">
         <h2>Datos de La fase</h2>
         <div class="mt-4 mb-2">
-          <p>Nombre del proyecto: {{ phase.name }}</p>
-          <p>Lider del proyecto: {{ phase.leader }}</p>
-          <p>Fecha de inicio Fase: {{ phase.dateCreate | date: 'M/d/yy'}}</p>
+          <p><strong>Nombre del proyecto:</strong> {{ phase.name }}</p>
+          <p><strong>Lider del proyecto:</strong> {{ phase.leader }}</p>
+          <p><strong>Fecha de inicio de Fase:</strong> {{ phase.dateCreate | date: 'M/d/yy'}}</p>
+          <p><strong>Descripción:</strong> {{ phase.description }}</p>
         </div>
       </mat-card>
     </div>
     <div class="col">
-      <mat-card class="reuniones">
-        <h2>Reuniones</h2>
-        <table class="table">
+      <mat-card class="tergeta">
+        <div class="row">
+          <div class="col">
+            <h2>
+              Reuniones
+            </h2>
+          </div>
+          <div class="col">
+            <a class="btn btn-primary btn-sm float-end">Nueva</a>
+          </div>
+        </div>
+        <table class="table table-striped">
           <tbody>
             <tr>
-              <td>
+              <td scope="col">
                 <a href="">Reunion 1</a>
               </td>
             </tr>
             <tr>
-              <td>
+              <td scope="col">
                 <a href="">Reunion 2</a>
               </td>
-            </tr><tr>
-              <td>
+            </tr>
+            <tr>
+              <td scope="col">
                 <a href="">Reunion 3</a>
               </td>
             </tr>
@@ -37,20 +48,39 @@
   <hr>
   <div class="row mt-3">
     <div class="col">
-      <mat-card>
-        <h3>Integrantes</h3>
+      <mat-card class="tergeta">
+        <div class="row">
+          <div class="col">
+            <h2>
+              Integrantes
+            </h2>
+          </div>
+          <div class="col">
+            <a class="btn btn-primary btn-sm float-end">Ver mas</a>
+          </div>
+        </div>
+        <table class="table table-striped">
+          <tbody>
+            <tr *ngFor="let inte of phase.integrantes;  index as i;">
+              <td>
+                {{inte}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </mat-card>
     </div>
     <div class="col">
-      <mat-card>
-        <h3>Calificar fase</h3>
+      <mat-card class="tergeta">
+        <h2>Calificar fase</h2>
+
       </mat-card>
     </div>
   </div>
   <hr>
   <div class="row mt-3">
     <div class="col">
-      <mat-card>
+      <mat-card class="tergeta">
         <h3>Estadisticas</h3>
         <div class="row">
           <div class="col">
