@@ -3,6 +3,12 @@
     <div class="col">
       <mat-card class="tergeta">
         <h2>Datos del Proyecto</h2>
+        <div class="mt-4 mb-2">
+          <p><strong>Nombre del proyecto:</strong> {{ proyect.name }}</p>
+          <p><strong>Lider del proyecto:</strong> {{ proyect.leader }}</p>
+          <p><strong>Fecha de inicio de Fase:</strong> {{ proyect.dateCreate | date: 'M/d/yy'}}</p>
+          <p><strong>Descripción:</strong> {{ proyect.description }}</p>
+        </div>
       </mat-card>
     </div>
     <div class="col">
@@ -17,6 +23,25 @@
             <a class="btn btn-primary btn-sm float-end">Nueva</a>
           </div>
         </div>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td scope="col">
+                <a href="">Fase 1</a>
+              </td>
+            </tr>
+            <tr>
+              <td scope="col">
+                <a href="">Fase 1</a>
+              </td>
+            </tr>
+            <tr>
+              <td scope="col">
+                <a href="">Fase 3</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </mat-card>
     </div>
   </div>
@@ -34,6 +59,15 @@
             <a class="btn btn-primary btn-sm float-end">Ver mas</a>
           </div>
         </div>
+        <table class="table table-striped">
+          <tbody>
+            <tr *ngFor="let inte of proyect.integrantes;  index as i;">
+              <td>
+                {{inte}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </mat-card>
     </div>
     <div class="col">
@@ -48,6 +82,15 @@
             <a class="btn btn-primary btn-sm float-end">Nueva</a>
           </div>
         </div>
+        <table class="table table-striped">
+          <tbody>
+            <tr *ngFor="let reunion of proyect.reuniones;  index as i;">
+              <td scope="col">
+                <a href="">{{reunion}}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </mat-card>
     </div>
   </div>
