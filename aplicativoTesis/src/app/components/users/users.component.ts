@@ -14,8 +14,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private observer: BreakpointObserver) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {

@@ -1,6 +1,6 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
@@ -13,6 +13,7 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class SigninComponent implements OnInit {
 
+  form:FormGroup;
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -23,17 +24,25 @@ export class SigninComponent implements OnInit {
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
-  
-  constructor() { 
+
+  constructor(private fb: FormBuilder) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
+    this.form = this.fb.group({
+      name:['', Validators.required],
+      mail: ['', Validators.required, Validators.email],
+      nickName: ['', Validators.required],
+      tel: ['', Validators.required, Validators.min(7), Validators.max(10)],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    })
   }
 
   ngOnInit(): void {
   }
 
-  
+
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -67,6 +76,6 @@ export class SigninComponent implements OnInit {
 
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
-  
+
 
 }

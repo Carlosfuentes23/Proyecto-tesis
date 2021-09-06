@@ -12,9 +12,10 @@ export class PhaseComponent implements OnInit {
     name: "Front-End",
     leader: "Carlos Fuentes",
     dateCreate: Date.now(),
-    dateEstimada: Date.now(),
+    dateEstimated: Date.now(),
     description: "En esta reunion se definieron los diseños del frontend",
-    integrantes: ["Carlos Fuentes", "Sebastian Reyes", "Camilo Rozo"],
+    members: ["Carlos Fuentes", "Sebastian Reyes", "Camilo Rozo"],
+    skills:["Bootstrap","Html 5","JS","Angular"]
   };
 
   constructor() { }
