@@ -6,6 +6,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { PhaseComponent } from './phase/phase.component';
 import { ProjectComponent } from './project/project.component';
+import { SelectRoleComponent } from './select-role/select-role.component';
 import { UsersComponent } from './users.component';
 
 
@@ -16,9 +17,9 @@ const routes: Routes = [
     { path: 'create-proyect', component: CreateProyectComponent },
     { path: 'create-phase', component: CreatePhaseComponent },
     { path: 'project', component: ProjectComponent},
-    { path: 'phase', component: PhaseComponent}
-
-  ]},
+    { path: 'phase', component: PhaseComponent},
+    { path: 'select-role', component: SelectRoleComponent }
+  ]}, 
 
 ];
 
