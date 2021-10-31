@@ -11,6 +11,7 @@ import { CreateProyectComponent } from './create-proyect/create-proyect.componen
 import { CreatePhaseComponent } from './create-phase/create-phase.component';
 import { ProjectComponent } from './project/project.component';
 import { PhaseComponent } from './phase/phase.component';
+import { SelectRoleComponent } from './select-role/select-role.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PhaseComponent } from './phase/phase.component';
     CreateProyectComponent,
     CreatePhaseComponent,
     ProjectComponent,
-    PhaseComponent
+    PhaseComponent,
+    SelectRoleComponent
   ],
   imports: [
     CommonModule,
