@@ -7,11 +7,12 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { InicioComponent } from './inicio/inicio.component';
-import { CreateProyectComponent } from './create-proyect/create-proyect.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 import { CreatePhaseComponent } from './create-phase/create-phase.component';
 import { ProjectComponent } from './project/project.component';
 import { PhaseComponent } from './phase/phase.component';
 import { SelectRoleComponent } from './select-role/select-role.component';
+import { SelectProjectComponent } from './select-project/select-project.component';
 
 
 @NgModule({
@@ -19,11 +20,12 @@ import { SelectRoleComponent } from './select-role/select-role.component';
     UsersComponent,
     EditUserComponent,
     InicioComponent,
-    CreateProyectComponent,
+    CreateProjectComponent,
     CreatePhaseComponent,
     ProjectComponent,
     PhaseComponent,
-    SelectRoleComponent
+    SelectRoleComponent,
+    SelectProjectComponent
   ],
   imports: [
     CommonModule,

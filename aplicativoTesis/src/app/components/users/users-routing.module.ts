@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreatePhaseComponent } from './create-phase/create-phase.component';
-import { CreateProyectComponent } from './create-proyect/create-proyect.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { PhaseComponent } from './phase/phase.component';
@@ -14,12 +14,12 @@ const routes: Routes = [
   { path:'', component: UsersComponent, children:[
     { path: '', component: InicioComponent },
     { path: 'edit-user', component: EditUserComponent },
-    { path: 'create-proyect', component: CreateProyectComponent },
+    { path: 'create-project', component: CreateProjectComponent },
     { path: 'create-phase', component: CreatePhaseComponent },
     { path: 'project', component: ProjectComponent},
     { path: 'phase', component: PhaseComponent},
     { path: 'select-role', component: SelectRoleComponent }
-  ]}, 
+  ]},
 
 ];
 

@@ -6,11 +6,11 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 @Component({
-  selector: 'app-create-proyect',
-  templateUrl: './create-proyect.component.html',
-  styleUrls: ['./create-proyect.component.css']
+  selector: 'app-create-project',
+  templateUrl: './create-project.component.html',
+  styleUrls: ['./create-project.component.css']
 })
-export class CreateProyectComponent implements OnInit {
+export class CreateProjectComponent implements OnInit {
 
   selectable = true;
   removable = true;

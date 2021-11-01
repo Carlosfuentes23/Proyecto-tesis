@@ -9,7 +9,7 @@ import { Project } from 'src/app/interfaces/project.interface';
 })
 export class ProjectComponent implements OnInit {
 
-  proyect : Project ={
+  project : Project ={
     name:"PeliApp",
     leader:"Carlos Fuentes",
     dateCreate: Date.now(),

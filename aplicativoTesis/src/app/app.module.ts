@@ -9,13 +9,11 @@ import { SharedModule } from './components/shared/shared.module';
 import { SigninComponent } from './components/signin/signin.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SigninComponent,
-
   ],
   imports: [
     BrowserModule,
