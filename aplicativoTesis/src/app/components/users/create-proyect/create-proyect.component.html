@@ -1,26 +1,26 @@
-<form class="cont">
+<form class="cont" [formGroup]='form'>
     <div class="card-body">
         <div class="row">
             <div class="col">
-              <label for="exampleInputEmail1" class="form-label">Nombre del Proyecto</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" >
+              <label for="nameProject" class="form-label">Nombre del Proyecto</label>
+              <input type="text" class="form-control" id="nameProject" formControlName="nameProject">
               <div id="emailHelp" class="form-text">Descripción</div>
             </div>
             <div class="col">
-              <label for="exampleInputEmail1" class="form-label">Duración Estimada</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" >
+              <label for="dateEstimated" class="form-label">Duración Estimada</label>
+              <input type="text" class="form-control" id="dateEstimated" formControlName="dateEstimated">
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label for="exampleInputEmail1" class="form-label">Organización</label>
-              <input type="text" class="form-control" id="exampleInputEmail1">
+              <input type="text" class="form-control" id="organization" formControlName="organization">
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="col">
               <label for="exampleInputEmail1" class="form-label">Telefono</label>
-              <input type="text" class="form-control" id="exampleInputEmail1">
+              <input type="text" class="form-control" id="phone" formControlName="phone">
               <div id="emailHelp" class="form-text">Usuario que suaras dentro de la app</div>
             </div>
           </div>
@@ -44,7 +44,9 @@
                     [matAutocomplete]="auto"
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    (matChipInputTokenEnd)="add($event)">
+                    (matChipInputTokenEnd)="add($event)"
+                    id="skills"
+                    formControlName="skills">
                 </mat-chip-list>
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                   <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">

@@ -1,4 +1,4 @@
-export interface Phase{
+export type Phase={
   name?: string;
   leader?: string;
   dateCreate?: number;

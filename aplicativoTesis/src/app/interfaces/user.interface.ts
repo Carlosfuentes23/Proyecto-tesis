@@ -1,4 +1,4 @@
-export interface user{
+export type user ={
   name?: string;
   email?: string;
   userName?:string;

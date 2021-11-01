@@ -1,6 +1,6 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
@@ -22,17 +22,26 @@ export class CreateProyectComponent implements OnInit {
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
-  
-  constructor() { 
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
+
+      this.form = this.fb.group({
+        nameProject:['', Validators.required],
+        dateEstimated:['', Validators.required],
+        organization:['', Validators.required],
+        phone:['', Validators.required],
+        skills:['', Validators.required],
+      })
   }
 
   ngOnInit(): void {
   }
 
-  
+
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
