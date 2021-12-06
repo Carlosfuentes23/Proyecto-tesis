@@ -44,3 +44,23 @@ func Delete(userId string) error {
 	}
 	return nil
 }
+
+func ReadById(userId string) (*m.User, error) {
+
+	user, err := userRepository.ReadById(userId)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+func ReadByEmail(email string) (*m.User, error) {
+
+	user, err := userRepository.ReadByEmail(email)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}

@@ -2,33 +2,69 @@ package controler_user
 
 import (
 	"main/models"
+	"main/security"
+	"main/util"
+	"net/http"
+	"strings"
 	"time"
 
 	userService "main/services/user.service"
 
 	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/mongo"
+	"gopkg.in/asaskevich/govalidator.v9"
 )
 
 func CreateUser(c *fiber.Ctx) error {
-	var data map[string]string
+	var data models.User
 
-	if err := c.BodyParser(&data); err != nil {
-		return err
-	}
-
-	user := models.User{
-		Name:     data["name"],
-		Email:    data["email"],
-		CreateAt: time.Now(),
-		UpdateAt: time.Now(),
-	}
-
-	err := userService.Create(user)
+	err := c.BodyParser(&data)
 	if err != nil {
-		return err
+		return c.
+			Status(http.StatusUnprocessableEntity).
+			JSON(util.NewJError(err))
 	}
 
-	return c.JSON(user)
+	data.Email = util.NormalizeEmail(data.Email)
+	if !govalidator.IsEmail(data.Email) {
+		return c.
+			Status(http.StatusBadRequest).
+			JSON(util.NewJError(util.ErrInvalidEmail))
+	}
+
+	exists, err := userService.ReadByEmail(data.Email)
+	if err == mongo.ErrNoDocuments {
+		if strings.TrimSpace(data.Password) == "" {
+			return c.
+				Status(http.StatusBadRequest).
+				JSON(util.NewJError(util.ErrEmptyPassword))
+		}
+		data.Password, err = security.EncryptPassword(data.Password)
+		if err != nil {
+			return c.
+				Status(http.StatusBadRequest).
+				JSON(util.NewJError(err))
+		}
+		data.CreateAt = time.Now()
+		data.UpdateAt = data.CreateAt
+		err = userService.Create(data)
+		if err != nil {
+			return c.
+				Status(http.StatusBadRequest).
+				JSON(util.NewJError(err))
+		}
+		return c.
+			Status(http.StatusCreated).
+			JSON(data)
+	}
+
+	if exists != nil {
+		err = util.ErrEmailAlreadyExists
+	}
+
+	return c.
+		Status(http.StatusBadRequest).
+		JSON(util.NewJError(err))
 
 }
 
@@ -40,14 +76,14 @@ func GetUsers(c *fiber.Ctx) error {
 	return c.JSON(users)
 }
 
-/*func GetUser(c *fiber.Ctx) error {
+func GetUserById(c *fiber.Ctx) error {
 	id := c.Params("id")
-	user, err := userService.ReadByID(id)
+	user, err := userService.ReadById(id)
 	if err != nil {
 		return err
 	}
 	return c.JSON(user)
-}*/
+}
 
 func UpdateUser(c *fiber.Ctx) error {
 	id := c.Params("id")

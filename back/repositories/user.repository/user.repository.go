@@ -93,3 +93,41 @@ func Delete(userId string) error {
 
 	return nil
 }
+
+func ReadById(userId string) (*m.User, error) {
+
+	var user m.User
+	var err error
+
+	uid, err := primitive.ObjectIDFromHex(userId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	filter := bson.M{"_id": uid}
+
+	err = collection.FindOne(ctx, filter).Decode(&user)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func ReadByEmail(email string) (*m.User, error) {
+
+	var user m.User
+	var err error
+
+	filter := bson.M{"email": email}
+
+	err = collection.FindOne(ctx, filter).Decode(&user)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
