@@ -1,10 +1,11 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { PasswordValidatorsDirective } from 'src/app/validators/password-validators.directive';
 
 @Component({
   selector: 'app-signin',
@@ -12,29 +13,33 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  form:FormGroup;
+  form: FormGroup;
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   skillCtrl = new FormControl();
   filteredSkills: Observable<string[]>;
   skills: string[] = ['Programacion'];
-  allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos','UI/UX'];
+  allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos', 'UI/UX'];
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+  ) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
     this.form = this.fb.group({
-      name:['', Validators.required],
+      name: ['', Validators.required],
       mail: ['', Validators.required, Validators.email],
       nickName: ['', Validators.required],
       tel: ['', Validators.required, Validators.min(7), Validators.max(10)],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+    }, {
+      validators: PasswordValidatorsDirective.passwordMatchValidator
     })
   }
 
@@ -76,6 +81,4 @@ export class SigninComponent implements OnInit {
 
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
-
-
 }

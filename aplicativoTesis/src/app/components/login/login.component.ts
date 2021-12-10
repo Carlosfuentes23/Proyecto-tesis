@@ -34,12 +34,6 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.error();
     })
-    /*if(usuario=="admin1" && password=="admin123"){
-      this.router.navigate(['User']);
-    }else{
-      this.error();
-      this.form.reset();
-    }*/
   }
 
   //Funcion para muestra error en el login
