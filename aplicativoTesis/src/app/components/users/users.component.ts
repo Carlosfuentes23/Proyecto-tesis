@@ -1,7 +1,9 @@
+import { E } from '@angular/cdk/keycodes';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/api/users.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -17,7 +19,12 @@ export class UsersComponent implements OnInit {
   constructor(
     private observer: BreakpointObserver,  
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private userService: UsersService) { 
+      this.userService.getUsers().subscribe((res) => {
+        console.log(res);
+      });
+    }
 
   ngOnInit(): void {}
 

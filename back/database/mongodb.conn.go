@@ -3,20 +3,23 @@ package database
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var (
-	usr  = "jsreyesg"
-	pwd  = "js0091rg"
-	host = "cluster0.orcv4.mongodb.net"
-	db   = "KMT"
-)
-
 func GetCollection(collection string) *mongo.Collection {
+	Init()
+	var (
+		usr  = os.Getenv("MONGO_USER")
+		pwd  = os.Getenv("MONGO_PASSWORD")
+		host = os.Getenv("MONGO_HOST")
+		db   = os.Getenv("MONGO_DB")
+	)
 
 	uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority", usr, pwd, host, db)
 
@@ -34,4 +37,11 @@ func GetCollection(collection string) *mongo.Collection {
 	}
 
 	return client.Database(db).Collection(collection)
+}
+
+func Init() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Panicln(err)
+	}
 }

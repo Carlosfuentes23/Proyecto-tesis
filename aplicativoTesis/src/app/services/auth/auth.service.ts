@@ -10,18 +10,22 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
 
-  api_url = environment.KMT_API + 'signin';
+  api_url = environment.KMT_API ;
   authSubject = new BehaviorSubject(false);
   private token?: string;
 
   constructor(private httpClient: HttpClient) { }
+
+  register(user: user): Observable<user> {
+    return this.httpClient.post<user>(this.api_url + 'register', user);
+  }
 
   login (mail: string, password: string): Observable<jwtResponse> {
     const data = {
       email: mail,
       password
     };
-    return this.httpClient.post<jwtResponse>(this.api_url, data).pipe(
+    return this.httpClient.post<jwtResponse>(this.api_url + 'signin', data).pipe(
       tap(
         (res: jwtResponse) => {
           if (res) {

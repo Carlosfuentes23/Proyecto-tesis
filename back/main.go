@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
 	"main/routes"
@@ -9,15 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/joho/godotenv"
 )
-
-func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Panicln(err)
-	}
-}
 
 func main() {
 	app := fiber.New()
