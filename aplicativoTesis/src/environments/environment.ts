@@ -2,8 +2,12 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { A } from "@angular/cdk/keycodes";
+
 export const environment = {
-  production: false
+  production: false,
+
+  KMT_API: 'http://localhost:8080/api/',
 };
 
 /*

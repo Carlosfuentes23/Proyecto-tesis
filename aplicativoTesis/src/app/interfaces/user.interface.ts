@@ -6,3 +6,9 @@ export type user ={
   password?: string;
   skills?: string[];
 }
+
+
+export type jwtResponse ={
+  token: string;
+  user: user;
+}
