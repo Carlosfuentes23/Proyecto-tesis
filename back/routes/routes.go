@@ -8,13 +8,13 @@ import (
 )
 
 func Start(app *fiber.App) {
-	app.Post("/api/signin", authControler.SignIn)
+	app.Post("/api/auth/signin", authControler.SignIn)
+	app.Post("/api/auth/register", userControler.CreateUser)
 
 	//Rutas Para el controlador de usuarios
-	app.Post("/api/register", userControler.CreateUser)
-	app.Get("/api/getusers", userControler.GetUsers)
-	app.Get("/api/getuser/:id", userControler.GetUserById)
-	app.Post("/api/updateuser/:id", userControler.UpdateUser)
-	app.Delete("/api/deleteuser/:id", userControler.DeleteUser)
+	app.Get("/api/users/getusers", userControler.GetUsers)
+	app.Get("/api/users/getuser/:id", userControler.GetUserById)
+	app.Post("/api/users/updateuser/:id", userControler.UpdateUser)
+	app.Delete("/api/users/deleteuser/:id", userControler.DeleteUser)
 
 }
