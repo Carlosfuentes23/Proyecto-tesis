@@ -29,12 +29,12 @@ func CreateProject(project m.Project) error {
 
 func GetProjectList() (m.Projects, error) {
 	var projects m.Projects
-	var err error
+	filter := bson.D{}
 
-	cursor, err := collection.Find(ctx, m.Project{})
+	cursor, err := collection.Find(ctx, filter)
 
 	if err != nil {
-		return projects, err
+		return nil, err
 	}
 
 	for cursor.Next(ctx) {
@@ -42,7 +42,7 @@ func GetProjectList() (m.Projects, error) {
 		err = cursor.Decode(&project)
 
 		if err != nil {
-			return projects, err
+			return nil, err
 		}
 
 		projects = append(projects, &project)
@@ -78,14 +78,15 @@ func UpdateProject(project m.Project, projectId string) error {
 	filter := bson.M{"_id": uid}
 
 	Update := bson.M{
-		"name":        project.Name,
-		"skills":      project.Skills,
-		"membersId":   project.MembersId,
-		"description": project.Description,
-		"phases":      project.Phases,
-		"state":       project.State,
-		"updated_at":  time.Now(),
-	}
+		"$set": bson.M{
+			"name":        project.Name,
+			"skills":      project.Skills,
+			"membersId":   project.MembersId,
+			"description": project.Description,
+			"phases":      project.Phases,
+			"state":       project.State,
+			"updated_at":  time.Now(),
+		}}
 
 	_, err = collection.UpdateOne(ctx, filter, Update)
 	if err != nil {

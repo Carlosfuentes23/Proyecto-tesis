@@ -49,9 +49,13 @@ func UpdatePhase(phase m.Phase, phaseId string) error {
 	return nil
 }
 
-func GetPhaseMembers(phaseId []string) (m.Users, error) {
+func GetPhaseMembers(phaseId string) (m.Users, error) {
+	phase, err := GetPhaseById(phaseId)
+	if err != nil {
+		return nil, err
+	}
 
-	members, err := phaseRepo.GetPhaseMembers(phaseId)
+	members, err := phaseRepo.GetPhaseMembers(phase.MembersId)
 
 	if err != nil {
 		return nil, err

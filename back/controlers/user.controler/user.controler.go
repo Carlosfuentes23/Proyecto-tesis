@@ -87,24 +87,19 @@ func GetUserById(c *fiber.Ctx) error {
 
 func UpdateUser(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var data map[string]string
+	var data models.User
 
+	err := c.BodyParser(&data)
 	if err := c.BodyParser(&data); err != nil {
 		return err
 	}
-
-	user := models.User{
-		Name:     data["name"],
-		Email:    data["email"],
-		UpdateAt: time.Now(),
-	}
-
-	err := userService.Update(user, id)
+	data.UpdateAt = time.Now()
+	err = userService.Update(data, id)
 	if err != nil {
 		return err
 	}
 
-	return c.JSON(user)
+	return c.JSON(data)
 }
 
 func DeleteUser(c *fiber.Ctx) error {

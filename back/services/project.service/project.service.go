@@ -50,9 +50,13 @@ func UpdateProject(project m.Project, projectId string) error {
 	return nil
 }
 
-func GetProjectMembers(membersId []string) (m.Users, error) {
+func GetProjectMembers(projectId string) (m.Users, error) {
+	project, err := GetProjectById(projectId)
+	if err != nil {
+		return nil, err
+	}
 
-	members, err := projectRepo.GetProjectMembers(membersId)
+	members, err := projectRepo.GetProjectMembers(project.MembersId)
 
 	if err != nil {
 		return nil, err
@@ -61,9 +65,9 @@ func GetProjectMembers(membersId []string) (m.Users, error) {
 	return members, nil
 }
 
-func GetProjectPhases(phasesId []string) (m.Phases, error) {
-
-	phases, err := projectRepo.GetProjectPhases(phasesId)
+func GetProjectPhases(projectId string) (m.Phases, error) {
+	project, err := GetProjectById(projectId)
+	phases, err := projectRepo.GetProjectPhases(project.Phases)
 
 	if err != nil {
 		return nil, err

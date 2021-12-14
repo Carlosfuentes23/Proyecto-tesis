@@ -76,14 +76,15 @@ func UpdatePhase(phase m.Phase, phaseId string) error {
 	filter := bson.M{"_id": uid}
 
 	Update := bson.M{
-		"name":        phase.Name,
-		"skills":      phase.Skills,
-		"membersId":   phase.MembersId,
-		"description": phase.Description,
-		"ceremonies":  phase.Ceremonies,
-		"state":       phase.State,
-		"updated_at":  time.Now(),
-	}
+		"$set": bson.M{
+			"name":        phase.Name,
+			"skills":      phase.Skills,
+			"membersId":   phase.MembersId,
+			"description": phase.Description,
+			"ceremonies":  phase.Ceremonies,
+			"state":       phase.State,
+			"updated_at":  time.Now(),
+		}}
 
 	_, err = collection.UpdateOne(ctx, filter, Update)
 	if err != nil {

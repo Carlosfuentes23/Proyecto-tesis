@@ -2,6 +2,7 @@ package routes
 
 import (
 	authControler "main/controlers/auth.controler"
+	projectControler "main/controlers/project.controler"
 	userControler "main/controlers/user.controler"
 
 	"github.com/gofiber/fiber/v2"
@@ -17,4 +18,11 @@ func Start(app *fiber.App) {
 	app.Post("/api/users/updateuser/:id", userControler.UpdateUser)
 	app.Delete("/api/users/deleteuser/:id", userControler.DeleteUser)
 
+	//Rutas Para el controlador de proyectos
+	app.Post("/api/projects/createproject", projectControler.CreateProject)
+	app.Get("/api/projects/getprojectlist", projectControler.GetProjectList)
+	app.Get("/api/projects/getproject/:id", projectControler.GetProjectById)
+	app.Post("/api/projects/updateproject/:id", projectControler.UpdateProject)
+	app.Get("/api/projects/getprojectmembers/:id", projectControler.GetProjectMembers)
+	app.Get("/api/projects/getprojectphases/:id", projectControler.GetProjectPhases)
 }
