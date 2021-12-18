@@ -2,6 +2,7 @@ package routes
 
 import (
 	authControler "main/controlers/auth.controler"
+	phaseControler "main/controlers/phase.controler"
 	projectControler "main/controlers/project.controler"
 	userControler "main/controlers/user.controler"
 
@@ -25,4 +26,11 @@ func Start(app *fiber.App) {
 	app.Post("/api/projects/updateproject/:id", projectControler.UpdateProject)
 	app.Get("/api/projects/getprojectmembers/:id", projectControler.GetProjectMembers)
 	app.Get("/api/projects/getprojectphases/:id", projectControler.GetProjectPhases)
+
+	//Rutas Para el controlador de fases
+	app.Post("/api/phases/createphase/:projectId", phaseControler.CreatePhase)
+	app.Get("/api/phases/getphase/:id", phaseControler.GetPhaseById)
+	app.Get("/api/phases/getphaselist/:projectId", phaseControler.GetPhaseListByProjectId)
+	app.Post("/api/phases/updatephase/:id", phaseControler.UpdatePhase)
+	app.Get("/api/phases/getphasemembers/:id", phaseControler.GetPhaseMembers)
 }
