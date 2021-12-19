@@ -1,10 +1,13 @@
 export type Phase={
+  id?: string;
   name?: string;
-  leader?: string;
-  dateCreate?: number;
-  dateEstimated?: number;
+  project_id?: string;
   description?: string;
-  members?: string[]; //Integrantes y Leader hay que cambiar string por Usser
+  members_id?: string[]; //Integrantes y Leader hay que cambiar string por Usser
   skills?: string[];
+  state: boolean;
+  created_at?: Date;
+  date_estimated?: number;
+  updated_at?: Date;
 }
 

@@ -1,9 +1,13 @@
 export type Project ={
+  id:string;
   name: string;
-  leader: string;
-  dateCreate: number;
-  dateEstimada: number;
+  leader_id: string;
+  skills: string[];
   description: string;
-  integrantes: string[];
-  reuniones: string[];
+  members_id: string[];
+  phases: string[];
+  state: boolean;
+  created_at?: Date;
+  date_estimated?: number;
+  updated_at?: Date;
 }

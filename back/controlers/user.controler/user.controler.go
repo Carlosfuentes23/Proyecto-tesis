@@ -93,6 +93,20 @@ func UpdateUser(c *fiber.Ctx) error {
 	if err := c.BodyParser(&data); err != nil {
 		return err
 	}
+
+	user, err := userService.ReadById(id)
+	if err != nil {
+		return err
+	}
+
+	data.Email = util.NormalizeEmail(data.Email)
+	if !govalidator.IsEmail(data.Email) {
+		return c.
+			Status(http.StatusBadRequest).
+			JSON(util.NewJError(util.ErrInvalidEmail))
+	}
+
+	data.Password = user.Password
 	data.UpdateAt = time.Now()
 	err = userService.Update(data, id)
 	if err != nil {
@@ -109,4 +123,65 @@ func DeleteUser(c *fiber.Ctx) error {
 		return err
 	}
 	return c.JSON(fiber.Map{"message": "User deleted"})
+}
+
+func UpdateUserPassword(c *fiber.Ctx) error {
+	id := c.Params("id")
+	var data models.User
+
+	err := c.BodyParser(&data)
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	user, err := userService.ReadById(id)
+	if err != nil {
+		return err
+	}
+
+	if strings.TrimSpace(data.Password) == "" {
+		return c.
+			Status(http.StatusBadRequest).
+			JSON(util.NewJError(util.ErrEmptyPassword))
+	}
+
+	data.Password, err = security.EncryptPassword(data.Password)
+	if err != nil {
+		return c.
+			Status(http.StatusBadRequest).
+			JSON(util.NewJError(err))
+	}
+
+	user.Password = data.Password
+	data.UpdateAt = time.Now()
+	err = userService.Update(*user, id)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(user)
+}
+
+func UpdeteProjectList(c *fiber.Ctx) error {
+	id := c.Params("id")
+	var data models.User
+
+	err := c.BodyParser(&data)
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	user, err := userService.ReadById(id)
+	if err != nil {
+		return err
+	}
+
+	user.Projects = data.Projects
+	data.UpdateAt = time.Now()
+	err = userService.Update(*user, id)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(user)
 }
