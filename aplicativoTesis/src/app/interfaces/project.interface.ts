@@ -1,5 +1,5 @@
 export type Project ={
-  id:string;
+  id?:string;
   name: string;
   leader_id: string;
   skills: string[];
@@ -7,7 +7,7 @@ export type Project ={
   members_id: string[];
   phases: string[];
   state: boolean;
+  date_estimated: number;
   created_at?: Date;
-  date_estimated?: number;
   updated_at?: Date;
 }

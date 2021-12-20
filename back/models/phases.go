@@ -13,7 +13,6 @@ type Phase struct {
 	Skills        []string           `json:"skills"`
 	MembersId     []string           `json:"members_id"`
 	Description   string             `json:"description"`
-	Ceremonies    []string           `json:"ceremonies"`
 	State         bool               `json:"state"`
 	CreateAt      time.Time          `bson:"created_at" json:"created_at"`
 	DateEstimated time.Time          `bson:"date_estimated" json:"date_estimated"`

@@ -3,6 +3,7 @@ package project_controler
 import (
 	"main/models"
 	projectServices "main/services/project.service"
+	user_service "main/services/user.service"
 	"net/http"
 	"time"
 
@@ -16,6 +17,16 @@ func CreateProject(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
+	for i := range data.MembersId {
+		user, err := user_service.ReadById(data.MembersId[i])
+		if err != nil {
+			return c.Status(http.StatusUnprocessableEntity).JSON(err)
+		}
+		user.Projects = append(user.Projects, data.ID.Hex())
+		err = user_service.Update(*user, data.MembersId[i])
+	}
+
+	data.CreateAt = time.Now()
 	data.UpdateAt = time.Now()
 	err = projectServices.CreateProject(data)
 	if err != nil {

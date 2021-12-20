@@ -11,12 +11,13 @@ export class ProjectComponent implements OnInit {
 
   project : Project ={
     name:"PeliApp",
-    leader:"Carlos Fuentes",
-    dateCreate: Date.now(),
-    dateEstimada: Date.now(),
+    leader_id:"",
     description:"La mejor app de peliculas",
-    integrantes: ["Carlos Fuentes", "Sebastian Reyes", "Camilo Rozo"],
-    reuniones:["reunion 1","reunion 2", "reunion 3"]
+    members_id: ["Carlos Fuentes", "Sebastian Reyes", "Camilo Rozo"],
+    skills: ["Programacion", "Diseño", "Bases De Datos","UI/UX"],
+    phases: ["Desarrollo", "Pruebas", "Testing", "Documentacion"],
+    state: true,
+    date_estimated: Date.now(),
   }
 
   constructor() { }

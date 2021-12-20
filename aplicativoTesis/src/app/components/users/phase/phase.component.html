@@ -5,8 +5,8 @@
         <h2>Datos de La fase</h2>
         <div class="mt-4 mb-2">
           <p><strong>Nombre del projecto:</strong> {{ phase.name }}</p>
-          <p><strong>Lider del projecto:</strong> {{ phase.leader }}</p>
-          <p><strong>Fecha de inicio de Fase:</strong> {{ phase.dateCreate | date: 'M/d/yy'}}</p>
+          <p><strong>Lider del projecto:</strong> {{ phase.leader_id }}</p>
+          <p><strong>Fecha de inicio de Fase:</strong> {{ phase.created_at | date: 'M/d/yy'}}</p>
           <p><strong>Descripción:</strong> {{ phase.description }}</p>
         </div>
       </mat-card>
@@ -61,7 +61,7 @@
         </div>
         <table class="table table-striped">
           <tbody>
-            <tr *ngFor="let inte of phase.members;  index as i;">
+            <tr *ngFor="let inte of phase.members_id;  index as i;">
               <td>
                 {{inte}}
               </td>

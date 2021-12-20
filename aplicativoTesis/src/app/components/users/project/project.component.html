@@ -5,8 +5,8 @@
         <h2>Datos del projecto</h2>
         <div class="mt-4 mb-2">
           <p><strong>Nombre del projecto:</strong> {{ project.name }}</p>
-          <p><strong>Lider del projecto:</strong> {{ project.leader }}</p>
-          <p><strong>Fecha de inicio de Fase:</strong> {{ project.dateCreate | date: 'M/d/yy'}}</p>
+          <p><strong>Lider del projecto:</strong> {{ project.leader_id }}</p>
+          <p><strong>Fecha de inicio de Fase:</strong> {{ project.created_at| date: 'M/d/yy'}}</p>
           <p><strong>Descripción:</strong> {{ project.description }}</p>
         </div>
       </mat-card>
@@ -61,7 +61,7 @@
         </div>
         <table class="table table-striped">
           <tbody>
-            <tr *ngFor="let inte of project.integrantes;  index as i;">
+            <tr *ngFor="let inte of project.members_id;  index as i;">
               <td>
                 {{inte}}
               </td>
@@ -84,7 +84,7 @@
         </div>
         <table class="table table-striped">
           <tbody>
-            <tr *ngFor="let reunion of project.reuniones;  index as i;">
+            <tr *ngFor="let reunion of project.phases;  index as i;">
               <td scope="col">
                 <a href="">{{reunion}}</a>
               </td>

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UsersService {
 
-  api_url = environment.KMT_API ;
+  api_url = environment.KMT_API +'users/';
 
   constructor(private httpClient: HttpClient) { }
 

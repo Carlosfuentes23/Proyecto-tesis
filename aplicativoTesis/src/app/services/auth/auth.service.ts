@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
 
-  api_url = environment.KMT_API ;
+  api_url = environment.KMT_API +'auth/';
   authSubject = new BehaviorSubject(false);
   private token?: string;
 
@@ -20,7 +20,7 @@ export class AuthService {
     return this.httpClient.post<user>(this.api_url + 'register', user);
   }
 
-  login (mail: string, password: string): Observable<jwtResponse> {
+  login(mail: string, password: string): Observable<jwtResponse> {
     const data = {
       email: mail,
       password

@@ -1,11 +1,12 @@
 export type user ={
   id?: string,
   name?: string;
+  last_name?: string;
   email?: string;
   telephone?: string;
   password?: string;
   skills?: string[];
-  projects_id: string[];
+  projects?: string[];
   created_at?: Date;
   updated_at?: Date;
 }

@@ -84,12 +84,12 @@ export class CreatePhaseComponent implements OnInit {
   createPhase(){
     this.phase={
       name: this.form.value.namePhase,
-      leader: "Carlos Fuentes",//Recordar acá va el usuario que crea la fase
-      dateCreate: Date.now(),
-      dateEstimated: this.form.value.dateEStimated,
+      project_id: '',
+      date_estimated: this.form.value.dateEStimated,
       description: this.form.value.description,
-      members: this.form.value.members,
+      members_id: this.form.value.members,
       skills: this.skills,
+      state: true,
     }
     //Aca viene el paso de datos al servicio para enviar a la base dedatos
     Swal.fire({

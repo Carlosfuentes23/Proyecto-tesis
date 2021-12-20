@@ -19,11 +19,9 @@ export class PasswordValidatorsDirective{
     const confirmPassword = control.get('confirmPassword')?.value;
     if (password !== confirmPassword) {
       control.get('confirmPassword')?.setErrors({ NoPassswordMatch: true });
-      console.log('password not match');
-      return null
+      return { NoPassswordMatch: true }
     }else
     {
       return null;
-    }
-  }
+    }  }
 }
