@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
+  id = localStorage.getItem("USER_ID");
 
-
-  constructor() { }
+  constructor() { 
+    console.log(this.id);
+  }
 
   ngOnInit(): void {
   }

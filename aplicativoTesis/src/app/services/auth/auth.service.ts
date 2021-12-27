@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { jwtResponse, user } from '../../interfaces/user.interface';
+import { jwtResponse, User } from '../../interfaces/user.interface';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -16,8 +16,8 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  register(user: user): Observable<user> {
-    return this.httpClient.post<user>(this.api_url + 'register', user);
+  register(user: User): Observable<User> {
+    return this.httpClient.post<User>(this.api_url + 'register', user);
   }
 
   login(mail: string, password: string): Observable<jwtResponse> {

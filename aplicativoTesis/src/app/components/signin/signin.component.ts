@@ -5,7 +5,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { user } from 'src/app/interfaces/user.interface';
+import { User } from 'src/app/interfaces/user.interface';
 import { PasswordValidatorsDirective } from 'src/app/validators/password-validators.directive';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -62,7 +62,7 @@ export class SigninComponent implements OnInit {
   }
 
   save() {
-    var user: user = {
+    var user: User = {
       name: this.form.value.name,
       last_name: this.form.value.lastName,
       email: this.form.value.email,
