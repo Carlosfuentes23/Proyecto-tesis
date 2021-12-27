@@ -1,4 +1,4 @@
-export type user ={
+export type User ={
   id?: string,
   name?: string;
   last_name?: string;
@@ -14,5 +14,5 @@ export type user ={
 
 export type jwtResponse ={
   token: string;
-  user: user;
+  user: User;
 }

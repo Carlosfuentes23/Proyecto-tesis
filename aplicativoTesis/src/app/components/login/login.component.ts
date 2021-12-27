@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     //Priemras pruebas para la redireccion del login
     this.authService.login(usuario, password).subscribe(() => {
-      this.succes('User');
+      this.succes('user');
     }, error => {
       this.error();
     })

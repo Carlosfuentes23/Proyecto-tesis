@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { user } from 'src/app/interfaces/user.interface';
+import { User } from 'src/app/interfaces/user.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,7 +13,15 @@ export class UsersService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getUsers(): Observable<user>{
-    return this.httpClient.get<user>(this.api_url + 'getusers');
+  getUsers(): Observable<User>{
+    return this.httpClient.get<User>(this.api_url + 'getusers');
+  }
+
+  getUser(id: string): Observable<User>{
+    return this.httpClient.get<User>(this.api_url + 'getuser/' + id);
+  }
+
+  updateUser(user: User): Observable<User>{
+    return this.httpClient.put<User>(this.api_url + 'updateuser', user);
   }
 }

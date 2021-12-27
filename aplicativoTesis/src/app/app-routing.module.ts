@@ -4,10 +4,10 @@ import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'Login', pathMatch:'full'},
-  { path: 'Login', component: LoginComponent },
-  { path: 'Signin', component: SigninComponent },
-  { path: 'User', loadChildren: ()=> import('./components/users/users.module').then(m => m.UsersModule)},
+  { path: '', redirectTo:'login', pathMatch:'full'},
+  { path: 'login', component: LoginComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'user', loadChildren: ()=> import('./components/users/users.module').then(m => m.UsersModule)},
   { path: '**', redirectTo:'login', pathMatch:'full'}
 ];
 

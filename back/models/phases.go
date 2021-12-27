@@ -9,6 +9,7 @@ import (
 type Phase struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
 	Name          string             `json:"name"`
+	LeaderId      string             `json:"leader_id"`
 	ProjectId     string             `json:"project_id"`
 	Skills        []string           `json:"skills"`
 	MembersId     []string           `json:"members_id"`

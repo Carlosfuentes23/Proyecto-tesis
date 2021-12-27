@@ -70,7 +70,6 @@ export class SigninComponent implements OnInit {
       password: this.form.value.password,
       skills: this.skills,
     }
-    console.log(user);
     this.authService.register(user).subscribe(
       () => {
         Swal.fire({
@@ -79,8 +78,12 @@ export class SigninComponent implements OnInit {
           text: 'Se ha registrado correctamente',
           confirmButtonText: 'Ok'
         })
-        this.router.navigate(['/login'])
+        this.succes('login');
       })
+  }
+
+  succes(url:string){
+    this.router.navigate([url]);
   }
 
   add(event: MatChipInputEvent): void {
