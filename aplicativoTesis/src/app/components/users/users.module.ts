@@ -13,6 +13,8 @@ import { ProjectComponent } from './project/project.component';
 import { PhaseComponent } from './phase/phase.component';
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { SelectProjectComponent } from './select-project/select-project.component';
+import { AddMembersProyectComponent } from './add-members-proyect/add-members-proyect.component';
+import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { SelectProjectComponent } from './select-project/select-project.componen
     ProjectComponent,
     PhaseComponent,
     SelectRoleComponent,
-    SelectProjectComponent
+    SelectProjectComponent,
+    AddMembersProyectComponent,
+    AddMembersPhaseComponent
   ],
   imports: [
     CommonModule,

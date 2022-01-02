@@ -34,7 +34,6 @@ export class CreateProjectComponent implements OnInit {
         dateEstimated:['', Validators.required],
         organization:['', Validators.required],
         phone:['', Validators.required],
-        skills:['', Validators.required],
       })
   }
 
@@ -75,5 +74,11 @@ export class CreateProjectComponent implements OnInit {
 
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
+
+  save(){
+    console.log(this.form.value);
+    console.log(this.skills);
+  }
+
 
 }

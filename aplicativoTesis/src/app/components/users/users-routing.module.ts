@@ -13,11 +13,12 @@ import { UsersComponent } from './users.component';
 const routes: Routes = [
   { path:'', component: UsersComponent, children:[
     { path: '', component: InicioComponent },
-    { path: 'edit-user', component: EditUserComponent },
+    { path: 'profile/:id', component: InicioComponent },
+    { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'create-project', component: CreateProjectComponent },
     { path: 'create-phase', component: CreatePhaseComponent },
-    { path: 'project', component: ProjectComponent},
-    { path: 'phase', component: PhaseComponent},
+    { path: 'project/:id', component: ProjectComponent},
+    { path: 'phase/:id', component: PhaseComponent},
     { path: 'select-role', component: SelectRoleComponent }
   ]},
 

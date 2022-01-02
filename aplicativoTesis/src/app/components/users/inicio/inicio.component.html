@@ -7,12 +7,11 @@
             <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
           </div>
           <div class="col-12 col-sm-6 col-md-8">
-            <p class="designation">Usuario</p>
-            <p class="designation">Correo</p>
-            <p class="designation">Habilidades</p>
+            <p class="designation"><span class="fw-bold">Usuario: </span> {{' ' + usr.name + ' ' + usr.last_name}}</p>
+            <p class="designation"><span class="fw-bold">Correo: </span> {{' ' + usr.email }}</p>
+            <p class="designation"><span class="fw-bold">Habilidades: </span> </p>
             <mat-chip-list aria-label="Fish selection">
-              <mat-chip>Skill 1</mat-chip>
-              <mat-chip>Skill 2</mat-chip>
+              <mat-chip *ngFor="let skill of usr.skills">{{ skill }}</mat-chip>
             </mat-chip-list>
           </div>
         </div>

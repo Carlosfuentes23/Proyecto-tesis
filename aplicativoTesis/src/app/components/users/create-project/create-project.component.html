@@ -7,8 +7,8 @@
               <div id="emailHelp" class="form-text">Descripción</div>
             </div>
             <div class="col">
-              <label for="dateEstimated" class="form-label">Duración Estimada</label>
-              <input type="text" class="form-control" id="dateEstimated" formControlName="dateEstimated">
+              <label for="dateEstimated" class="form-label">Cierre del proyecto</label>
+              <input type="date" class="form-control" id="dateEstimated" formControlName="dateEstimated">
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
           </div>
@@ -57,12 +57,12 @@
           </div>
           <div class="row">
             <div class="col">
-                <button [routerLink]="['/User']" type="button"  mat-raised-button color="warn" class="float-star">
+                <button [routerLink]="['/user']" type="button"  mat-raised-button color="warn" class="float-star">
                     Volver
                 </button>
             </div>
             <div class="col">
-                <button type="submit" mat-raised-button color="primary" class="float-end">
+                <button type="submit" mat-raised-button color="primary" class="float-end" [disabled]="form.invalid" (click)="save()">
                     Guardar
                 </button>
             </div>

@@ -29,8 +29,7 @@ export class AuthService {
       tap(
         (res: jwtResponse) => {
           if (res) {
-            if(res.user.id)
-              this.saveToken(res.token, res.user.id);
+            this.saveToken(res);
           }
         }
       )
@@ -39,13 +38,11 @@ export class AuthService {
 
   logout(): void {
     this.token = '';
-    localStorage.removeItem("ACCESS_TOKEN");
+    sessionStorage.removeItem("ACCESS_TOKEN");
   }
 
-  private saveToken(token: string, id: string): void {
-    localStorage.setItem("ACCESS_TOKEN", token);
-    localStorage.setItem("USER_ID", id);
-    this.token = token;
+  private saveToken(jwt: jwtResponse): void {
+    sessionStorage.setItem("USER", JSON.stringify(jwt));
   }
 
   private getToken(): string {
