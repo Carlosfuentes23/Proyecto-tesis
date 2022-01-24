@@ -51,6 +51,61 @@ func GetProjectList() (m.Projects, error) {
 	return projects, nil
 }
 
+func GetProyectListForLeader(leaderId string) (m.Projects, error) {
+	var projects m.Projects
+	var err error
+
+	filter := bson.M{"leaderid": leaderId}
+
+	cursor, err := collection.Find(ctx, filter)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for cursor.Next(ctx) {
+		var project m.Project
+		err = cursor.Decode(&project)
+
+		if err != nil {
+			return nil, err
+		}
+
+		projects = append(projects, &project)
+	}
+
+	return projects, nil
+}
+
+func GetProjectListForUser(userId string) (m.Projects, error) {
+	var projects m.Projects
+	var projectsUser m.Projects
+	var err error
+
+	projects, err = GetProjectList()
+	if err != nil {
+		return nil, err
+	}
+
+	for _, project := range projects {
+		if contains(project.MembersId, userId) {
+			projectsUser = append(projectsUser, project)
+		}
+	}
+
+	return projectsUser, nil
+}
+
+func contains(s []string, userId string) bool {
+	for _, id := range s {
+		if id == userId {
+			return true
+		}
+	}
+
+	return false
+}
+
 func GetProjectById(projectId string) (*m.Project, error) {
 	var project m.Project
 	var err error
@@ -81,7 +136,8 @@ func UpdateProject(project m.Project, projectId string) error {
 		"$set": bson.M{
 			"name":        project.Name,
 			"skills":      project.Skills,
-			"membersId":   project.MembersId,
+			"leaderid":    project.LeaderId,
+			"membersid":   project.MembersId,
 			"description": project.Description,
 			"phases":      project.Phases,
 			"state":       project.State,

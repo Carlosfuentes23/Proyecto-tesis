@@ -44,6 +44,27 @@ func GetProjectList(c *fiber.Ctx) error {
 	return c.JSON(projects)
 }
 
+func GetProyectListForLeader(c *fiber.Ctx) error {
+
+	leaderId := c.Params("leaderId")
+	projects, err := projectServices.GetProyectListForLeader(leaderId)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(err)
+	}
+
+	return c.JSON(projects)
+}
+
+func GetProjectListForUser(c *fiber.Ctx) error {
+	userId := c.Params("userId")
+	projects, err := projectServices.GetProjectListForUser(userId)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(err)
+	}
+
+	return c.JSON(projects)
+}
+
 func GetProjectById(c *fiber.Ctx) error {
 	id := c.Params("id")
 

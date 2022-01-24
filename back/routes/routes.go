@@ -22,6 +22,8 @@ func Start(app *fiber.App) {
 	//Rutas Para el controlador de proyectos
 	app.Post("/api/projects/createproject", projectControler.CreateProject)
 	app.Get("/api/projects/getprojectlist", projectControler.GetProjectList)
+	app.Get("/api/projects/getprojectlistforleader/:leaderId", projectControler.GetProyectListForLeader)
+	app.Get("/api/projects/getprojectlistforuser/:userId", projectControler.GetProjectListForUser)
 	app.Get("/api/projects/getproject/:id", projectControler.GetProjectById)
 	app.Post("/api/projects/updateproject/:id", projectControler.UpdateProject)
 	app.Get("/api/projects/getprojectmembers/:id", projectControler.GetProjectMembers)

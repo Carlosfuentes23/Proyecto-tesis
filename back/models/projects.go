@@ -9,9 +9,9 @@ import (
 type Project struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
 	Name          string             `json:"name"`
-	LeaderId      string             `json:"leader_id"`
+	LeaderId      string             `json:"leaderid"`
 	Skills        []string           `json:"skills"`
-	MembersId     []string           `json:"members_id"`
+	MembersId     []string           `json:"membersid"`
 	Description   string             `json:"description"`
 	Phases        []string           `json:"phases"`
 	State         bool               `json:"state"`

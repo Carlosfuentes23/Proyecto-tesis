@@ -1,10 +1,14 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Project } from 'src/app/interfaces/project.interface';
+import { ProjectsService } from 'src/app/services/api/projects.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
@@ -12,29 +16,34 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class CreateProjectComponent implements OnInit {
 
+  user = JSON.parse(sessionStorage.getItem("USER")!);
+
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   skillCtrl = new FormControl();
   filteredSkills: Observable<string[]>;
   skills: string[] = ['Programacion'];
-  allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos','UI/UX'];
+  allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos', 'UI/UX'];
+  members: string[] = [];
+  userId: string = this.user.id;
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private projectService: ProjectsService, private router: Router) {
+    console.log(this.user.id);
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
 
-      this.form = this.fb.group({
-        nameProject:['', Validators.required],
-        dateEstimated:['', Validators.required],
-        organization:['', Validators.required],
-        phone:['', Validators.required],
-      })
+    this.form = this.fb.group({
+      nameProject: ['', Validators.required],
+      dateEstimated: ['', Validators.required],
+      organization: ['', Validators.required],
+      description: ['', Validators.required],
+    })
   }
 
   ngOnInit(): void {
@@ -75,10 +84,31 @@ export class CreateProjectComponent implements OnInit {
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
 
-  save(){
-    console.log(this.form.value);
-    console.log(this.skills);
+  save() {
+    console.log(this.userId);
+    this.members.push(this.userId);
+    var project: Project = {
+      name: this.form.value.nameProject,
+      date_estimated: new Date(this.form.value.dateEstimated).toISOString(),
+      skills: this.skills,
+      description: this.form.value.description,
+      membersid: this.members,
+      organization: this.form.value.organization,
+      state: true,
+      leaderid: this.user.id,
+    }
+    console.log(project);
+    this.projectService.createProject(project).subscribe(
+      () => {
+        Swal.fire({
+          title: 'Proyecto creado',
+          text: 'El proyecto ha sido creado con exito',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          this.router.navigate(['/user'])
+        })
+      }
+    ) 
   }
-
-
 }

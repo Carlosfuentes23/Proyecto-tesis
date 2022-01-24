@@ -39,6 +39,28 @@ func GetProjectById(projectId string) (*m.Project, error) {
 	return project, nil
 }
 
+func GetProyectListForLeader(leaderId string) (m.Projects, error) {
+
+	projects, err := projectRepo.GetProyectListForLeader(leaderId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return projects, nil
+}
+
+func GetProjectListForUser(userId string) (m.Projects, error) {
+
+	projects, err := projectRepo.GetProjectListForUser(userId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return projects, nil
+}
+
 func UpdateProject(project m.Project, projectId string) error {
 
 	err := projectRepo.UpdateProject(project, projectId)

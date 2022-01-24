@@ -19,8 +19,8 @@
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="col">
-              <label for="exampleInputEmail1" class="form-label">Telefono</label>
-              <input type="text" class="form-control" id="phone" formControlName="phone">
+              <label for="exampleInputEmail1" class="form-label">Descripción</label>
+              <input type="text" class="form-control" id="description" formControlName="description">
               <div id="emailHelp" class="form-text">Usuario que suaras dentro de la app</div>
             </div>
           </div>
@@ -45,8 +45,7 @@
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     (matChipInputTokenEnd)="add($event)"
-                    id="skills"
-                    formControlName="skills">
+                    id="skills">
                 </mat-chip-list>
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                   <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
