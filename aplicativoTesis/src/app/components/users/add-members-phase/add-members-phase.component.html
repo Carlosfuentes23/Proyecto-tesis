@@ -1,1 +1,22 @@
-<p>add-members-phase works!</p>
+<div class="cont">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombres</th>
+            <th scope="col">Email</th>
+            <th scope="col">Skills</th>
+            <th scope="col">No. Proyectos</th>
+            <th scope="col">Añadir</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let user of users">
+          <tr>
+            <th >{{ user.name +' '+ user.last_name | titlecase }}</th>
+            <td>{{ user.email }}</td>
+            <td>{{ user.skills }}</td>
+            <td>{{ user.projects?.length }}</td>
+            <td>Boton</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

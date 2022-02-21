@@ -42,7 +42,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDividerModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatTabsModule
+    MatTabsModule,
 
   ],
   exports: [

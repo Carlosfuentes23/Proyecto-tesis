@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/user.interface';
+import { UsersService } from 'src/app/services/api/users.service';
 
 @Component({
   selector: 'app-add-members-phase',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddMembersPhaseComponent implements OnInit {
 
-  constructor() { }
+  users: User[] = [];
+  
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
+    this.getUsers();
+  }
+
+  getUsers(){
+    this.userService.getUsers().subscribe((res) => {
+      this.users = res;
+      console.log(this.users);
+    });
   }
 
 }

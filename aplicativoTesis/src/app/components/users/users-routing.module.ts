@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.component';
 import { CreatePhaseComponent } from './create-phase/create-phase.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
@@ -13,13 +14,15 @@ import { UsersComponent } from './users.component';
 const routes: Routes = [
   { path:'', component: UsersComponent, children:[
     { path: '', component: InicioComponent },
+    { path:':id', component: InicioComponent},
     { path: 'profile/:id', component: InicioComponent },
     { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'create-project', component: CreateProjectComponent },
     { path: 'create-phase', component: CreatePhaseComponent },
     { path: 'project/:id', component: ProjectComponent},
     { path: 'phase/:id', component: PhaseComponent},
-    { path: 'select-role', component: SelectRoleComponent }
+    { path: 'select-role', component: SelectRoleComponent },
+    { path: 'add-members-phase/:id', component: AddMembersPhaseComponent }
   ]},
 
 ];

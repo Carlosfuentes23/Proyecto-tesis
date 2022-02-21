@@ -6,22 +6,22 @@ export function passwordValidation(): ValidatorFn {
     const passwordValidatorsDirective = new PasswordValidatorsDirective();
     return PasswordValidatorsDirective.passwordMatchValidator(control);
   }
- }
+}
 
 @Directive({
   selector: '[passwordValidators]',
-  providers: [{provide: NG_VALIDATORS, useExisting: PasswordValidatorsDirective, multi: true}]
+  providers: [{ provide: NG_VALIDATORS, useExisting: PasswordValidatorsDirective, multi: true }]
 })
-export class PasswordValidatorsDirective{
-  static passwordMatchValidator(control:AbstractControl): import("@angular/forms").ValidationErrors | null {
+export class PasswordValidatorsDirective {
+  static passwordMatchValidator(control: AbstractControl): import("@angular/forms").ValidationErrors | null {
 
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
     if (password !== confirmPassword) {
       control.get('confirmPassword')?.setErrors({ NoPassswordMatch: true });
       return { NoPassswordMatch: true }
-    }else
-    {
+    } else {
       return null;
-    }  }
+    }
+  }
 }
