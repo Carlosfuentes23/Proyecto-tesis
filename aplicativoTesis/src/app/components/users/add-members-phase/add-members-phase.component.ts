@@ -20,7 +20,7 @@ export class AddMembersPhaseComponent implements OnInit {
   getUsers(){
     this.userService.getUsers().subscribe((res) => {
       this.users = res;
-      console.log(this.users);
+      console.log(this.users[0].projects?.length);
     });
   }
 
