@@ -183,3 +183,29 @@ func GetProjectPhases(phasesId []string) (m.Phases, error) {
 
 	return phases, nil
 }
+
+//lista de usuarios que no estan en el proyecto
+func GetProjectMembersNotInProject(membersId []string, projectId string) (m.Users, error) {
+	var members m.Users
+	var err error
+
+	project, err := GetProjectById(projectId)
+
+	if err != nil {
+		return members, err
+	}
+
+	for _, memberId := range membersId {
+		if !contains(project.MembersId, memberId) {
+			user, err := user_repository.ReadById(memberId)
+
+			if err != nil {
+				return members, err
+			}
+
+			members = append(members, user)
+		}
+	}
+
+	return members, nil
+}

@@ -109,3 +109,60 @@ func GetProjectPhases(c *fiber.Ctx) error {
 	}
 	return c.JSON(phases)
 }
+
+func AddMemberProject(c *fiber.Ctx) error {
+	id := c.Params("id")
+	var data models.User
+
+	err := c.BodyParser(&data)
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+	err = projectServices.AddMemberProject(id, data.ID.Hex())
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+
+	var user, er = user_service.ReadById(data.ID.Hex())
+	if er != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(er)
+	}
+
+	user.Projects = append(user.Projects, id)
+	err = user_service.Update(data, data.ID.Hex())
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+	return c.JSON(data)
+}
+
+func RemovedMemberProject(c *fiber.Ctx) error {
+	id := c.Params("id")
+	var data models.User
+
+	err := c.BodyParser(&data)
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+	err = projectServices.RemovedMemberProject(id, data.ID.Hex())
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+
+	var user, er = user_service.ReadById(data.ID.Hex())
+	if er != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(er)
+	}
+
+	//delete project from user
+	for i := range user.Projects {
+		if user.Projects[i] == id {
+			user.Projects = append(user.Projects[:i], user.Projects[i+1:]...)
+		}
+	}
+	err = user_service.Update(data, data.ID.Hex())
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+	return c.JSON(data)
+}

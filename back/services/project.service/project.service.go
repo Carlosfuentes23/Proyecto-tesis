@@ -97,3 +97,40 @@ func GetProjectPhases(projectId string) (m.Phases, error) {
 
 	return phases, nil
 }
+
+func AddMemberProject(projectId string, userId string) error {
+	project, err := GetProjectById(projectId)
+	if err != nil {
+		return err
+	}
+
+	project.MembersId = append(project.MembersId, userId)
+
+	err = UpdateProject(*project, projectId)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func RemovedMemberProject(projectId string, userId string) error {
+	project, err := GetProjectById(projectId)
+	if err != nil {
+		return err
+	}
+
+	for i, v := range project.MembersId {
+		if v == userId {
+			project.MembersId = append(project.MembersId[:i], project.MembersId[i+1:]...)
+			break
+		}
+	}
+
+	err = UpdateProject(*project, projectId)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
