@@ -15,6 +15,7 @@ import { SelectRoleComponent } from './select-role/select-role.component';
 import { SelectProjectComponent } from './select-project/select-project.component';
 import { AddMembersProyectComponent } from './add-members-proyect/add-members-proyect.component';
 import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.
   imports: [
     CommonModule,
     UsersRoutingModule,
-    SharedModule
+    SharedModule,
+    FontAwesomeModule
   ]
 })
 export class UsersModule { }

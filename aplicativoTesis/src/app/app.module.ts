@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './components/shared/shared.module';
 import { SigninComponent } from './components/signin/signin.component';
 import { PasswordValidatorsDirective } from './validators/password-validators.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { PasswordValidatorsDirective } from './validators/password-validators.di
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

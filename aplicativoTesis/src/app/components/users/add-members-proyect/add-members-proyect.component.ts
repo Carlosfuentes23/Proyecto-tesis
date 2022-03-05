@@ -11,16 +11,18 @@ export class AddMembersProyectComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor(private userService: UsersService) { }
+  constructor(private userService: UsersService) {
+    this.getUsers();
+    console.log(this.users);
+   }
 
   ngOnInit(): void {
-    this.getUsers();
+
   }
 
   getUsers(){
     this.userService.getUsers().subscribe((res) => {
       this.users = res;
-      console.log(this.users);
     });
   }
 }

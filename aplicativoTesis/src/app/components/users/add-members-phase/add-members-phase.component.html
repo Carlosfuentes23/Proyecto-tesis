@@ -5,8 +5,8 @@
             <th scope="col">Nombres</th>
             <th scope="col">Email</th>
             <th scope="col">Skills</th>
-            <th scope="col">No. Proyectos</th>
-            <th scope="col">Añadir</th>
+            <th scope="col" class="text-center">No. Proyectos</th>
+            <th scope="col" class="text-center">Añadir</th>
           </tr>
         </thead>
         <tbody *ngFor="let user of users">
@@ -14,8 +14,16 @@
             <th >{{ user.name +' '+ user.last_name | titlecase }}</th>
             <td>{{ user.email }}</td>
             <td>{{ user.skills }}</td>
-            <td>{{ user.projects?.length }}</td>
-            <td>Boton</td>
+            <td class="text-center" *ngIf="user.projects?.length">{{ user.projects?.length }}</td>
+            <td class="text-center" *ngIf="!user.projects?.length">0</td>
+            <td class="text-center">
+              <div>
+                <button type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)"><fa-icon class="fs-14" [icon]="faPlus"></fa-icon></button>
+              </div>
+                <!--<div  class="col-6">
+                  <button type="button" class="btn btn-danger " (click)="addMember(user)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                </div>-->
+            </td>
           </tr>
         </tbody>
       </table>
