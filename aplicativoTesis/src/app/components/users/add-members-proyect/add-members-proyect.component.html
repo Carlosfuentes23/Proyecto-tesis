@@ -16,7 +16,11 @@
           <td>{{ user.skills }}</td>
           <td *ngIf="user.projects?.length">{{ user.projects?.length }}</td>
           <td *ngIf="!user.projects?.length">0</td>
-          <td>Boton</td>
+          <td>
+            <div>
+              <button type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)"><fa-icon class="fs-14" [icon]="faPlus"></fa-icon></button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

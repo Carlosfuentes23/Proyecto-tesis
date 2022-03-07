@@ -88,9 +88,12 @@ func GetProjectMembers(projectId string) (m.Users, error) {
 }
 
 func GetProjectPhases(projectId string) (m.Phases, error) {
-	project, err := GetProjectById(projectId)
-	phases, err := projectRepo.GetProjectPhases(project.Phases)
+	project, er := GetProjectById(projectId)
+	if er != nil {
+		return nil, er
+	}
 
+	phases, err := projectRepo.GetProjectPhases(project.Phases)
 	if err != nil {
 		return nil, err
 	}
@@ -133,4 +136,19 @@ func RemovedMemberProject(projectId string, userId string) error {
 	}
 
 	return nil
+}
+
+func GetProjectMembersNotInProject(projectId string) (m.Users, error) {
+	project, err := GetProjectById(projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	members, err := projectRepo.GetProjectMembersNotInProject(project.MembersId, projectId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return members, nil
 }

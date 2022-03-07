@@ -39,4 +39,8 @@ export class ProjectsService {
     return this.httpClient.get<Phase>(this.api_url + 'getprojectphases/' + id);
   }
 
+  getUsersNotInProject(id: string): Observable<User[]>{
+    return this.httpClient.get<User[]>(this.api_url + 'getprojectmembersnotinproject/' + id);
+  }
+
 }

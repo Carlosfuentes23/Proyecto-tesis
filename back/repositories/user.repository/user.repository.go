@@ -65,6 +65,7 @@ func Update(user m.User, userId string) error {
 			"last_name":  user.LastName,
 			"password":   user.Password,
 			"skills":     user.Skills,
+			"projects":   user.Projects,
 			"updated_at": time.Now(),
 		}}
 

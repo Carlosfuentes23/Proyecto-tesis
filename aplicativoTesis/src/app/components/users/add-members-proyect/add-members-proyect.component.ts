@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/interfaces/user.interface';
+import { ProjectsService } from 'src/app/services/api/projects.service';
 import { UsersService } from 'src/app/services/api/users.service';
 
 @Component({
@@ -9,20 +12,30 @@ import { UsersService } from 'src/app/services/api/users.service';
 })
 export class AddMembersProyectComponent implements OnInit {
 
-  users: User[] = [];
+  faPlus = faPlus;
+  faTrash = faTrash;
 
-  constructor(private userService: UsersService) {
-    this.getUsers();
-    console.log(this.users);
+  users: User[] = [];
+  id = this.ac.snapshot.paramMap.get('id');
+
+  constructor(private projectService: ProjectsService, private ac : ActivatedRoute) {
+    if (this.id !== null) {
+      this.getUsers(this.id);
+    }
+
    }
 
   ngOnInit(): void {
 
   }
 
-  getUsers(){
-    this.userService.getUsers().subscribe((res) => {
+  getUsers(id: string){
+    this.projectService.getUsersNotInProject(id).subscribe((res) => {
       this.users = res;
     });
+  }
+
+  addMember(user: User){
+    console.log(user);
   }
 }

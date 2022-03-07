@@ -17,14 +17,6 @@ func CreateProject(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
-	for i := range data.MembersId {
-		user, err := user_service.ReadById(data.MembersId[i])
-		if err != nil {
-			return c.Status(http.StatusUnprocessableEntity).JSON(err)
-		}
-		user.Projects = append(user.Projects, data.ID.Hex())
-		err = user_service.Update(*user, data.MembersId[i])
-	}
 
 	data.CreateAt = time.Now()
 	data.UpdateAt = time.Now()
@@ -123,12 +115,7 @@ func AddMemberProject(c *fiber.Ctx) error {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
 
-	var user, er = user_service.ReadById(data.ID.Hex())
-	if er != nil {
-		return c.Status(http.StatusUnprocessableEntity).JSON(er)
-	}
-
-	user.Projects = append(user.Projects, id)
+	data.Projects = append(data.Projects, id)
 	err = user_service.Update(data, data.ID.Hex())
 	if err != nil {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
@@ -149,15 +136,10 @@ func RemovedMemberProject(c *fiber.Ctx) error {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
 
-	var user, er = user_service.ReadById(data.ID.Hex())
-	if er != nil {
-		return c.Status(http.StatusUnprocessableEntity).JSON(er)
-	}
-
 	//delete project from user
-	for i := range user.Projects {
-		if user.Projects[i] == id {
-			user.Projects = append(user.Projects[:i], user.Projects[i+1:]...)
+	for i := range data.Projects {
+		if data.Projects[i] == id {
+			data.Projects = append(data.Projects[:i], data.Projects[i+1:]...)
 		}
 	}
 	err = user_service.Update(data, data.ID.Hex())
@@ -165,4 +147,14 @@ func RemovedMemberProject(c *fiber.Ctx) error {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
 	return c.JSON(data)
+}
+
+func GetProjectMembersNotInProject(c *fiber.Ctx) error {
+	id := c.Params("id")
+	members, err := projectServices.GetProjectMembersNotInProject(id)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(err)
+	}
+
+	return c.JSON(members)
 }

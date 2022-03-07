@@ -190,19 +190,17 @@ func GetProjectMembersNotInProject(membersId []string, projectId string) (m.User
 	var err error
 
 	project, err := GetProjectById(projectId)
-
 	if err != nil {
 		return members, err
 	}
 
-	for _, memberId := range membersId {
-		if !contains(project.MembersId, memberId) {
-			user, err := user_repository.ReadById(memberId)
+	users, err := user_repository.Read()
+	if err != nil {
+		return members, err
+	}
 
-			if err != nil {
-				return members, err
-			}
-
+	for _, user := range users {
+		if !contains(project.MembersId, user.ID.Hex()) {
 			members = append(members, user)
 		}
 	}

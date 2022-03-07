@@ -28,6 +28,9 @@ func Start(app *fiber.App) {
 	app.Post("/api/projects/updateproject/:id", projectControler.UpdateProject)
 	app.Get("/api/projects/getprojectmembers/:id", projectControler.GetProjectMembers)
 	app.Get("/api/projects/getprojectphases/:id", projectControler.GetProjectPhases)
+	app.Get("/api/projects/getprojectmembersnotinproject/:id", projectControler.GetProjectMembersNotInProject)
+	app.Post("/api/projects/addmembertoproject/:id", projectControler.AddMemberProject)
+	app.Post("/api/projects/removememberfromproject/:id", projectControler.RemovedMemberProject)
 
 	//Rutas Para el controlador de fases
 	app.Post("/api/phases/createphase/:projectId", phaseControler.CreatePhase)
