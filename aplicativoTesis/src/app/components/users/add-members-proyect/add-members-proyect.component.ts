@@ -1,3 +1,4 @@
+import { S } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -52,6 +53,14 @@ export class AddMembersProyectComponent implements OnInit {
           if (this.id) {
             this.getUsers(this.id);
           }
+        }, (err) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo agregar al usuario',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3085d6',
+          });
         })
       }
     })
