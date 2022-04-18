@@ -97,7 +97,7 @@ export class CreateProjectComponent implements OnInit {
       state: true,
       leaderid: this.user.id,
     }
-    console.log(project);
+
     this.projectService.createProject(project).subscribe(
       () => {
         Swal.fire({
@@ -109,6 +109,6 @@ export class CreateProjectComponent implements OnInit {
           this.router.navigate(['/user'])
         })
       }
-    ) 
+    )
   }
 }

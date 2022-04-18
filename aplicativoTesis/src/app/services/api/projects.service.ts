@@ -43,4 +43,11 @@ export class ProjectsService {
     return this.httpClient.get<User[]>(this.api_url + 'getprojectmembersnotinproject/' + id);
   }
 
+  getProjectsByUser(id: string): Observable<Project[]>{
+    return this.httpClient.get<Project[]>(this.api_url + 'getprojectlistforuser/' + id);
+  }
+
+  addMemberToProject(user:User, projectId:string): Observable<Project> {
+    return this.httpClient.post<Project>(this.api_url + 'addmembertoproject/'+projectId, user);
+  }
 }

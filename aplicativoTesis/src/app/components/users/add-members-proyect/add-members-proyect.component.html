@@ -1,5 +1,11 @@
 <div class="cont">
-  <table class="table">
+  <div class="row h1">
+    Agregar Integrantes
+  </div>
+  <div class="h3 mt-2" *ngIf="users.length === 0">
+    No hay integrantes para agregar a este proyecto
+  </div>
+  <table class="table"  *ngIf="users.length > 0">
       <thead>
         <tr>
           <th scope="col">Nombres</th>

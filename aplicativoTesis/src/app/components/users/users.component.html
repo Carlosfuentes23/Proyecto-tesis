@@ -1,71 +1,68 @@
 <mat-toolbar>
-    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-      <mat-icon *ngIf="!sidenav.opened">
-          menu
-      </mat-icon>
-      <mat-icon *ngIf="sidenav.opened">
-          close
-      </mat-icon>
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+  Aplicacion
+  <span class="example-spacer"></span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>people_alt</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>email</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>notifications</mat-icon>
+  </button>
+  <button (click)="logout()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8" opened>
+    <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+
+    <h4 class="name">{{user.user.name}}</h4>
+    <p class="designation">{{user.user.email}}</p>
+
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button" [routerLink]="'/user'">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
     </button>
-    Aplicacion
-    <span class="example-spacer"></span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>people_alt</mat-icon>
+    <button mat-button class="menu-button">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>email</mat-icon>
+    <button mat-button class="menu-button">
+      <mat-icon>info</mat-icon>
+      <span>About</span>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>notifications</mat-icon>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button">
+      <mat-icon>help</mat-icon>
+      <span>Help</span>
     </button>
-    <button (click)="logout()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button text-danger" (click)="logout()">
       <mat-icon>logout</mat-icon>
+      <span>Logout</span>
     </button>
-  </mat-toolbar>
-
-
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8" opened>
-      <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
-
-      <h4 class="name">John Smith</h4>
-      <p class="designation">Software Engineer</p>
-
-      <mat-divider></mat-divider>
-      <button mat-button class="menu-button">
-        <mat-icon>home</mat-icon>
-        <span>Home</span>
-      </button>
-      <button mat-button class="menu-button">
-          <mat-icon>person</mat-icon>
-          <span>Profile</span>
-      </button>
-      <button mat-button class="menu-button">
-          <mat-icon>info</mat-icon>
-          <span>About</span>
-      </button>
-
-      <mat-divider></mat-divider>
-
-      <button mat-button class="menu-button">
-          <mat-icon>help</mat-icon>
-          <span>Help</span>
-      </button>
-
-      <mat-divider></mat-divider>
-
-      <button mat-button class="menu-button text-danger" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-    </button>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="content mat-elevation-z8" style="overflow: auto;">
-            <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-
-
-
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8" style="overflow: auto;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

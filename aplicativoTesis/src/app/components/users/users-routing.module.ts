@@ -15,7 +15,6 @@ import { UsersComponent } from './users.component';
 const routes: Routes = [
   { path:'', component: UsersComponent, children:[
     { path: '', component: InicioComponent },
-    { path:':id', component: InicioComponent},
     { path: 'profile/:id', component: InicioComponent },
     { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'create-project', component: CreateProjectComponent },
@@ -24,7 +23,8 @@ const routes: Routes = [
     { path: 'phase/:id', component: PhaseComponent},
     { path: 'select-role', component: SelectRoleComponent },
     { path: 'add-members-phase/:id', component: AddMembersPhaseComponent },
-    { path: 'add-members-proyect/:id', component: AddMembersProyectComponent }
+    { path: 'add-members-project/:id', component: AddMembersProyectComponent },
+    { path:':id', component: InicioComponent},
   ]},
 
 ];

@@ -1,44 +1,94 @@
 <div class="cont">
-  <div class="row mb-3">
-    <div class="col">
-      <mat-card>
-        <div class="row cont" >
+  <div class="row mb-3" >
+    <div class="col-xl-5 col-lg-12" >
+      <mat-card  style=" height: 100%;overflow: auto;">
+        <div class="row cont ">
           <div class="col-6 col-md-4 centrar">
             <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
           </div>
           <div class="col-12 col-sm-6 col-md-8">
-            <p class="designation"><span class="fw-bold">Usuario: </span> {{' ' + usr.name + ' ' + usr.last_name}}</p>
-            <p class="designation"><span class="fw-bold">Correo: </span> {{' ' + usr.email }}</p>
-            <p class="designation"><span class="fw-bold">Habilidades: </span> </p>
+            <p class="designation">
+              <span class="fw-bold">Usuario: </span>
+              {{ " " + usr.name + " " + usr.last_name }}
+            </p>
+            <p class="designation">
+              <span class="fw-bold">Correo: </span> {{ " " + usr.email }}
+            </p>
+            <p class="designation">
+              <span class="fw-bold">Habilidades: </span>
+            </p>
             <mat-chip-list aria-label="Fish selection">
               <mat-chip *ngFor="let skill of usr.skills">{{ skill }}</mat-chip>
             </mat-chip-list>
           </div>
         </div>
-
       </mat-card>
     </div>
-    <div class="col">
-      <mat-card style="height: 100%;">
-        <div class="row">
-          <div class="col">
-            <h2>
-                Proyectos
-            </h2>
+    <div class="col-xl-7 col-lg-12 mt3">
+      <mat-card  style=" height: 100%;overflow: auto;">
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <h2>Proyectos</h2>
+            </div>
+            <div class="col">
+              <a class="btn btn-primary btn-sm float-end" [routerLink]="['/user/create-project']">
+                Nuevo
+              </a>
+            </div>
           </div>
-          <div class="col">
-            <a class="btn btn-primary btn-sm float-end" [routerLink]="['/user/create-project']">Nuevo</a>
-          </div>
-        </div>
-        <mat-tab-group>
-          <mat-tab label="Manager"> Content 1 </mat-tab>
-          <mat-tab label="Leader"> Content 2 </mat-tab>
-          <mat-tab label="Developer"> Content 3 </mat-tab>
-        </mat-tab-group>
+          <mat-tab-group>
+            <mat-tab label="Leader">
+              <div class="p-3" *ngIf="leadProjects.length === 0">
+                <div class="h5">El usuario no es</div>
+                <div class="h7">líder de ningun proyecto</div>
+              </div>
+              <table class="table table-secondary table-responsive"
+                *ngIf="leadProjects !== undefined && leadProjects.length > 0">
+                <thead>
+                  <tr>
+                    <th>Nombre Proyecto</th>
+                    <th>Fecha de creación</th>
+                    <th>No. integrantes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="cursor:pointer" *ngFor="let project of leadProjects" [routerLink]="'/user/project/'+project._id">
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.created_at | date }}</td>
+                    <td>{{ project.membersid?.length }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-tab>
+            <mat-tab label="Developer">
+              <div class="row p-3" *ngIf="!projects">
+                <div class="col-12">El usuario no es líder de ningn proyecto</div>
+              </div>
+              <table class="table table-info table-responsive" *ngIf="projects">
+                <thead>
+                  <tr>
+                    <th>Nombre Proyecto</th>
+                    <th>Fecha de creación</th>
+                    <th>No. de integrantes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="cursor:pointer" *ngFor="let project of projects" [routerLink]="'/user/project/'+project._id">
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.created_at | date }}</td>
+                    <td>{{ project.membersid?.length }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+        <a class="float-end" style="font-size: 10px;">Ver Todos></a>
       </mat-card>
     </div>
   </div>
-  <hr>
+  <hr />
   <div class="row mt-3">
     <div class="col">
       <mat-card>
@@ -46,19 +96,19 @@
           <div class="col">
             <mat-card>
               Estadistica 1
-              <img src="assets/img/tarta_1_0.png" style="height: 165px;">
+              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
             </mat-card>
           </div>
           <div class="col">
             <mat-card>
               Estadistica 2
-              <img src="assets/img/tarta_1_0.png" style="height: 165px;">
+              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
             </mat-card>
           </div>
           <div class="col">
             <mat-card>
               Estadistica 3
-              <img src="assets/img/tarta_1_0.png" style="height: 165px;">
+              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
             </mat-card>
           </div>
         </div>
@@ -66,6 +116,3 @@
     </div>
   </div>
 </div>
-
-
-
