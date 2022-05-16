@@ -2,30 +2,30 @@
   <div class="card-body">
       <div class="row">
           <div class="col">
-            <label for="exampleInputEmail1" class="form-label">Nombre de la fase <p class="text-danger">*</p></label>
+            <label for="exampleInputEmail1" class="form-label">Nombre de la fase</label>
             <input type="text" class="form-control" formControlName="namePhase">
             <div id="emailHelp" class="form-text">Descripción</div>
           </div>
           <div class="col">
-            <label for="exampleInputEmail1" class="form-label">Duración Estimada</label>
+            <label for="exampleInputEmail1" class="form-label">Descripción </label>
             <input type="text" class="form-control" formControlName="dateEstimated">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <label for="exampleInputEmail1" class="form-label">Descripción</label>
-            <input type="text" class="form-control" formControlName="description">
+            <label for="exampleInputEmail1" class="form-label">Inicio de fase</label>
+            <input type="date" class="form-control" formControlName="startDate">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div class="col">
-            <label for="exampleInputEmail1" class="form-label">Agregar Empleaados</label>
-            <input type="text" class="form-control" formControlName="members">
+            <label for="exampleInputEmail1" class="form-label">final de fase</label>
+            <input type="date" class="form-control" formControlName="endDate">
             <div id="emailHelp" class="form-text">Usuario que suaras dentro de la app</div>
           </div>
         </div>
         <div class="row">
-          <label for="exampleInputEmail1" class="form-label">Seleccione su habilidad </label>
+          <label for="exampleInputEmail1" class="form-label">Seleccione las habilidadades </label>
           <mat-form-field class="example-chip-list ancho" appearance="fill" >
               <mat-label>Habilidades</mat-label>
               <mat-chip-list #chipList aria-label="seleccion de habilidades">

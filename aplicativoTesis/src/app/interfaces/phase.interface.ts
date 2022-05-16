@@ -9,6 +9,8 @@ export type Phase={
   state?: boolean;
   date_estimated?: number;
   created_at?: Date;
+  start_date?: Date;
+  end_date?: Date;
   updated_at?: Date;
 }
 

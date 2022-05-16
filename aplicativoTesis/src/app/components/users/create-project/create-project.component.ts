@@ -40,7 +40,8 @@ export class CreateProjectComponent implements OnInit {
 
     this.form = this.fb.group({
       nameProject: ['', Validators.required],
-      dateEstimated: ['', Validators.required],
+      endDate: ['', Validators.required],
+      startDate: ['', Validators.required],
       organization: ['', Validators.required],
       description: ['', Validators.required],
     })
@@ -89,12 +90,13 @@ export class CreateProjectComponent implements OnInit {
     this.members.push(this.userId);
     var project: Project = {
       name: this.form.value.nameProject,
-      date_estimated: new Date(this.form.value.dateEstimated).toISOString(),
       skills: this.skills,
       description: this.form.value.description,
       membersid: this.members,
       organization: this.form.value.organization,
       state: true,
+      start_date: new Date(this.form.value.startDate),
+      end_date: new Date(this.form.value.endDate) ,
       leaderid: this.user.id,
     }
 

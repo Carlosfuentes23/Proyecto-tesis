@@ -8,6 +8,8 @@ export type User ={
   skills?: string[];
   projects?: string[];
   created_at?: Date;
+  start_date?: Date;
+  end_date?: Date;
   updated_at?: Date;
 }
 

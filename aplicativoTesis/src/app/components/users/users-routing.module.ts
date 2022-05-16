@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: 'profile/:id', component: InicioComponent },
     { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'create-project', component: CreateProjectComponent },
-    { path: 'create-phase', component: CreatePhaseComponent },
+    { path: 'create-phase/:id', component: CreatePhaseComponent },
     { path: 'project/:id', component: ProjectComponent},
     { path: 'phase/:id', component: PhaseComponent},
     { path: 'select-role', component: SelectRoleComponent },

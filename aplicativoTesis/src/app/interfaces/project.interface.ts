@@ -8,7 +8,8 @@ export type Project ={
   organization?: string;
   phases?: string[];
   state?: boolean;
-  date_estimated?: string;
   created_at?: Date;
+  start_date?: Date;
+  end_date?: Date;
   updated_at?: Date;
 }

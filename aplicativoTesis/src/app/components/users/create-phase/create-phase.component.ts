@@ -1,13 +1,14 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { validateHorizontalPosition } from '@angular/cdk/overlay';
-import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import { Router } from '@angular/router';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Phase } from 'src/app/interfaces/phase.interface';
+import { PhasesService } from 'src/app/services/api/phases.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,21 +26,27 @@ export class CreatePhaseComponent implements OnInit {
   skillCtrl = new FormControl();
   filteredSkills: Observable<string[]>;
   skills: string[] = ['Programacion'];
-  allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos','UI/UX'];
+  allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos', 'UI/UX'];
+  id: string | null;
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private phaseService: PhasesService,
+    private aRoute: ActivatedRoute) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
     this.form = this.fb.group({
       namePhase: ['', Validators.required],
-      dateEstimated: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
       description: ['', Validators.required],
       members: ['', Validators.required],
     });
+    this.id = this.aRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
@@ -81,32 +88,37 @@ export class CreatePhaseComponent implements OnInit {
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
 
-  createPhase(){
-    this.phase={
-      name: this.form.value.namePhase,
-      project_id: '',
-      date_estimated: this.form.value.dateEStimated,
-      description: this.form.value.description,
-      members_id: this.form.value.members,
-      skills: this.skills,
-      state: true,
-    }
-    //Aca viene el paso de datos al servicio para enviar a la base dedatos
-    Swal.fire({
-      icon: 'success',
-      title: 'Fase Creada con exitosamente',
-      text: this.form.value.namePhase,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
+  createPhase() {
+    if (this.id) {
+      this.phase = {
+        name: this.form.value.namePhase,
+        project_id: this.id,
+        description: this.form.value.description,
+        start_date: new Date(),
+        end_date: new Date(),
+        members_id: this.form.value.members,
+        skills: this.skills,
+        state: true,
       }
-    }).then((result)=>{
-      if(result.value){
-        this.router.navigate(["User/phase"])
-      }
-    });
-  }
 
+      //Aca viene el paso de datos al servicio para enviar a la base dedatos
+      this.phaseService.createPhase(this.phase).subscribe(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Fase Creada con exitosamente',
+          text: this.form.value.namePhase,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(["User/phase"])
+          }
+        });
+      })
+    }
+  }
 }

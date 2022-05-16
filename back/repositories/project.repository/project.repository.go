@@ -141,6 +141,8 @@ func UpdateProject(project m.Project, projectId string) error {
 			"description": project.Description,
 			"phases":      project.Phases,
 			"state":       project.State,
+			"start_date":  project.StartDate,
+			"end_date":    project.EndDate,
 			"updated_at":  time.Now(),
 		}}
 

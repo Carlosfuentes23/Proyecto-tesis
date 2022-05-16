@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Phase } from 'src/app/interfaces/phase.interface';
 
 import { Project } from 'src/app/interfaces/project.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -16,6 +17,8 @@ export class ProjectComponent implements OnInit {
   project: Project = {};
   leader: User = {};
   projectMembers: User[] = [];
+  projectPhases: Phase[] = [];
+  user = JSON.parse(sessionStorage.getItem("USER")!);
 
   constructor(
     private userService: UsersService,
@@ -52,5 +55,11 @@ export class ProjectComponent implements OnInit {
     this.projectService.gatProjectMembers(id).subscribe((data: any) => {
       this.projectMembers = data;
     })
+  }
+
+  getPhases(id: string): void {
+    this.projectService.getProjectPhases(id).subscribe((data: any) => {
+      this.projectPhases = data;
+    });
   }
 }

@@ -82,6 +82,8 @@ func UpdatePhase(phase m.Phase, phaseId string) error {
 			"membersId":   phase.MembersId,
 			"description": phase.Description,
 			"state":       phase.State,
+			"start_date":  phase.StartDate,
+			"end_date":    phase.EndDate,
 			"updated_at":  time.Now(),
 		}}
 

@@ -19,11 +19,16 @@
               Fases
             </h2>
           </div>
-          <div class="col">
-            <a class="btn btn-primary btn-sm float-end">Nueva</a>
+          <div class="col" *ngIf="project.leaderid === user.user._id">
+            <button class="btn btn-primary btn-sm float-end" [routerLink]="'/user/create-phase/'+project._id">Nueva</button>
           </div>
         </div>
-        <table class="table table-striped">
+        <div *ngIf="projectPhases.length === 0">
+          <div class="h3">
+            Este proyecto aun no cuenta con mienbros asignados
+          </div>
+        </div>
+        <table class="table table-striped"  *ngIf="projectPhases.length > 0">
           <tbody>
             <tr>
               <td scope="col">
@@ -56,10 +61,15 @@
             </h2>
           </div>
           <div class="col">
-            <a class="btn btn-primary btn-sm float-end" [routerLink]="'/user/add-members-project/'+id">Agregar</a>
+            <a class="btn btn-primary btn-sm float-end"  *ngIf="project.leaderid === user.user._id" [routerLink]="'/user/add-members-project/'+id">Agregar</a>
           </div>
         </div>
-        <table class="table table-striped">
+        <div class="row" *ngIf="projectMembers.length ===0">
+          <div class="h3">
+            Este proyecto aun no cuenta con mienbros asignados
+          </div>
+        </div>
+        <table class="table table-striped" *ngIf="projectMembers.length > 0">
           <thead>
             <tr>
               <th scope="col">No.</th>
@@ -90,7 +100,7 @@
             </h2>
           </div>
           <div class="col">
-            <a class="btn btn-primary btn-sm float-end">Nueva</a>
+            <a class="btn btn-primary btn-sm float-end"  *ngIf="project.leaderid === user.user._id">Nueva</a>
           </div>
         </div>
         <table class="table table-striped">
