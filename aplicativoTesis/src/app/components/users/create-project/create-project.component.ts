@@ -26,14 +26,17 @@ export class CreateProjectComponent implements OnInit {
   skills: string[] = ['Programacion'];
   allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos', 'UI/UX'];
   members: string[] = [];
-  userId: string = this.user.id;
+  userId: string = this.user.user._id;
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private projectService: ProjectsService, private router: Router) {
-    console.log(this.user.id);
+  constructor(
+    private fb: FormBuilder,
+    private projectService: ProjectsService,
+    private router: Router) {
+    console.log(this.userId);
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
@@ -86,7 +89,6 @@ export class CreateProjectComponent implements OnInit {
   }
 
   save() {
-    console.log(this.userId);
     this.members.push(this.userId);
     var project: Project = {
       name: this.form.value.nameProject,
@@ -94,10 +96,10 @@ export class CreateProjectComponent implements OnInit {
       description: this.form.value.description,
       membersid: this.members,
       organization: this.form.value.organization,
-      state: true,
+      state: 'ACTIVE',
       start_date: new Date(this.form.value.startDate),
       end_date: new Date(this.form.value.endDate) ,
-      leaderid: this.user.id,
+      leaderid: this.userId,
     }
 
     this.projectService.createProject(project).subscribe(
@@ -108,9 +110,16 @@ export class CreateProjectComponent implements OnInit {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
+
           this.router.navigate(['/user'])
         })
-      }
-    )
+      }, (err) => {
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo crear el proyecto',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        })
+      });
   }
 }

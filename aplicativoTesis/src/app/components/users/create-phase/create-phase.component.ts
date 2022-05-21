@@ -118,7 +118,19 @@ export class CreatePhaseComponent implements OnInit {
             this.router.navigate(["User/phase"])
           }
         });
-      })
+      }, err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo crear la fase',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+      });
     }
   }
 }

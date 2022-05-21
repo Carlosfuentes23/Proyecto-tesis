@@ -1,6 +1,6 @@
 <div class="cont">
   <div class="row mb-3" >
-    <div class="col-xl-5 col-lg-12" >
+    <div class="col-xl-5 col-lg-12"  style="height: 280px;">
       <mat-card  style=" height: 100%;overflow: auto;">
         <div class="row cont ">
           <div class="col-6 col-md-4 centrar">
@@ -24,7 +24,7 @@
         </div>
       </mat-card>
     </div>
-    <div class="col-xl-7 col-lg-12 mt3">
+    <div class="col-xl-7 col-lg-12" style="height: 280px;">
       <mat-card  style=" height: 100%;overflow: auto;">
         <mat-card-content>
           <div class="row">
@@ -62,10 +62,11 @@
               </table>
             </mat-tab>
             <mat-tab label="Developer">
-              <div class="row p-3" *ngIf="!projects">
-                <div class="col-12">El usuario no es líder de ningn proyecto</div>
+              <div class="p-3" *ngIf="projects.length === 0">
+                <div class="h5">El usuario no es</div>
+                <div class="h7">desarrollador en ningun proyecto</div>
               </div>
-              <table class="table table-info table-responsive" *ngIf="projects">
+              <table class="table table-info table-responsive" *ngIf="projects !== undefined && projects.length > 0">
                 <thead>
                   <tr>
                     <th>Nombre Proyecto</th>
@@ -84,7 +85,6 @@
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>
-        <a class="float-end" style="font-size: 10px;">Ver Todos></a>
       </mat-card>
     </div>
   </div>

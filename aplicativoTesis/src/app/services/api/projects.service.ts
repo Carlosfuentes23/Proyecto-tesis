@@ -47,6 +47,10 @@ export class ProjectsService {
     return this.httpClient.get<Project[]>(this.api_url + 'getprojectlistforuser/' + id);
   }
 
+  getProjectsByLeader(id: string): Observable<Project[]>{
+    return this.httpClient.get<Project[]>(this.api_url + 'getprojectlistforleader/' + id);
+  }
+
   addMemberToProject(user:User, projectId:string): Observable<Project> {
     return this.httpClient.post<Project>(this.api_url + 'addmembertoproject/'+projectId, user);
   }

@@ -7,7 +7,7 @@ export type Project ={
   membersid?: string[];
   organization?: string;
   phases?: string[];
-  state?: boolean;
+  state?: string;
   created_at?: Date;
   start_date?: Date;
   end_date?: Date;

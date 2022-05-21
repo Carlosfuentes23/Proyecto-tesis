@@ -24,6 +24,16 @@ func CreateProject(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
+	user, err := user_service.ReadById(data.LeaderId)
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+	user.Projects = append(user.Projects, data.ID.Hex())
+	err = user_service.Update(*user, user.ID.Hex())
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+
 	return c.JSON(data)
 }
 

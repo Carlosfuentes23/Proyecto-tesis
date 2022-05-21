@@ -27,7 +27,8 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser(this.id);
-    this.getProjects(this.id);
+    this.getProjectsWhereDev(this.id);
+    this.getProjectsWhereLead(this.id);
   }
 
   getUser(id: string | null) {
@@ -42,23 +43,27 @@ export class InicioComponent implements OnInit {
     }
   }
 
-  getProjects(id: string | null): void {
+  getProjectsWhereDev(id: string | null): void {
     if (id) {
       this.projectService.getProjectsByUser(id).subscribe((data: any) => {
-        console.log(data);
-        //guardar solo los 3 primeros proyectos
-        this.projects = data.slice(0, 3);
-        this.leadProjects = data.filter((project: Project) => {
-          return project.leaderid === this.user.user._id;
-        })
+        this.projects = data.projects;
       });
     } else {
       this.projectService.getProjectsByUser(this.user.user._id).subscribe((data: any) => {
-        console.log(data);
-        this.projects = data;
-        this.leadProjects = data.filter((project: Project) => {
-          return project.leaderid === this.user.user._id;
-        })
+        this.projects = data.projects;
+      });
+    }
+  }
+
+  getProjectsWhereLead(id: string | null): void {
+    if (id) {
+      this.projectService.getProjectsByLeader(id).subscribe((data: any) => {
+        this.leadProjects = data.projects;
+      });
+    }else{
+      this.projectService.getProjectsByLeader(this.user.user._id).subscribe((data: Project[]) => {
+        this.leadProjects = data;
+        console.log(this.leadProjects);
       });
     }
   }
