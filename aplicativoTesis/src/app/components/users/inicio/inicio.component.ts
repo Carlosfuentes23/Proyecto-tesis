@@ -16,6 +16,7 @@ export class InicioComponent implements OnInit {
   projects: Project[] = [];
   leadProjects: Project[] = [];
   id: string | null;
+  selectedTab: 'lead' | 'dev' = 'lead';
 
   constructor(
     private userService: UsersService,
@@ -45,26 +46,35 @@ export class InicioComponent implements OnInit {
 
   getProjectsWhereDev(id: string | null): void {
     if (id) {
-      this.projectService.getProjectsByUser(id).subscribe((data: any) => {
-        this.projects = data.projects;
+      this.projectService.getProjectsByUser(id).subscribe((data: Project[]) => {
+        this.projects = data;
+        this.projects = this.projects.filter((project: Project) => {
+          return project.leaderid !== this.user.user._id;
+        });
       });
     } else {
-      this.projectService.getProjectsByUser(this.user.user._id).subscribe((data: any) => {
-        this.projects = data.projects;
-      });
+      this.projectService
+        .getProjectsByUser(this.user.user._id)
+        .subscribe((data: Project[]) => {
+          this.projects = data;
+          this.projects = this.projects.filter((project: Project) => {
+            return project.leaderid !== this.user.user._id;
+          });
+        });
     }
   }
 
   getProjectsWhereLead(id: string | null): void {
     if (id) {
       this.projectService.getProjectsByLeader(id).subscribe((data: any) => {
-        this.leadProjects = data.projects;
-      });
-    }else{
-      this.projectService.getProjectsByLeader(this.user.user._id).subscribe((data: Project[]) => {
         this.leadProjects = data;
-        console.log(this.leadProjects);
       });
+    } else {
+      this.projectService
+        .getProjectsByLeader(this.user.user._id)
+        .subscribe((data: Project[]) => {
+          this.leadProjects = data;
+        });
     }
   }
 }

@@ -107,11 +107,13 @@ func AddMemberProject(projectId string, userId string) error {
 		return err
 	}
 
-	project.MembersId = append(project.MembersId, userId)
-
-	err = UpdateProject(*project, projectId)
-	if err != nil {
-		return err
+	//verify if user is already in project
+	if contains(project.MembersId, userId) {
+		project.MembersId = append(project.MembersId, userId)
+		err = UpdateProject(*project, projectId)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -151,4 +153,13 @@ func GetProjectMembersNotInProject(projectId string) (m.Users, error) {
 	}
 
 	return members, nil
+}
+
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
 }

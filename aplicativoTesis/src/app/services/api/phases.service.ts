@@ -21,7 +21,7 @@ export class PhasesService {
     return this.httpClient.get<Phase>(this.api_url + 'getphases');
   }
 
-  gaterPhase(id: string): Observable<Phase> {
+  getPhase(id: string): Observable<Phase> {
     return this.httpClient.get<Phase>(this.api_url + 'getphase/' + id);
   }
 
@@ -29,7 +29,15 @@ export class PhasesService {
     return this.httpClient.put<Phase>(this.api_url + 'updatephase', phase);
   }
 
-  getPhaseMembers(id: string): Observable<User> {
-    return this.httpClient.get<User>(this.api_url + 'getphasemembers/' + id);
+  getPhaseMembers(id: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.api_url + 'getphasemembers/' + id);
+  }
+
+  addMemberPhase(user:User, phaseId:string): Observable<Phase> {
+    return this.httpClient.post<Phase>(this.api_url + 'addmembertophase/'+phaseId, user);
+  }
+
+  removeMemberPhase(user:User, phaseId:string): Observable<User> {
+    return this.httpClient.post<User>(this.api_url + 'removememberfromphase/'+phaseId, user);
   }
 }

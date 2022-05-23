@@ -20,6 +20,7 @@ export class CreatePhaseComponent implements OnInit {
 
   form: FormGroup;
   phase?: Phase;
+  members: string[] =[]
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -44,7 +45,6 @@ export class CreatePhaseComponent implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       description: ['', Validators.required],
-      members: ['', Validators.required],
     });
     this.id = this.aRoute.snapshot.params.id;
   }
@@ -90,18 +90,18 @@ export class CreatePhaseComponent implements OnInit {
 
   createPhase() {
     if (this.id) {
+      this.members.push(this.id);
       this.phase = {
         name: this.form.value.namePhase,
         project_id: this.id,
         description: this.form.value.description,
         start_date: new Date(),
         end_date: new Date(),
-        members_id: this.form.value.members,
+        members_id: this.members,
         skills: this.skills,
-        state: true,
+        state: 'ACTIVE',
       }
 
-      //Aca viene el paso de datos al servicio para enviar a la base dedatos
       this.phaseService.createPhase(this.phase).subscribe(() => {
         Swal.fire({
           icon: 'success',
@@ -115,7 +115,7 @@ export class CreatePhaseComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            this.router.navigate(["User/phase"])
+            this.router.navigate(["user/project/", this.id]);
           }
         });
       }, err => {

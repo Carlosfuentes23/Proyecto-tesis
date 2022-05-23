@@ -1,30 +1,39 @@
 <div class="cont">
   <div class="row h1">
-    Agregar Integrantes
+    <span  *ngIf="addOrNot">Agregar Integrantes</span> 
+    <span *ngIf="!addOrNot">Lista de Integrantes</span>
   </div>
-  <div class="h3 mt-2" *ngIf="users.length === 0">
+  <div class="h3 mt-2" *ngIf="!users">
     No hay integrantes para agregar a este proyecto
   </div>
-  <table class="table"  *ngIf="users.length > 0">
+  <table class="table"  *ngIf="users">
       <thead>
         <tr>
           <th scope="col">Nombres</th>
           <th scope="col">Email</th>
           <th scope="col">Skills</th>
-          <th scope="col">No. Proyectos</th>
-          <th scope="col">Añadir</th>
+          <th class="text-center" scope="col">No. Proyectos</th>
+          <th class="text-center" *ngIf="usr.user._id === project.leaderid" scope="col">
+            <span *ngIf="addOrNot">Añadir</span>
+            <span *ngIf="!addOrNot">Eliminar</span>
+          </th>
         </tr>
       </thead>
-      <tbody *ngFor="let user of users">
-        <tr>
+      <tbody>
+        <tr *ngFor="let user of users">
           <th >{{ user.name +' '+ user.last_name | titlecase }}</th>
           <td>{{ user.email }}</td>
           <td>{{ user.skills }}</td>
-          <td *ngIf="user.projects?.length">{{ user.projects?.length }}</td>
-          <td *ngIf="!user.projects?.length">0</td>
-          <td>
+          <td class="text-center" *ngIf="user.projects?.length">{{ user.projects?.length }}</td>
+          <td class="text-center" *ngIf="!user.projects?.length">0</td>
+          <td class="text-center" *ngIf="usr.user._id === project.leaderid">
             <div>
-              <button type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)"><fa-icon class="fs-14" [icon]="faPlus"></fa-icon></button>
+              <button *ngIf="addOrNot" type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)">
+                <fa-icon class="fs-14" [icon]="faPlus"></fa-icon>
+              </button>
+              <button *ngIf="!addOrNot" type="button" class="btn btn-sm rounded-circle btn-danger " (click)="removeMember(user)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
             </div>
           </td>
         </tr>

@@ -63,3 +63,50 @@ func GetPhaseMembers(phaseId string) (m.Users, error) {
 
 	return members, nil
 }
+
+func AddMemberPhase(phaseId string, memberId string) error {
+	phase, err := GetPhaseById(phaseId)
+	if err != nil {
+		return err
+	}
+	//verificar que el usuario no este en la lista de miembros
+	if !contains(phase.MembersId, memberId) {
+		phase.MembersId = append(phase.MembersId, memberId)
+		err = UpdatePhase(*phase, phaseId)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func RemoveMemberPhase(phaseId string, memberId string) error {
+	phase, err := GetPhaseById(phaseId)
+	if err != nil {
+		return err
+	}
+
+	for i, v := range phase.MembersId {
+		if v == memberId {
+			phase.MembersId = append(phase.MembersId[:i], phase.MembersId[i+1:]...)
+			break
+		}
+	}
+
+	err = UpdatePhase(*phase, phaseId)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
+}

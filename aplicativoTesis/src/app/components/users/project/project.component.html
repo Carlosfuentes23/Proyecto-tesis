@@ -1,17 +1,17 @@
 <div class="cont">
   <div class="row mt-3">
-    <div class="col">
+    <div class="col" style="height: 220px;">
       <mat-card class="tergeta">
         <h2>Datos del projecto</h2>
         <div class="mt-4 mb-2">
           <p><strong>Nombre del projecto:</strong> {{ project.name }}</p>
-          <p><strong>Lider del projecto:</strong> {{ leader.name +" "}} {{leader.last_name}} </p>
+          <p><strong>Lider del projecto:</strong> {{ leader.name +" "+leader.last_name | titlecase}} </p>
           <p><strong>Fecha de inicio de Proyecto:</strong> {{ project.created_at| date: 'M/d/yyyy'}}</p>
           <p><strong>Descripción:</strong> {{ project.description }}</p>
         </div>
       </mat-card>
     </div>
-    <div class="col">
+    <div class="col" style="height: 220px;">
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">
@@ -28,21 +28,23 @@
             Este proyecto aun no cuenta con mienbros asignados
           </div>
         </div>
-        <table class="table table-striped"  *ngIf="projectPhases.length > 0">
+        <table class="table table-striped"  *ngIf="projectPhases.length">
+          <thead>
+            <tr>
+              <th scope="col">No.</th>
+              <th scope="col">Nombre de la fase</th>
+              <th scope="col">Fecha final</th>
+              <th scope="col">Estado</th>
+            <tr>
+          </thead>
           <tbody>
-            <tr>
-              <td scope="col">
-                <a href="">Fase 1</a>
-              </td>
-            </tr>
-            <tr>
-              <td scope="col">
-                <a href="">Fase 1</a>
-              </td>
-            </tr>
-            <tr>
-              <td scope="col">
-                <a href="">Fase 3</a>
+            <tr *ngFor="let phase of projectPhases, let i = index" [routerLink]="'/user/phase/'+ phase._id">
+              <td>{{ i+1 }}</td>
+              <td>{{ phase.name }}</td>
+              <td>{{ phase.end_date | date: 'M/d/yyyy'}}</td>
+              <td>
+                <span *ngIf="phase.state === 'ACTIVE'">Activo</span>
+                <span *ngIf="phase.state === 'CLOSE'">Cerrado</span>
               </td>
             </tr>
           </tbody>
@@ -51,13 +53,15 @@
     </div>
   </div>
   <hr>
-  <div class="row mt-3">
+  <div class="row mt -3" style="height: 220px;">
     <div class="col">
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">
-            <h2>
-              Integrantes
+            <h2 class="int">
+              <a class="text-dark text-decoration-none" [routerLink]="'/user/list-members-project/'+id">
+                Integrantes
+              </a>
             </h2>
           </div>
           <div class="col">
@@ -90,8 +94,8 @@
           </tbody>
         </table>
       </mat-card>
-    </div>
-    <div class="col">
+    </div> 
+    <div class="col" style="height: 220px;">
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">

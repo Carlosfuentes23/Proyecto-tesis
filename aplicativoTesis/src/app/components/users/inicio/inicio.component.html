@@ -1,13 +1,13 @@
 <div class="cont">
-  <div class="row mb-3" >
-    <div class="col-xl-5 col-lg-12"  style="height: 280px;">
-      <mat-card  style=" height: 100%;overflow: auto;">
+  <div class="row mb-3">
+    <div class="col-xl-5 col-lg-12" style="height: 280px;">
+      <mat-card style=" height: 100%;overflow: auto;">
         <div class="row cont ">
           <div class="col-6 col-md-4 centrar">
             <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
           </div>
           <div class="col-12 col-sm-6 col-md-8">
-            <p class="designation">
+            <p class="desig/playlist/37i9dQZF1DX0MqBmOXvo6bnation">
               <span class="fw-bold">Usuario: </span>
               {{ " " + usr.name + " " + usr.last_name }}
             </p>
@@ -25,7 +25,7 @@
       </mat-card>
     </div>
     <div class="col-xl-7 col-lg-12" style="height: 280px;">
-      <mat-card  style=" height: 100%;overflow: auto;">
+      <mat-card style=" height: 100%;overflow: auto;">
         <mat-card-content>
           <div class="row">
             <div class="col">
@@ -37,9 +37,17 @@
               </a>
             </div>
           </div>
-          <mat-tab-group>
-            <mat-tab label="Leader">
-              <div class="p-3" *ngIf="leadProjects.length === 0">
+          <div>
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" style="cursor: pointer;" (click)="selectedTab = 'lead'" [class.active]="selectedTab === 'lead'">Líder</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="cursor: pointer;" (click)="selectedTab = 'dev'" [class.active]="selectedTab === 'dev'">Desarrollador</a>
+              </li>
+            </ul>
+            <div *ngIf="selectedTab === 'lead'">
+              <div class="p-3" *ngIf="!leadProjects || !leadProjects.length">
                 <div class="h5">El usuario no es</div>
                 <div class="h7">líder de ningun proyecto</div>
               </div>
@@ -53,16 +61,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor:pointer" *ngFor="let project of leadProjects" [routerLink]="'/user/project/'+project._id">
+                  <tr style="cursor:pointer" *ngFor="let project of leadProjects"
+                    [routerLink]="'/user/project/'+project._id">
                     <td>{{ project.name }}</td>
                     <td>{{ project.created_at | date }}</td>
                     <td>{{ project.membersid?.length }}</td>
                   </tr>
                 </tbody>
               </table>
-            </mat-tab>
-            <mat-tab label="Developer">
-              <div class="p-3" *ngIf="projects.length === 0">
+            </div>
+            <div *ngIf="selectedTab === 'dev'">
+              <div class="p-3" *ngIf="!projects || !projects.length">
                 <div class="h5">El usuario no es</div>
                 <div class="h7">desarrollador en ningun proyecto</div>
               </div>
@@ -75,15 +84,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor:pointer" *ngFor="let project of projects" [routerLink]="'/user/project/'+project._id">
+                  <tr style="cursor:pointer" *ngFor="let project of projects"
+                    [routerLink]="'/user/project/'+project._id">
                     <td>{{ project.name }}</td>
                     <td>{{ project.created_at | date }}</td>
                     <td>{{ project.membersid?.length }}</td>
                   </tr>
                 </tbody>
               </table>
-            </mat-tab>
-          </mat-tab-group>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>

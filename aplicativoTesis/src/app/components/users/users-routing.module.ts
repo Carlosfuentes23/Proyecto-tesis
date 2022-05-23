@@ -24,6 +24,8 @@ const routes: Routes = [
     { path: 'select-role', component: SelectRoleComponent },
     { path: 'add-members-phase/:id', component: AddMembersPhaseComponent },
     { path: 'add-members-project/:id', component: AddMembersProyectComponent },
+    { path: 'list-members-project/:id', component: AddMembersProyectComponent },
+    { path: 'list-members-phase/:id', component: AddMembersPhaseComponent },
     { path:':id', component: InicioComponent},
   ]},
 

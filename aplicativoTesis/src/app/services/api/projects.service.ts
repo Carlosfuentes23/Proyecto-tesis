@@ -31,12 +31,12 @@ export class ProjectsService {
     return this.httpClient.put<Project>(this.api_url + 'updateproject', project);
   }
 
-  gatProjectMembers(id: string): Observable<User> {
-    return this.httpClient.get<User>(this.api_url + 'getprojectmembers/' + id);
+  getProjectMembers(id: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.api_url + 'getprojectmembers/' + id);
   }
 
-  getProjectPhases(id: string): Observable<Phase> {
-    return this.httpClient.get<Phase>(this.api_url + 'getprojectphases/' + id);
+  getProjectPhases(id: string): Observable<Phase[]> {
+    return this.httpClient.get<Phase[]>(this.api_url + 'getprojectphases/' + id);
   }
 
   getUsersNotInProject(id: string): Observable<User[]>{
@@ -53,5 +53,9 @@ export class ProjectsService {
 
   addMemberToProject(user:User, projectId:string): Observable<Project> {
     return this.httpClient.post<Project>(this.api_url + 'addmembertoproject/'+projectId, user);
+  }
+
+  removeMemberFromProject(user:User, projectId:string): Observable<Project> {
+    return this.httpClient.post<Project>(this.api_url + 'removememberfromproject/'+projectId, user);
   }
 }

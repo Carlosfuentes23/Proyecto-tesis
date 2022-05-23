@@ -1,30 +1,41 @@
 <div class="cont">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nombres</th>
-            <th scope="col">Email</th>
-            <th scope="col">Skills</th>
-            <th scope="col" class="text-center">No. Proyectos</th>
-            <th scope="col" class="text-center">Añadir</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let user of users">
-          <tr>
-            <th >{{ user.name +' '+ user.last_name | titlecase }}</th>
-            <td>{{ user.email }}</td>
-            <td>{{ user.skills }}</td>
-            <td class="text-center" *ngIf="user.projects?.length">{{ user.projects?.length }}</td>
-            <td class="text-center" *ngIf="!user.projects?.length">0</td>
-            <td class="text-center">
-              <div>
-                <button type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)"><fa-icon class="fs-14" [icon]="faPlus"></fa-icon></button>
-              </div>
-                <!--<div  class="col-6">
-                  <button type="button" class="btn btn-danger " (click)="addMember(user)"><fa-icon [icon]="faTrash"></fa-icon></button>
-                </div>-->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="row h1">
+    <span *ngIf="addOrNot">Agregar Integrantes</span>
+    <span *ngIf="!addOrNot">Lista de Integrantes</span>
+  </div>
+  <div class="h3 mt-2" *ngIf="!users">
+    No hay integrantes para agregar a este fase
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombres</th>
+        <th scope="col">Email</th>
+        <th scope="col">Skills</th>
+        <th scope="col" class="text-center">No. Proyectos</th>
+        <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Añadir</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of users">
+      <tr>
+        <th>{{ user.name + " " + user.last_name | titlecase }}</th>
+        <td>{{ user.email }}</td>
+        <td>{{ user.skills }}</td>
+        <td class="text-center" *ngIf="user.projects?.length">
+          {{ user.projects?.length }}
+        </td>
+        <td class="text-center" *ngIf="!user.projects?.length">0</td>
+        <td class="text-center" *ngIf="usr.user._id === project.leaderid">
+          <div>
+            <button *ngIf="addOrNot" type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)">
+              <fa-icon class="fs-14" [icon]="faPlus"></fa-icon>
+            </button>
+            <button *ngIf="!addOrNot" type="button"class="btn btn-sm rounded-circle btn-danger" (click)="removeMember(user)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

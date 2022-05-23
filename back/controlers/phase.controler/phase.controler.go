@@ -110,3 +110,37 @@ func GetPhaseMembers(c *fiber.Ctx) error {
 
 	return c.JSON(members)
 }
+
+func AddMemberPhase(c *fiber.Ctx) error {
+	phaseId := c.Params("id")
+	var data models.User
+
+	err := c.BodyParser(&data)
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+
+	err = phaseService.AddMemberPhase(phaseId, data.ID.Hex())
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+
+	return c.JSON(data)
+}
+
+func RemoveMemberPhase(c *fiber.Ctx) error {
+	phaseId := c.Params("id")
+	var data models.User
+
+	err := c.BodyParser(&data)
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+
+	err = phaseService.RemoveMemberPhase(phaseId, data.ID.Hex())
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	}
+
+	return c.JSON(data)
+}

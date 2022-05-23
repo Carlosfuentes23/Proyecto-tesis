@@ -38,4 +38,6 @@ func Start(app *fiber.App) {
 	app.Get("/api/phases/getphaselist/:projectId", phaseControler.GetPhaseListByProjectId)
 	app.Post("/api/phases/updatephase/:id", phaseControler.UpdatePhase)
 	app.Get("/api/phases/getphasemembers/:id", phaseControler.GetPhaseMembers)
+	app.Post("/api/phases/addmembertophase/:id", phaseControler.AddMemberPhase)
+	app.Post("/api/phases/removememberfromphase/:id", phaseControler.RemoveMemberPhase)
 }

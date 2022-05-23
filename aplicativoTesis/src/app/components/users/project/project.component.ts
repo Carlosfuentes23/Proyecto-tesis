@@ -31,6 +31,7 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     if(this.id) {
       this.getProject(this.id);
+      this.getPhases(this.id);
     }
 
   }
@@ -52,7 +53,7 @@ export class ProjectComponent implements OnInit {
   }
 
   getMembers(id: string): void {
-    this.projectService.gatProjectMembers(id).subscribe((data: any) => {
+    this.projectService.getProjectMembers(id).subscribe((data: any) => {
       this.projectMembers = data;
     })
   }
