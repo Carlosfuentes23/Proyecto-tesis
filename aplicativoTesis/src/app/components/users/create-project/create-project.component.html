@@ -2,36 +2,56 @@
     <div class="card-body">
         <div class="row">
             <div class="col">
-              <label for="nameProject" class="form-label">Nombre del projecto</label>
-              <input type="text" class="form-control" id="nameProject" formControlName="nameProject">
-              <div id="emailHelp" class="form-text">Descripción</div>
+              <label for="nameProject" class="form-label">Nombre del proyecto</label>
+              <input type="text" class="form-control" id="nameProject" formControlName="nameProject"
+              [ngClass]="{'is-invalid border-danger': form.get('nameProject')?.touched && form.get('nameProject')?.invalid}">
+              <div *ngIf="form.get('nameProject')?.errors && form.get('nameProject')?.dirty">
+                <div class="text-danger" *ngIf="form.get('nameProject')?.hasError('required')">
+                  El nombre del proyecto es requerido
+                </div>
+              </div>
             </div>
             <div class="col">
               <label for="exampleInputEmail1" class="form-label">Organización</label>
-              <input type="text" class="form-control" id="organization" formControlName="organization">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              <input type="text" class="form-control" id="organization" formControlName="organization"
+              [ngClass]="{'is-invalid border-danger': form.get('organization')?.touched && form.get('organization')?.invalid}">
+              <div  *ngIf="form.get('organization')?.errors && form.get('organization')?.dirty">
+                <div class="text-danger" *ngIf="form.get('organization')?.hasError('required')">
+                  La organización es requerida
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row  mt-2">
             <div class="col">
               <label for="dateEstimated" class="form-label">Fecha de inicio del proyecto</label>
-              <input type="date" class="form-control" id="startDate" formControlName="startDate">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              <input type="date" class="form-control" id="startDate" formControlName="startDate"
+              [ngClass]="{'is-invalid border-danger': form.get('startDate')?.touched && form.get('startDate')?.invalid}">
+              <div  *ngIf="form.get('startDate')?.errors && form.get('startDate')?.dirty">
+                <div class="text-danger" *ngIf="form.get('startDate')?.hasError('required')">
+                  La fecha de inicio es requerida
+                </div>
+              </div>
             </div>
             <div class="col">
               <label for="dateEstimated" class="form-label">Fecha de cierre del proyecto</label>
-              <input type="date" class="form-control" id="endDate" formControlName="endDate">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              <input type="date" class="form-control" id="endDate" formControlName="endDate"
+              [ngClass]="{'is-invalid border-danger': form.get('endDate')?.touched && form.get('endDate')?.invalid}">
+              <div *ngIf="form.get('endDate')?.errors && form.get('startDate')?.dirty">
+                <div class="text-danger" *ngIf="form.get('endDate')?.hasError('required')">
+                  La fecha de cierre es requerida
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt-2">
             <div class="col">
               <label for="exampleInputEmail1" class="form-label">Descripción</label>
               <textarea type="text" class="form-control" id="description" formControlName="description"></textarea>
               <div id="emailHelp" class="form-text">Usuario que suaras dentro de la app</div>
             </div>
           </div>
-          <div class="row">
+          <div class="row  mt-2">
             <label for="exampleInputEmail1" class="form-label">Seleccione las habilidadades </label>
             <mat-form-field class="example-chip-list ancho" appearance="fill" >
                 <mat-label>Habilidades</mat-label>

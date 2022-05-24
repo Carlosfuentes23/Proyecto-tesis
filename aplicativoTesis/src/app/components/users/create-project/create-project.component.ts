@@ -36,7 +36,6 @@ export class CreateProjectComponent implements OnInit {
     private fb: FormBuilder,
     private projectService: ProjectsService,
     private router: Router) {
-    console.log(this.userId);
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));

@@ -25,8 +25,10 @@ export class AddMembersProyectComponent implements OnInit {
     private projectService: ProjectsService,
     private ac: ActivatedRoute
   ) {
-    if (this.id) this.getProject(this.id);
-    this.addOrListMembers();
+    if (this.id){ 
+      this.getProject(this.id);
+      this.addOrListMembers();
+    }
   }
 
   ngOnInit(): void {}
@@ -48,6 +50,7 @@ export class AddMembersProyectComponent implements OnInit {
   getProject(id: string) {
     this.projectService.getProject(id).subscribe((res) => {
       this.project = res;
+      this.project.leaderid
     });
   }
 
@@ -64,7 +67,6 @@ export class AddMembersProyectComponent implements OnInit {
   }
 
   addMember(user: User) {
-    console.log(user);
     Swal.fire({
       title: '¿Está seguro de agregar a este usuario al proyecto?',
       icon: 'question',

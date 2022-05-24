@@ -23,12 +23,12 @@
             <button class="btn btn-primary btn-sm float-end" [routerLink]="'/user/create-phase/'+project._id">Nueva</button>
           </div>
         </div>
-        <div *ngIf="projectPhases.length === 0">
+        <div *ngIf="!projectPhases || !projectPhases.length">
           <div class="h3">
             Este proyecto aun no cuenta con mienbros asignados
           </div>
         </div>
-        <table class="table table-striped"  *ngIf="projectPhases.length">
+        <table class="table table-striped"  *ngIf="projectPhases && projectPhases.length > 0">
           <thead>
             <tr>
               <th scope="col">No.</th>
@@ -38,7 +38,7 @@
             <tr>
           </thead>
           <tbody>
-            <tr *ngFor="let phase of projectPhases, let i = index" [routerLink]="'/user/phase/'+ phase._id">
+            <tr style="cursor:pointer" *ngFor="let phase of projectPhases, let i = index" [routerLink]="'/user/phase/'+ phase._id">
               <td>{{ i+1 }}</td>
               <td>{{ phase.name }}</td>
               <td>{{ phase.end_date | date: 'M/d/yyyy'}}</td>

@@ -29,7 +29,7 @@
                 [ngClass]="{'is-invalid border-danger': form.get('lastName')?.touched && form.get('lastName')?.invalid}">
               <div *ngIf="form.get('lastName')?.errors && form.get('lastName')?.dirty">
                 <div class="text-danger" *ngIf="form.get('lastName')?.hasError('required')">
-                  El nombre es requerido
+                  Los apellidos es requerido
                 </div>
                 <div class="text-danger" *ngIf="form.get('lastName')?.hasError('pattern')">
                   Caracter invalido
@@ -53,12 +53,12 @@
               </div>
             </div>
             <div class="col">
-              <label for="exampleInputEmail1" class="form-label"><span>Telefono<span class="text-danger">*</span></span></label>
+              <label for="exampleInputEmail1" class="form-label"><span>Teléfono<span class="text-danger">*</span></span></label>
               <input type="text" class="form-control" formControlName="tel"
               [ngClass]="{'is-invalid border-danger': form.get('tel')?.touched && form.get('tel')?.invalid}">
               <div *ngIf="form.get('tel')?.errors && form.get('tel')?.dirty">
                 <div class="text-danger" *ngIf="form.get('tel')?.hasError('required')">
-                  El correo es requerido
+                  El teléfono es requerido
                 </div>
                 <div class="text-danger" *ngIf="form.get('tel')?.hasError('pattern')">
                   Caracter invalido

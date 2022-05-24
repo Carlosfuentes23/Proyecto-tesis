@@ -18,9 +18,13 @@
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">
-            <h2>Integrantes</h2>
+            <h2 class="int">
+              <a class="text-dark text-decoration-none" [routerLink]="'/user/list-members-phase/'+id">
+                Integrantes
+              </a>
+            </h2>
           </div>
-          <div class="col">
+          <div *ngIf="leader._id === user.user._id"  class="col">
             <a class="btn btn-primary btn-sm float-end" [routerLink]="'/user/add-members-phase/'+id">Agregar</a>
           </div>
         </div>

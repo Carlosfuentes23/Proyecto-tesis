@@ -5,3 +5,12 @@
 .tergeta {
   height: 100%;
 }
+
+
+.int{
+  cursor: pointer;
+}
+
+.int:hover{
+  color: #3134ef;
+}

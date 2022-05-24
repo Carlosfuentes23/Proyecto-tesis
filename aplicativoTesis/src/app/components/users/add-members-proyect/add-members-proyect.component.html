@@ -31,6 +31,8 @@
               <button *ngIf="addOrNot" type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)">
                 <fa-icon class="fs-14" [icon]="faPlus"></fa-icon>
               </button>
+            </div>
+            <div *ngIf="user._id !== project.leaderid">
               <button *ngIf="!addOrNot" type="button" class="btn btn-sm rounded-circle btn-danger " (click)="removeMember(user)">
                 <fa-icon [icon]="faTrash"></fa-icon>
               </button>
