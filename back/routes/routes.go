@@ -1,6 +1,7 @@
 package routes
 
 import (
+	abilitiesControler "main/controlers/abilities.controler"
 	authControler "main/controlers/auth.controler"
 	phaseControler "main/controlers/phase.controler"
 	projectControler "main/controlers/project.controler"
@@ -36,8 +37,17 @@ func Start(app *fiber.App) {
 	app.Post("/api/phases/createphase/:projectId", phaseControler.CreatePhase)
 	app.Get("/api/phases/getphase/:id", phaseControler.GetPhaseById)
 	app.Get("/api/phases/getphaselist/:projectId", phaseControler.GetPhaseListByProjectId)
-	app.Post("/api/phases/updatephase/:id", phaseControler.UpdatePhase)
 	app.Get("/api/phases/getphasemembers/:id", phaseControler.GetPhaseMembers)
+	app.Get("/api/phases/getphaseabilities/:id", phaseControler.GetAbilitiesPhase)
+	app.Post("/api/phases/updatephase/:id", phaseControler.UpdatePhase)
 	app.Post("/api/phases/addmembertophase/:id", phaseControler.AddMemberPhase)
 	app.Post("/api/phases/removememberfromphase/:id", phaseControler.RemoveMemberPhase)
+
+	//Rutas Para el controlador de habilidades
+	app.Post("/api/abilities/createability/:phaseId", abilitiesControler.CreateAbilite)
+	app.Post("/api/abilities/updateability/:id", abilitiesControler.UpdateAbilitie)
+	app.Get("/api/abilities/getability/:id", abilitiesControler.GetAbilitieById)
+	app.Get("/api/abilities/getabilitylist", abilitiesControler.GetAbilitieList)
+	app.Get("/api/abilities/getabilitylist/:projectId", abilitiesControler.GetAbilitiesByProjectId)
+
 }
