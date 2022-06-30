@@ -40,7 +40,7 @@ func GetPhaseById(phaseId string) (*m.Phase, error) {
 
 func UpdatePhase(phase m.Phase, phaseId string) error {
 
-	err := phaseRepo.UpdatePhase(phase, phaseId)
+	err := phaseRepo.UpdatePhase(phase)
 
 	if err != nil {
 		return err
@@ -62,6 +62,21 @@ func GetPhaseMembers(phaseId string) (m.Users, error) {
 	}
 
 	return members, nil
+}
+
+func GetAbilitiesPhase(phaseId string) (m.Abilities, error) {
+	phase, err := GetPhaseById(phaseId)
+	if err != nil {
+		return nil, err
+	}
+
+	abilities, err := phaseRepo.GetAbilitiesPhase(phase.AbilitiesId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return abilities, nil
 }
 
 func AddMemberPhase(phaseId string, memberId string) error {

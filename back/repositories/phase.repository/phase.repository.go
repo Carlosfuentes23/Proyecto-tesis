@@ -4,8 +4,8 @@ import (
 	"context"
 	"main/database"
 	m "main/models"
+	abilitie_repository "main/repositories/abilitie.repository"
 	user_repository "main/repositories/user.repository"
-	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -69,30 +69,19 @@ func GetPhaseById(phaseId string) (*m.Phase, error) {
 	return &phase, nil
 }
 
-func UpdatePhase(phase m.Phase, phaseId string) error {
+func UpdatePhase(phase m.Phase) error {
 	var err error
-	uid, _ := primitive.ObjectIDFromHex(phaseId)
 
-	filter := bson.M{"_id": uid}
+	filter := bson.M{"_id": phase.ID}
 
-	Update := bson.M{
-		"$set": bson.M{
-			"name":        phase.Name,
-			"skills":      phase.Skills,
-			"membersId":   phase.MembersId,
-			"description": phase.Description,
-			"state":       phase.State,
-			"start_date":  phase.StartDate,
-			"end_date":    phase.EndDate,
-			"updated_at":  time.Now(),
-		}}
+	_, err = collection.UpdateOne(ctx, filter, bson.M{"$set": phase})
 
-	_, err = collection.UpdateOne(ctx, filter, Update)
 	if err != nil {
 		return err
 	}
 
 	return nil
+
 }
 
 func GetPhaseMembers(membersId []string) (m.Users, error) {
@@ -109,4 +98,20 @@ func GetPhaseMembers(membersId []string) (m.Users, error) {
 	}
 
 	return members, nil
+}
+
+func GetAbilitiesPhase(abilitiesId []string) (m.Abilities, error) {
+	var abilities m.Abilities
+
+	for _, abilityId := range abilitiesId {
+		ability, err := abilitie_repository.GetAbilitieById(abilityId)
+
+		if err != nil {
+			return abilities, err
+		}
+
+		abilities = append(abilities, ability)
+	}
+
+	return abilities, nil
 }

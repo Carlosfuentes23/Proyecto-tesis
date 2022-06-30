@@ -81,6 +81,17 @@ func GetPhaseList(c *fiber.Ctx) error {
 	return c.JSON(phases)
 }
 
+func GetAbilitiesPhase(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	abilities, err := phaseService.GetAbilitiesPhase(id)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(err)
+	}
+
+	return c.JSON(abilities)
+}
+
 func UpdatePhase(c *fiber.Ctx) error {
 	id := c.Params("id")
 
