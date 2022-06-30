@@ -7,7 +7,8 @@
 export const environment = {
   production: false,
 
-  KMT_API: 'https://tesis-backapp.herokuapp.com/api/',
+  //KMT_API: 'https://tesis-backapp.herokuapp.com/api/',
+  KMT_API: 'http://localhost:8080/api/',
 };
 
 /*
