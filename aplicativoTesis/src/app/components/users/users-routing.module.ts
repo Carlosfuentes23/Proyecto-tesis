@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AbilitieComponent } from './abilitie/abilitie.component';
 import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.component';
 import { AddMembersProyectComponent } from './add-members-proyect/add-members-proyect.component';
+import { CreateAbilitieComponent } from './create-abilitie/create-abilitie.component';
 import { CreatePhaseComponent } from './create-phase/create-phase.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
@@ -26,6 +28,8 @@ const routes: Routes = [
     { path: 'add-members-project/:id', component: AddMembersProyectComponent },
     { path: 'list-members-project/:id', component: AddMembersProyectComponent },
     { path: 'list-members-phase/:id', component: AddMembersPhaseComponent },
+    { path: 'abilitie/:id', component: AbilitieComponent },
+    { path: 'create-abilitie/:id', component: CreateAbilitieComponent },
     { path:':id', component: InicioComponent},
   ]},
 

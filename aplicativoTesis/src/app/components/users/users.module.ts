@@ -16,6 +16,9 @@ import { SelectProjectComponent } from './select-project/select-project.componen
 import { AddMembersProyectComponent } from './add-members-proyect/add-members-proyect.component';
 import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CreateAbilitieComponent } from './create-abilitie/create-abilitie.component';
+import { AbilitieListComponent } from './abilitie-list/abilitie-list.component';
+import { AbilitieComponent } from './abilitie/abilitie.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SelectRoleComponent,
     SelectProjectComponent,
     AddMembersProyectComponent,
-    AddMembersPhaseComponent
+    AddMembersPhaseComponent,
+    CreateAbilitieComponent,
+    AbilitieListComponent,
+    AbilitieComponent
   ],
   imports: [
     CommonModule,

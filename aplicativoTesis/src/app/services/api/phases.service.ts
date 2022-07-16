@@ -33,6 +33,10 @@ export class PhasesService {
     return this.httpClient.get<User[]>(this.api_url + 'getphasemembers/' + id);
   }
 
+  getPhaseAbilities(id: string): Observable<any> {
+    return this.httpClient.get<any>(this.api_url + 'getphaseabilities/' + id);
+  }
+
   addMemberPhase(user:User, phaseId:string): Observable<Phase> {
     return this.httpClient.post<Phase>(this.api_url + 'addmembertophase/'+phaseId, user);
   }

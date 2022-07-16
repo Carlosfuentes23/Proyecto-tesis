@@ -1,0 +1,31 @@
+<div class="cont">
+    <div class="row h1">
+        <span>Crear Abilidad</span> 
+    </div>
+    <div class="form">
+
+    </div>
+    <div class="pt-3">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Técnicas</th>
+                    <th scope="col">Añadir</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of phaseMembers">
+                    <td>{{user.name }}&nbsp;{{user.last_name}}</td>
+                    <td>
+                        <span *ngFor="let skill of user.skills">
+                            {{skill | titlecase}}.&nbsp;
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" >Añadir</button>
+                    </td>
+                </tr>
+        </table>
+    </div>
+</div>

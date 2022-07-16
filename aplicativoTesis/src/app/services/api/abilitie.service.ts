@@ -12,7 +12,23 @@ export class AbilitieService {
   
   constructor(private httpClient: HttpClient) { }
 
-  createAbilitie(abilitie: Abilitie): Observable<Abilitie> {
-    return this.httpClient.post<Abilitie>(this.api_url+'/:phaseId', abilitie);
+  createAbilitie(phaseId: string,abilitie: Abilitie): Observable<Abilitie> {
+    return this.httpClient.post<Abilitie>(this.api_url+'createability/'+ phaseId, abilitie);
+  }
+
+  updateAbilitie(abilitie: Abilitie): Observable<Abilitie> {
+    return this.httpClient.post<Abilitie>(this.api_url+'updateability/'+ abilitie._id, abilitie);
+  }
+
+  GetAbilitieById(abilitieId: string): Observable<Abilitie> {
+    return this.httpClient.get<Abilitie>(this.api_url+'getability/'+ abilitieId);
+  }
+
+  getAbilitieByProjectId(projectId: string): Observable<Abilitie[]> {
+    return this.httpClient.get<Abilitie[]>(this.api_url+'getabilitylistbyprojectid/'+ projectId);
+  }
+
+  GetAbilitieList(): Observable<Abilitie[]> {
+    return this.httpClient.get<Abilitie[]>(this.api_url+'getabilitylist');
   }
 }
