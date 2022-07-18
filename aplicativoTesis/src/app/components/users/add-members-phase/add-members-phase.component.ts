@@ -98,7 +98,7 @@ export class AddMembersPhaseComponent implements OnInit {
   addMember(user: User) {
     Swal.fire({
       title: '¿Estas seguro?',
-      text: `¿Deseas agregar a ${user.name} la fase?`,
+      text: `¿Deseas agregar a ${user.name} a la fase?`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

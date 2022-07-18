@@ -3,11 +3,11 @@ export type Abilitie = {
     name?: string;
     description?:string
     id_project?:string;
-    members?: members;
+    members?: members[];
 }
 
 export type members = {
-    id_member?: string;   
+    id_member?: string;
     name?: string;
     lastname?:string;
     notes?:notes;

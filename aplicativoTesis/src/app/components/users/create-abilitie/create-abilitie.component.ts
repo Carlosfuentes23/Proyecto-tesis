@@ -6,6 +6,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { Phase } from 'src/app/interfaces/phase.interface';
 import { AbilitieService } from 'src/app/services/api/abilitie.service';
 import { PhasesService } from 'src/app/services/api/phases.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-abilitie',
@@ -18,7 +19,8 @@ export class CreateAbilitieComponent implements OnInit {
   abilitie: Abilitie ={};
   phase: Phase = {};
   phaseMembers: User[] = [];
-  notMembers: members[] = [];
+  notMembers: User[] = [];
+  abilitieMembers: members[] = [];
 
   constructor( private aRoute: ActivatedRoute,
     private fb: FormBuilder,
@@ -51,11 +53,12 @@ export class CreateAbilitieComponent implements OnInit {
     this.phaseService.getPhaseMembers(pasheId).subscribe(
       (members: User[]) => {
         this.phaseMembers = members;
+        this.membersNotIntoPhase(this.phaseMembers, this.abilitieMembers);
       }
     )
   }
 
-  createAbilitie(pasheId :string) {    
+  createAbilitie(pasheId :string) {
     this.abilitie.name = this.form.value.name;
     this.abilitie.description = this.form.value.description;
 
@@ -78,15 +81,69 @@ export class CreateAbilitieComponent implements OnInit {
         }
       });
       if(!exist){
-        this.notMembers.push({
-          id_member: member._id,
-          name: member.name,
-          lastname: member.last_name,
-        });
+        this.notMembers.push(member);
       }
     })
     console.log(this.notMembers);
   }
 
 
+  addMember(member: User) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: `¿Deseas agregar a ${member.name}?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        this.abilitieMembers.push({
+          id_member: member._id,
+          name: member.name,
+          lastname: member.last_name,
+        });
+        this.notMembers = this.notMembers.filter(notMember => notMember._id != member._id);
+      }
+    })
+  }
+
+  saveAbilitie(){
+    if(this.abilitieMembers.length > 0){
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: `¿Deseas guardar la abilidad?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.value) {
+          this.abilitie.members = this.abilitieMembers;
+          if(this.id)
+            this.createAbilitie(this.id);
+        }
+      });
+    }else{
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: `¿Deseas guardar la abilidad sin miembros?`,
+        icon: 'question',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.value) {
+          this.abilitie.members = this.abilitieMembers;
+          if(this.id)
+            this.createAbilitie(this.id);
+        }
+      });
+    }
+  }
 }
