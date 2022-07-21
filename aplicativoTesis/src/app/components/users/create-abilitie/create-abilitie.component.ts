@@ -61,12 +61,10 @@ export class CreateAbilitieComponent implements OnInit {
   createAbilitie(pasheId :string) {
     this.abilitie.name = this.form.value.name;
     this.abilitie.description = this.form.value.description;
-
-
     this.abilitieService.createAbilitie(pasheId, this.abilitie).subscribe(
       (abilitie: Abilitie) => {
         console.log(abilitie);
-        this.router.navigate(['/abilities']);
+        this.router.navigate(['pashe/' + pasheId]);
       }
     )
   }
@@ -104,6 +102,7 @@ export class CreateAbilitieComponent implements OnInit {
           id_member: member._id,
           name: member.name,
           lastname: member.last_name,
+          state: 'ACTIVE',
         });
         this.notMembers = this.notMembers.filter(notMember => notMember._id != member._id);
       }

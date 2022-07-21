@@ -17,6 +17,7 @@ type Member struct {
 	Name      string `json:"name"`
 	Lastname  string `json:"lastname"`
 	Notes     []Note `json:"notes"`
+	State     string `json:"state"`
 }
 
 type Members []*Member

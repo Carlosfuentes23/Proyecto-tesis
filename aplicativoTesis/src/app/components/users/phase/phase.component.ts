@@ -19,7 +19,7 @@ export class PhaseComponent implements OnInit {
   leader: User = {};
   phaseMembers: User[] = [];
   user = JSON.parse(sessionStorage.getItem("USER")!);
-  
+
 
   constructor(
     private phaseService: PhasesService,
@@ -34,6 +34,7 @@ export class PhaseComponent implements OnInit {
     if (this.id) {
       this.getPhase(this.id);
       this.getPhaseMembers(this.id);
+      this.getAbilities(this.id);
     }
   }
 
@@ -60,6 +61,12 @@ export class PhaseComponent implements OnInit {
           this.leader = data;
         });
       }
+    });
+  }
+
+  getAbilities(phaseId: string): void {
+    this.phaseService.getPhaseAbilities(phaseId).subscribe((data: any) => {
+      console.log(data);
     });
   }
 }

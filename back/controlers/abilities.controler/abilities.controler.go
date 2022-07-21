@@ -8,6 +8,8 @@ import (
 	abilitie_service "main/services/abilitie.service"
 	phase_service "main/services/phase.service"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -15,6 +17,7 @@ func CreateAbilite(c *fiber.Ctx) error {
 	phaseId := c.Params("phaseId")
 
 	var data models.Abilitie
+	data.ID = primitive.NewObjectID()
 
 	err := c.BodyParser(&data)
 	if err != nil {

@@ -2,28 +2,35 @@
     <div class="row h1">
         <span>Crear Abilidad</span>
     </div>
-    <div class="form">
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <label for="name" class="form-label">Nombre de la Habilidad</label>
-            <input type="text" class="form-control w-60" id="name" formControlName="name"
-              [ngClass]="{'is-invalid border-danger': form.get('name')?.touched && form.get('names')?.invalid}">
-              <div *ngIf="form.get('name')?.errors && form.get('name')?.dirty">
-                <div class="text-danger" *ngIf="form.get('name')?.hasError('required')">
-                  El nombre de la habilidad es requerido
+    <form  [formGroup]="form">
+      <div class="form">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <label for="name" class="form-label">Nombre de la Habilidad</label>
+              <input type="text" class="form-control w-60" id="name" formControlName="name"
+                [ngClass]="{'is-invalid border-danger': form.get('name')?.touched && form.get('names')?.invalid}">
+                <div *ngIf="form.get('name')?.errors && form.get('name')?.dirty">
+                  <div class="text-danger" *ngIf="form.get('name')?.hasError('required')">
+                    El nombre de la habilidad es requerido
+                  </div>
                 </div>
-              </div>
+            </div>
           </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col">
-            <label for="exampleInputEmail1" class="form-label">Descripción</label>
-            <textarea type="text" class="form-control w-60" id="description" formControlName="description"></textarea>
+          <div class="row mt-2">
+            <div class="col">
+              <label for="exampleInputEmail1" class="form-label">Descripción</label>
+              <textarea type="text" class="form-control w-60" id="description" formControlName="description"></textarea>
+            </div>
+            <div *ngIf="form.get('description')?.errors && form.get('description')?.dirty">
+              <div class="text-danger" *ngIf="form.get('description')?.hasError('required')">
+                La descripción es requerida
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
     <div class="pt-3">
         <table class="table table-responsive">
             <thead>
@@ -42,9 +49,12 @@
                         </span>
                     </td>
                     <td>
-                        <button class="btn btn-primary" >Añadir</button>
+                        <button class="btn btn-primary" (click)="addMember(user)">Añadir</button>
                     </td>
                 </tr>
         </table>
+    </div>
+    <div>
+        <button class="btn btn-primary float-end" [disabled]="this.form.invalid" (click)="saveAbilitie()">Crear abilidad</button>
     </div>
 </div>

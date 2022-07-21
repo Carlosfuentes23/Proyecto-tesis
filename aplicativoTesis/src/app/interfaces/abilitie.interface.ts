@@ -3,6 +3,7 @@ export type Abilitie = {
     name?: string;
     description?:string
     id_project?:string;
+    state?: 'ACTIVE' | 'INACTIVE';
     members?: members[];
 }
 
@@ -11,6 +12,7 @@ export type members = {
     name?: string;
     lastname?:string;
     notes?:notes;
+    state?: 'ACTIVE' | 'INACTIVE';
 }
 
 export type notes = {
