@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AbilitieService {
   api_url = environment.KMT_API +'abilities/';
-  
+
   constructor(private httpClient: HttpClient) { }
 
   createAbilitie(phaseId: string,abilitie: Abilitie): Observable<Abilitie> {
@@ -25,7 +25,7 @@ export class AbilitieService {
   }
 
   getAbilitieByProjectId(projectId: string): Observable<Abilitie[]> {
-    return this.httpClient.get<Abilitie[]>(this.api_url+'getabilitylistbyprojectid/'+ projectId);
+    return this.httpClient.get<Abilitie[]>(this.api_url+'getabilitylist/'+ projectId);
   }
 
   GetAbilitieList(): Observable<Abilitie[]> {

@@ -94,13 +94,13 @@
           </tbody>
         </table>
       </mat-card>
-    </div> 
+    </div>
     <div class="col" style="height: 220px;">
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">
             <h2>
-              Reuniones
+              Habilidades
             </h2>
           </div>
           <div class="col">
@@ -109,9 +109,9 @@
         </div>
         <table class="table table-striped">
           <tbody>
-            <tr *ngFor="let reunion of project.phases;  index as i;">
+            <tr *ngFor="let abilitie of projectAbilities;  index as i;">
               <td scope="col">
-                <a href="">{{reunion}}</a>
+                <a href="">{{abilitie.name}}</a>
               </td>
             </tr>
           </tbody>

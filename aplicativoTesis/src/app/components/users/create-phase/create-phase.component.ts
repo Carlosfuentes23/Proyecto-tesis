@@ -93,12 +93,12 @@ export class CreatePhaseComponent implements OnInit {
       this.members.push(this.id);
       this.phase = {
         name: this.form.value.namePhase,
-        project_id: this.id,
+        projectid: this.id,
         description: this.form.value.description,
         start_date: new Date(),
         end_date: new Date(),
-        members_id: this.members,
-        skills: this.skills,
+        membersid: this.members,
+        abilitiesid: this.skills,
         state: 'ACTIVE',
       }
 

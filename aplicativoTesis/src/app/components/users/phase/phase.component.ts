@@ -41,8 +41,8 @@ export class PhaseComponent implements OnInit {
   getPhase(id: string): void {
     this.phaseService.getPhase(id).subscribe((data: Phase) => {
       this.phase = data;
-      if(this.phase.project_id){
-        this.getLeader(this.phase.project_id);
+      if(this.phase.projectid){
+        this.getLeader(this.phase.projectid);
       }
     });
   }

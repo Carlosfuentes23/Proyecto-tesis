@@ -58,8 +58,8 @@ export class AddMembersPhaseComponent implements OnInit {
   getProjectMebers(idPhase: string) {
     this.phaseService.getPhase(idPhase).subscribe((res: Phase) => {
       this.pashe = res;
-      if (res.project_id) {
-        this.getMembersProject(res.project_id);
+      if (res.projectid) {
+        this.getMembersProject(res.projectid);
       }
     });
   }
@@ -85,7 +85,7 @@ export class AddMembersPhaseComponent implements OnInit {
   getPhase(id: string) {
     this.phaseService.getPhase(id).subscribe((res: Phase) => {
       this.pashe = res;
-      if (res.project_id) this.getProject(res.project_id);
+      if (res.projectid) this.getProject(res.projectid);
     });
   }
 

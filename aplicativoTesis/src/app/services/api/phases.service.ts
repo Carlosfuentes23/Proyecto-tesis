@@ -14,7 +14,7 @@ export class PhasesService {
   constructor(private httpClient: HttpClient) { }
 
   createPhase(phase: Phase): Observable<Phase> {
-    return this.httpClient.post<Phase>(this.api_url + 'createphase/' + phase.project_id, phase);
+    return this.httpClient.post<Phase>(this.api_url + 'createphase/' + phase.projectid, phase);
   }
 
   getPhasesList(): Observable<Phase> {
