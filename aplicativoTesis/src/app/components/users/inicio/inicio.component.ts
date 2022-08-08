@@ -49,8 +49,9 @@ export class InicioComponent implements OnInit {
       this.projectService.getProjectsByUser(id).subscribe((data: Project[]) => {
         this.projects = data;
         this.projects = this.projects.filter((project: Project) => {
-          return project.leaderid !== this.user.user._id;
+          return project.leaderid !== id;
         });
+
       });
     } else {
       this.projectService

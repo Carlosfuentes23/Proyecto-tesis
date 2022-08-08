@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Abilitie } from 'src/app/interfaces/abilitie.interface';
 import { Phase } from 'src/app/interfaces/phase.interface';
 import { Project } from 'src/app/interfaces/project.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -18,6 +19,7 @@ export class PhaseComponent implements OnInit {
   phase: Phase = {};
   leader: User = {};
   phaseMembers: User[] = [];
+  abilities: Abilitie[] = [];
   user = JSON.parse(sessionStorage.getItem("USER")!);
 
 
@@ -65,8 +67,8 @@ export class PhaseComponent implements OnInit {
   }
 
   getAbilities(phaseId: string): void {
-    this.phaseService.getPhaseAbilities(phaseId).subscribe((data: any) => {
-      console.log(data);
+    this.phaseService.getPhaseAbilities(phaseId).subscribe((data: Abilitie[]) => {
+      this.abilities = data;
     });
   }
 }

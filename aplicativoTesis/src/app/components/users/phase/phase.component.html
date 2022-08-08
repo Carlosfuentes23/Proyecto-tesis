@@ -1,6 +1,6 @@
 <div class="cont">
   <div class="row mt-3">
-    <div class="col" style="height: 220px;">
+    <div class="col-md-6 col-12" style="height: 220px;">
       <mat-card class="tergeta">
         <h2>Datos de La fase</h2>
         <div class="mt-4 mb-2">
@@ -14,7 +14,7 @@
         </div>
       </mat-card>
     </div>
-    <div class="col" style="height: 220px;">
+    <div class="col-md-6 col-12 mt-md-0 mt-2" style="height: 220px;">
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">
@@ -33,53 +33,73 @@
             Este proyecto aun no cuenta con mienbros asignados
           </div>
         </div>
-        <table class="table table-striped" *ngIf="phaseMembers.length > 0">
-          <thead>
-            <tr>
-              <th scope="col">No.</th>
-              <th scope="col">Nombres</th>
-              <th scope="col">Email</th>
-            <tr>
-          </thead>
-          <tbody>
-            <tr  style="cursor:pointer" *ngFor="let inte of phaseMembers;  index as i;" [routerLink]="'/user/'+inte._id">
-              <td>{{i+1}}</td>
-              <td>
-                {{inte.name}} {{inte.last_name}}
-              </td>
-              <td>
-                {{inte.email}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-striped table-responsive" *ngIf="phaseMembers.length > 0">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Email</th>
+              <tr>
+            </thead>
+            <tbody>
+              <tr  style="cursor:pointer" *ngFor="let inte of phaseMembers;  index as i;" [routerLink]="'/user/'+inte._id">
+                <td>{{i+1}}</td>
+                <td>
+                  {{inte.name}} {{inte.last_name}}
+                </td>
+                <td>
+                  {{inte.email}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </mat-card>
     </div>
   </div>
   <hr />
-  <div class="row mt-3">
-    <div class="col">
+  <div class="row my-3" style="height: 220px;">
+    <div class="col-md-6 col-12">
       <mat-card class="tergeta">
-        <h3>Estadisticas</h3>
         <div class="row">
           <div class="col">
-            <mat-card>
-              Estadistica 1
-              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
-            </mat-card>
+            <h2>
+              Habilidades
+            </h2>
           </div>
           <div class="col">
-            <mat-card>
-              Estadistica 2
-              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
-            </mat-card>
+            <a class="btn btn-primary btn-sm float-end"  *ngIf="this.leader._id === user.user._id">Nueva</a>
           </div>
-          <div class="col">
-            <mat-card>
-              Estadistica 3
-              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
-            </mat-card>
-          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-responsive">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Nombre de la habilidad</th>
+                <th scope="col">Fecha de creación</th>
+              <tr>
+            </thead>
+            <tbody>
+              <tr style="cursor:pointer" *ngFor="let abilitie of abilities;  index as i;" [routerLink]="'/user/phase/'+id+'/abilitie/'+abilitie._id">
+                <td>{{i+1}}</td>
+                <td>{{abilitie.name}}</td>
+                <td>{{abilitie.created_at | date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-md-6 col-12 mt-md-0 mt-2 pb-md-0 pb-3">
+      <mat-card class="tergeta">
+        <h2>Estadisticas</h2>
+        <div class="col">
+          <mat-card>
+            Estadistica 1
+            <img src="assets/img/tarta_1_0.png" style="height: 165px" />
+          </mat-card>
         </div>
       </mat-card>
     </div>

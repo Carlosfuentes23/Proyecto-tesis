@@ -5,6 +5,7 @@ export type Abilitie = {
     id_project?:string;
     state?: 'ACTIVE' | 'INACTIVE';
     members?: members[];
+    created_at?: string;
 }
 
 export type members = {

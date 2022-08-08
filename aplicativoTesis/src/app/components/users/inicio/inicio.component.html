@@ -24,7 +24,7 @@
         </div>
       </mat-card>
     </div>
-    <div class="col-xl-7 col-lg-12" style="height: 290px;">
+    <div class="col-xl-7 col-lg-12 mt-xl-0 mt-2" style="height: 290px;">
       <mat-card style=" height: 100%;overflow: auto;">
         <mat-card-content>
           <div class="row">
@@ -51,24 +51,26 @@
                 <div class="h5">El usuario no es</div>
                 <div class="h7">líder de ningun proyecto</div>
               </div>
-              <table class="table table-secondary table-responsive"
-                *ngIf="leadProjects !== undefined && leadProjects.length > 0">
-                <thead>
-                  <tr>
-                    <th>Nombre Proyecto</th>
-                    <th>Fecha de creación</th>
-                    <th>No. integrantes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="cursor:pointer" *ngFor="let project of leadProjects"
-                    [routerLink]="'/user/project/'+project._id">
-                    <td>{{ project.name }}</td>
-                    <td>{{ project.created_at | date }}</td>
-                    <td>{{ project.membersid?.length }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table class="table table-secondary table-responsive"
+                  *ngIf="leadProjects !== undefined && leadProjects.length > 0">
+                  <thead>
+                    <tr>
+                      <th>Nombre Proyecto</th>
+                      <th>Fecha de creación</th>
+                      <th>No. integrantes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="cursor:pointer" *ngFor="let project of leadProjects"
+                      [routerLink]="'/user/project/'+project._id">
+                      <td>{{ project.name }}</td>
+                      <td>{{ project.created_at | date }}</td>
+                      <td>{{ project.membersid?.length }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div *ngIf="selectedTab === 'dev'">
               <div class="p-3" *ngIf="!projects || !projects.length">
