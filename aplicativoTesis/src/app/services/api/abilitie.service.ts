@@ -20,7 +20,7 @@ export class AbilitieService {
     return this.httpClient.post<Abilitie>(this.api_url+'updateability/'+ abilitie._id, abilitie);
   }
 
-  GetAbilitieById(abilitieId: string): Observable<Abilitie> {
+  getAbilitieById(abilitieId: string): Observable<Abilitie> {
     return this.httpClient.get<Abilitie>(this.api_url+'getability/'+ abilitieId);
   }
 

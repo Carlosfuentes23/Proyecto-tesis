@@ -19,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CreateAbilitieComponent } from './create-abilitie/create-abilitie.component';
 import { AbilitieListComponent } from './abilitie-list/abilitie-list.component';
 import { AbilitieComponent } from './abilitie/abilitie.component';
+import { AddMembersAbilitieComponent } from './add-members-abilitie/add-members-abilitie.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AbilitieComponent } from './abilitie/abilitie.component';
     AddMembersPhaseComponent,
     CreateAbilitieComponent,
     AbilitieListComponent,
-    AbilitieComponent
+    AbilitieComponent,
+    AddMembersAbilitieComponent
   ],
   imports: [
     CommonModule,

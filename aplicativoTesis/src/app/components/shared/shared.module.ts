@@ -18,12 +18,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
   declarations: [
 
-  
+
     NavbarComponent
   ],
   imports: [
@@ -43,7 +44,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatChipsModule,
     MatAutocompleteModule,
     MatTabsModule,
-
+    NgxChartsModule
   ],
   exports: [
     MatFormFieldModule,
@@ -61,7 +62,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatChipsModule,
     MatAutocompleteModule,
     MatTabsModule,
-    NavbarComponent
+    NavbarComponent,
+    NgxChartsModule
   ]
 })
 export class SharedModule { }

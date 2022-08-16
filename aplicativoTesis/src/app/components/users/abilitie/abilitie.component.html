@@ -1,8 +1,63 @@
 <div class="cont">
-  <div *ngIf="projectId">
-    Abilidad desde el Proyecto {{projectId}}
+  <div class="row mt-3">
+    <div class="col-md-6 col-12">
+      <mat-card class="tergeta">
+        <div class="row">
+          <div class="col">
+            <h2>Datos de La habilidad</h2>
+          </div>
+          <div class="col" *ngIf="phaseId">
+            <a class="btn btn-primary btn-sm float-end">Calificar</a>
+          </div>
+        </div>
+        <div class="mt-4 mb-2">
+          <p><strong>Nombre de la habilidad:</strong>  {{ abilitie?.name }}</p>
+          <p><strong>Lider del projecto:</strong> {{ leader.name + '' + leader.last_name | titlecase}} </p>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-md-6 col-12 mt-md-0 mt-2">
+      <mat-card class="tergeta">
+        <div class="row">
+          <div class="col">
+            <h2 class="int">
+                Integrantes
+            </h2>
+          </div>
+          <div *ngIf="leader._id === user.user._id && phaseId"  class="col">
+            <a class="btn btn-primary btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id">Agregar</a>
+          </div>
+        </div>
+      </mat-card>
+    </div>
   </div>
-  <div *ngIf="phaseId">
-    Abilidad desde la Fase {{phaseId}}
+  <hr>
+  <div class="row mt-3">
+    <div class="col">
+      <mat-card class="tergeta">
+        <h3>Estadisticas</h3>
+        <div class="row">
+          <div class="col">
+            <mat-card>
+              Estadistica 1
+              <img src="assets/img/tarta_1_0.png" style="height: 165px;">
+            </mat-card>
+
+          </div>
+          <div class="col">
+            <mat-card>
+              Estadistica 2
+              <img src="assets/img/tarta_1_0.png" style="height: 165px;">
+            </mat-card>
+          </div>
+          <div class="col">
+            <mat-card>
+              Estadistica 3
+              <img src="assets/img/tarta_1_0.png" style="height: 165px;">
+            </mat-card>
+          </div>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </div>

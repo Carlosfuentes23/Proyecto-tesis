@@ -67,7 +67,7 @@ func GetAbilitiesByProjectId(c *fiber.Ctx) error {
 }
 
 func GetAbilitieById(c *fiber.Ctx) error {
-	abilitieId := c.Params("abilitieId")
+	abilitieId := c.Params("id")
 
 	abilitie, err := abilitie_service.GetAbilitieById(abilitieId)
 	if err != nil {

@@ -1,0 +1,20 @@
+<div class="cont">
+  <div class="row h1">
+    <span *ngIf="addOrNot">Agregar Integrantes</span>
+    <span *ngIf="!addOrNot">Lista de Integrantes</span>
+  </div>
+  <div class="h3 mt-2" *ngIf="!members">
+    No hay integrantes para agregar a esta habilidad
+  </div>
+  <table class="table" *ngIf="members">
+    <thead>
+      <tr>
+        <th scope="col">Nombres</th>
+        <th scope="col">Email</th>
+        <th scope="col">Skills</th>
+        <th scope="col" class="text-center">No. Proyectos</th>
+        <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Añadir</th>
+      </tr>
+    </thead>
+  </table>
+</div>

@@ -1,6 +1,6 @@
 <div class="cont">
   <div class="row h1">
-    <span  *ngIf="addOrNot">Agregar Integrantes</span> 
+    <span  *ngIf="addOrNot">Agregar Integrantes</span>
     <span *ngIf="!addOrNot">Lista de Integrantes</span>
   </div>
   <div class="h3 mt-2" *ngIf="!users">
@@ -29,12 +29,12 @@
           <td class="text-center" *ngIf="usr.user._id === project.leaderid">
             <div>
               <button *ngIf="addOrNot" type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)">
-                <!-- <fa-icon class="fs-14" [icon]="faPlus"></fa-icon> --> Agregar
+                <fa-icon class="fs-14" [icon]="faPlus"></fa-icon>
               </button>
             </div>
             <div *ngIf="user._id !== project.leaderid">
               <button *ngIf="!addOrNot" type="button" class="btn btn-sm rounded-circle btn-danger " (click)="removeMember(user)">
-                <!--  <fa-icon [icon]="faTrash"></fa-icon> --> Eliminar
+                <fa-icon [icon]="faTrash"></fa-icon>
               </button>
             </div>
           </td>

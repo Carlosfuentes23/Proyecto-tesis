@@ -6,7 +6,9 @@ import { User } from 'src/app/interfaces/user.interface';
 import { Phase } from 'src/app/interfaces/phase.interface';
 import { AbilitieService } from 'src/app/services/api/abilitie.service';
 import { PhasesService } from 'src/app/services/api/phases.service';
+
 import Swal from 'sweetalert2';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-abilitie',
@@ -16,6 +18,7 @@ import Swal from 'sweetalert2';
 export class CreateAbilitieComponent implements OnInit {
   form: FormGroup;
   id?: string;
+  faPlus = faPlus;
   abilitie: Abilitie ={};
   phase: Phase = {};
   phaseMembers: User[] = [];
