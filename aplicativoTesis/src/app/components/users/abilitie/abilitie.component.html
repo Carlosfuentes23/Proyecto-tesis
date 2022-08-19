@@ -1,6 +1,6 @@
 <div class="cont">
   <div class="row mt-3">
-    <div class="col-md-6 col-12">
+    <div class="col-md-6 col-12" style="height: 220px;">
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">
@@ -16,7 +16,7 @@
         </div>
       </mat-card>
     </div>
-    <div class="col-md-6 col-12 mt-md-0 mt-2">
+    <div class="col-md-6 col-12 mt-md-0 mt-2" style="height: 220px;">
       <mat-card class="tergeta">
         <div class="row">
           <div class="col">
@@ -27,6 +27,30 @@
           <div *ngIf="leader._id === user.user._id && phaseId"  class="col">
             <a class="btn btn-primary btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id">Agregar</a>
           </div>
+        </div>
+        <div class="row" *ngIf="!abilitie?.members?.length">
+          <div class="h3">
+            Esta habilidad aun no cuenta con mienbros asignados
+          </div>
+        </div>
+        <div class="table-responsive" *ngIf="abilitie?.members?.length">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Nombres</th>
+              <tr>
+            </thead>
+            <tbody>
+              <tr  style="cursor:pointer" *ngFor="let inte of abilitie?.members;  index as i;" [routerLink]="'/user/'+inte.id_member">
+                <td>{{i+1}}</td>
+                <td>
+                  {{inte.name}} {{inte?.lastname}}
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
         </div>
       </mat-card>
     </div>

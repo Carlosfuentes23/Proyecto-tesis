@@ -32,6 +32,7 @@ const routes: Routes = [
     { path: 'project/:projectId/abilitie/:id', component: AbilitieComponent },
     { path: 'phase/:phaseId/abilitie/:id', component: AbilitieComponent },
     { path: 'phase/:phaseId/add-members-abilities/:id', component: AddMembersAbilitieComponent },
+    { path: 'phase/:phaseId/members-abilities/:id', component: AddMembersAbilitieComponent },
     { path: 'create-abilitie/:id', component: CreateAbilitieComponent },
     { path:':id', component: InicioComponent},
   ]},
