@@ -13,11 +13,14 @@
         <th scope="col">Email</th>
         <th scope="col">Skills</th>
         <th scope="col" class="text-center">No. Proyectos</th>
-        <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Añadir</th>
+        <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">
+          <span *ngIf="addOrNot">Añadir</span>
+          <samp *ngIf="!addOrNot">Eliminar</samp>
+        </th>
       </tr>
     </thead>
-    <tbody *ngFor="let user of users">
-      <tr>
+    <tbody>
+      <tr *ngFor="let user of users">
         <th>{{ user.name + " " + user.last_name | titlecase }}</th>
         <td>{{ user.email }}</td>
         <td>{{ user.skills }}</td>

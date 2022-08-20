@@ -6,15 +6,43 @@
   <div class="h3 mt-2" *ngIf="!members">
     No hay integrantes para agregar a esta habilidad
   </div>
-  <table class="table" *ngIf="members">
-    <thead>
-      <tr>
-        <th scope="col">Nombres</th>
-        <th scope="col">Email</th>
-        <th scope="col">Skills</th>
-        <th scope="col" class="text-center">No. Proyectos</th>
-        <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Añadir</th>
-      </tr>
-    </thead>
-  </table>
+  <div class="table-respnsive">
+    <table  class="table"  *ngIf="addOrNot">
+      <thead>
+        <tr>
+          <th scope="col">Nombres</th>
+          <th scope="col">Email</th>
+          <th scope="col">Skills</th>
+          <th scope="col" class="text-center">No. Proyectos</th>
+          <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Añadir</th>
+        </tr>
+      </thead>
+    </table>
+    <table class="table" *ngIf="!addOrNot">
+      <thead>
+        <tr>
+          <th scope="col">Nombres</th>
+          <th scope="col">Nota</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Calificar</th>
+          <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usr of abilitie.members">
+          <th>{{usr.name + ' ' + usr.lastname }}</th>
+          <th>{{usr.notes}}</th>
+          <th>{{usr.state}}</th>
+          <th>
+            <div *ngIf="usr.id_member">
+              <button type="button"class="btn btn-sm rounded-circle btn-danger" (click)="removeMember(usr)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </div>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>

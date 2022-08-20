@@ -22,6 +22,7 @@ const routes: Routes = [
     { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'create-project', component: CreateProjectComponent },
     { path: 'create-phase/:id', component: CreatePhaseComponent },
+    { path: 'create-abilitie/:id', component: CreateAbilitieComponent },
     { path: 'project/:id', component: ProjectComponent},
     { path: 'phase/:id', component: PhaseComponent},
     { path: 'select-role', component: SelectRoleComponent },
@@ -33,7 +34,6 @@ const routes: Routes = [
     { path: 'phase/:phaseId/abilitie/:id', component: AbilitieComponent },
     { path: 'phase/:phaseId/add-members-abilities/:id', component: AddMembersAbilitieComponent },
     { path: 'phase/:phaseId/members-abilities/:id', component: AddMembersAbilitieComponent },
-    { path: 'create-abilitie/:id', component: CreateAbilitieComponent },
     { path:':id', component: InicioComponent},
   ]},
 

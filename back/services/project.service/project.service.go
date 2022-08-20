@@ -107,8 +107,8 @@ func AddMemberProject(projectId string, userId string) error {
 		return err
 	}
 
-	//verify if user is already in project
-	if contains(project.MembersId, userId) {
+	//verify if user is not already in project
+	if !contains(project.MembersId, userId) {
 		project.MembersId = append(project.MembersId, userId)
 		err = UpdateProject(*project, projectId)
 		if err != nil {

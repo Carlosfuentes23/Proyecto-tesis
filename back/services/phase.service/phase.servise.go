@@ -3,6 +3,7 @@ package phase_service
 import (
 	m "main/models"
 	phaseRepo "main/repositories/phase.repository"
+	"time"
 )
 
 func CreatePhase(phase m.Phase) error {
@@ -87,6 +88,7 @@ func AddMemberPhase(phaseId string, memberId string) error {
 	//verificar que el usuario no este en la lista de miembros
 	if !contains(phase.MembersId, memberId) {
 		phase.MembersId = append(phase.MembersId, memberId)
+		phase.UpdateAt = time.Now()
 		err = UpdatePhase(*phase, phaseId)
 		if err != nil {
 			return err

@@ -1,3 +1,5 @@
+import { members } from './../../../interfaces/abilitie.interface';
+import { Phase } from './../../../interfaces/phase.interface';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -5,7 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProjectsService } from 'src/app/services/api/projects.service';
 import { PhasesService } from 'src/app/services/api/phases.service';
 import { ActivatedRoute } from '@angular/router';
-import { Phase } from 'src/app/interfaces/phase.interface';
+
 import Swal from 'sweetalert2';
 import { Project } from 'src/app/interfaces/project.interface';
 
@@ -76,10 +78,12 @@ export class AddMembersPhaseComponent implements OnInit {
 
   filterMembers(users: User[], phaseId: string) {
     this.phaseService.getPhaseMembers(phaseId).subscribe((res: User[]) => {
-      this.users = users.filter((user) => {
-        return !res.some((member) => member._id === user._id);
-      });
+        this.users = users.filter((user) => {
+          return !res.some((member) => member._id === user._id);
+        });
+        //console.log(this.users);
     });
+
   }
 
   getPhase(id: string) {
@@ -96,6 +100,7 @@ export class AddMembersPhaseComponent implements OnInit {
   }
 
   addMember(user: User) {
+    let phase = this.pashe;
     Swal.fire({
       title: '¿Estas seguro?',
       text: `¿Deseas agregar a ${user.name} a la fase?`,
@@ -106,8 +111,9 @@ export class AddMembersPhaseComponent implements OnInit {
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
     }).then((result) => {
-      if (result.isConfirmed && this.id) {
-        this.phaseService.addMemberPhase(user, this.id).subscribe(
+      if (result.isConfirmed && this.pashe.membersid && user._id && this.id) {
+        this.pashe.membersid.push(user._id);
+        this.phaseService.updatePhase(this.pashe, this.id).subscribe(
           () => {
             Swal.fire({
               title: 'Usuario agregado',
@@ -118,6 +124,7 @@ export class AddMembersPhaseComponent implements OnInit {
             }).then((result) => {
               if (result.isConfirmed && this.id) {
                 this.getPhase(this.id);
+                this.addOrListMembers();
               }
             });
           },
@@ -152,6 +159,20 @@ export class AddMembersPhaseComponent implements OnInit {
             title: 'Usuario eliminado',
             text: 'El usuario ha sido eliminado de la fase',
             icon: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3085d6',
+          }).then((result) => {
+            if (result.isConfirmed && this.id) {
+              this.getPhase(this.id);
+              this.addOrListMembers();
+            }
+          });
+        },
+        (err) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo eliminar al usuario',
+            icon: 'error',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#3085d6',
           });

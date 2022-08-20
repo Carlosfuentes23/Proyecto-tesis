@@ -103,14 +103,16 @@ func GetPhaseMembers(membersId []string) (m.Users, error) {
 func GetAbilitiesPhase(abilitiesId []string) (m.Abilities, error) {
 	var abilities m.Abilities
 
-	for _, abilityId := range abilitiesId {
-		ability, err := abilitie_repository.GetAbilitieById(abilityId)
+	if !(abilitiesId == nil) {
+		for _, abilityId := range abilitiesId {
+			ability, err := abilitie_repository.GetAbilitieById(abilityId)
 
-		if err != nil {
-			return abilities, err
+			if err != nil {
+				return abilities, err
+			}
+
+			abilities = append(abilities, ability)
 		}
-
-		abilities = append(abilities, ability)
 	}
 
 	return abilities, nil

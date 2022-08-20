@@ -101,7 +101,6 @@ func UpdatePhase(c *fiber.Ctx) error {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
 
-	data.ID = primitive.NewObjectID()
 	data.UpdateAt = time.Now()
 	err = phaseService.UpdatePhase(data, id)
 	if err != nil {

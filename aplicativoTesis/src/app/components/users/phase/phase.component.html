@@ -69,7 +69,7 @@
             </h2>
           </div>
           <div class="col">
-            <a class="btn btn-primary btn-sm float-end"  *ngIf="this.leader._id === user.user._id">Nueva</a>
+            <a class="btn btn-primary btn-sm float-end"  [routerLink]="'/user/create-abilitie/'+ this.id"  *ngIf="this.leader._id === user.user._id">Nueva</a>
           </div>
         </div>
         <div class="table-responsive">

@@ -125,10 +125,12 @@ func AddMemberProject(c *fiber.Ctx) error {
 		return c.Status(http.StatusUnprocessableEntity).JSON(err)
 	}
 
-	data.Projects = append(data.Projects, id)
-	err = user_service.Update(data, data.ID.Hex())
-	if err != nil {
-		return c.Status(http.StatusUnprocessableEntity).JSON(err)
+	if !contains(data.Projects, id) {
+		data.Projects = append(data.Projects, id)
+		err = user_service.Update(data, data.ID.Hex())
+		if err != nil {
+			return c.Status(http.StatusUnprocessableEntity).JSON(err)
+		}
 	}
 	return c.JSON(data)
 }
@@ -167,4 +169,13 @@ func GetProjectMembersNotInProject(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(members)
+}
+
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
 }
