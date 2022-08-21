@@ -23,14 +23,15 @@ type Member struct {
 type Members []*Member
 
 type Abilitie struct {
-	ID          primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	Name        string             `json:"name"`
-	Description string             `json:"description"`
-	Id_project  string             `json:"id_project"`
-	Members     []Member           `json:"members"`
-	State       string             `json:"state"`
-	CreateAt    time.Time          `bson:"created_at" json:"created_at"`
-	UpdateAt    time.Time          `bson:"updated_at" json:"updated_at,omitempty"`
+	ID             primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+	Name           string             `json:"name"`
+	Description    string             `json:"description"`
+	Id_project     string             `json:"id_project"`
+	Members        []Member           `json:"members"`
+	State          string             `json:"state"`
+	ActiveInPoject bool               `json:"activeInPoject"`
+	CreateAt       time.Time          `bson:"created_at" json:"created_at"`
+	UpdateAt       time.Time          `bson:"updated_at" json:"updated_at,omitempty"`
 }
 
 type Abilities []*Abilitie

@@ -1,1 +1,29 @@
-<p>abilitie-list works!</p>
+<div class="cont">
+  <div class="row h1">
+    Agregar habilidad
+  </div>
+  <div class="row mt-2">
+    <div class="col table-resonsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Habilidad</th>
+            <th>Descripción</th>
+            <th>Integrantes</th>
+            <th>Agregar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let abilitie of projecAbilities">
+            <td>{{abilitie.name}}</td>
+            <td>{{abilitie.description}}</td>
+            <td>{{abilitie.members?.length}}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="addAbilitie(abilitie)">Agregar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

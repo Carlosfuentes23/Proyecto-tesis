@@ -1,4 +1,4 @@
-<form class="cont"  [formGroup]="form" (ngSubmit)="createPhase()">
+<form class="cont"  [formGroup]="form" >
   <div class="card-body">
       <div class="row">
           <div class="col">
@@ -44,34 +44,37 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <label for="exampleInputEmail1" class="form-label">Seleccione las habilidadades </label>
-          <mat-form-field class="example-chip-list ancho" appearance="fill" >
-              <mat-label>Habilidades</mat-label>
-              <mat-chip-list #chipList aria-label="seleccion de habilidades">
-                <mat-chip
-                  *ngFor="let skill of skills"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(skill)">
-                  {{skill}}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="Agregar habilidad..."
-                  #skillInput
-                  [formControl]="skillCtrl"
-                  [matAutocomplete]="auto"
-                  [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  (matChipInputTokenEnd)="add($event)">
-              </mat-chip-list>
-              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
-                  {{skill}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+        <div class="row mt-2">
+          <div class="col">
+            <label for="exampleInputEmail1" class="form-label">Seleccione las habilidadades </label>
+            <div class="mb-2" *ngIf="!abilitieList.length">
+              <span>
+                El Proyecto no cuenta con mas habilidades o no tiene hanilidades creadas
+              </span>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped"  *ngIf="abilitieList.length">
+                <thead>
+                  <tr>
+                    <th>Habilidad</th>
+                    <th>Descripción</th>
+                    <th>Integrantes</th>
+                    <th>Seleccionar</th>
+                  </tr>
+                </thead>
+                <thead>
+                  <tr *ngFor="let abilitie of abilitieList">
+                    <td>{{abilitie.name}}</td>
+                    <td>{{abilitie.description}}</td>
+                    <td>{{abilitie.members?.length}}</td>
+                    <td>
+                      <button class="btn btn-primary" (click)="addAbilitie(abilitie)"><fa-icon class="fs-14" [icon]="faPlus"></fa-icon> Añadir</button>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="col">
@@ -80,7 +83,7 @@
               </button>
           </div>
           <div class="col">
-              <button type="submit" mat-raised-button color="primary" class="float-end"  [disabled]="form.invalid">
+              <button type="submit" mat-raised-button color="primary" class="float-end" (click)="savePhase()" [disabled]="form.invalid">
                   Guardar
               </button>
           </div>

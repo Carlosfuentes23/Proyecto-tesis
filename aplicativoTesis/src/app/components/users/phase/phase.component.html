@@ -69,7 +69,8 @@
             </h2>
           </div>
           <div class="col">
-            <a class="btn btn-primary btn-sm float-end"  [routerLink]="'/user/create-abilitie/'+ this.id"  *ngIf="this.leader._id === user.user._id">Nueva</a>
+            <a class="btn btn-primary btn-sm ms-2 float-end"  [routerLink]="'/user/create-abilitie/'+ this.id"  *ngIf="this.leader._id === user.user._id">Nueva</a>
+            <a class="btn btn-success btn-sm float-end" [routerLink]="'/user/add-abiblitie-phase/'+ this.id"> Añadir</a>
           </div>
         </div>
         <div class="table-responsive">

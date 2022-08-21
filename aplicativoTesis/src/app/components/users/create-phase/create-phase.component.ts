@@ -1,13 +1,15 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { Abilitie } from 'src/app/interfaces/abilitie.interface';
 import { Phase } from 'src/app/interfaces/phase.interface';
+import { AbilitieService } from 'src/app/services/api/abilitie.service';
 import { PhasesService } from 'src/app/services/api/phases.service';
 import Swal from 'sweetalert2';
 
@@ -19,6 +21,7 @@ import Swal from 'sweetalert2';
 export class CreatePhaseComponent implements OnInit {
 
   form: FormGroup;
+  faPlus = faPlus;
   phase?: Phase;
   members: string[] =[]
   selectable = true;
@@ -26,9 +29,10 @@ export class CreatePhaseComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   skillCtrl = new FormControl();
   filteredSkills: Observable<string[]>;
-  skills: string[] = ['Programacion'];
-  allSkills: string[] = ['Programacion', 'Diseño', 'Bases De Datos', 'UI/UX'];
+  skills: string[] = [];
+  allSkills: string[] = [];
   id: string | null;
+  abilitieList: Abilitie[] = [];
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
@@ -36,6 +40,7 @@ export class CreatePhaseComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private router: Router,
     private phaseService: PhasesService,
+    private abilitieService: AbilitieService,
     private aRoute: ActivatedRoute) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
@@ -44,13 +49,21 @@ export class CreatePhaseComponent implements OnInit {
       namePhase: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      abilitie: [''],
       description: ['', Validators.required],
     });
     this.id = this.aRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
-    this.form.controls['skill'].markAsTouched();
+    if(this.id){
+      console.log(this.id);
+      this.getAbilitesProject(this.id);
+    }
+  }
+
+  seeAbilitie() {
+    console.log(this.form.get('abilitie')?.value.name);
   }
 
 
@@ -90,7 +103,6 @@ export class CreatePhaseComponent implements OnInit {
 
   createPhase() {
     if (this.id) {
-      this.members.push(this.id);
       this.phase = {
         name: this.form.value.namePhase,
         projectid: this.id,
@@ -132,5 +144,65 @@ export class CreatePhaseComponent implements OnInit {
         })
       });
     }
+  }
+
+  savePhase() {
+    if(this.skills.length > 0){
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: `¿Deseas guardar la fase?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.createPhase();
+        }
+      });
+    }else{
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: `¿Deseas guardar la fase sin abilidades?`,
+        icon: 'question',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.createPhase();
+        }
+      });
+    };
+  }
+
+  addAbilitie(abilitie: Abilitie) {
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: `¿Deseas agregar a ${abilitie.name}?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.value && abilitie._id) {
+          this.skills.push(abilitie._id);
+          this.abilitieList = this.abilitieList.filter((item) => item._id !== abilitie._id);
+        }
+      });
+  }
+
+
+
+  getAbilitesProject(projectId: string) {
+    this.abilitieService.getAbilitieByProjectId(projectId).subscribe((res: Abilitie[]) => {
+      this.abilitieList = res;
+      console.log(res);
+    });
   }
 }

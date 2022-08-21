@@ -32,6 +32,8 @@ func CreatePhase(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(err)
 	}
 
+	data.MembersId = append(data.MembersId, project.LeaderId)
+	data.CreateAt = time.Now()
 	data.UpdateAt = time.Now()
 	err = phaseService.CreatePhase(data)
 	if err != nil {

@@ -17,6 +17,16 @@
           <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Añadir</th>
         </tr>
       </thead>
+      <tbody>
+        <tr *ngFor="let member of members">
+          <td>{{member.name}}</td>
+          <td>{{member.email}}</td>
+          <td>{{member.skills?.length}}</td>
+          <td class="text-center">{{member.projects?.length}}</td>
+          <td *ngIf="usr.user._id === project.leaderid" class="text-center">
+            <button class="btn btn-primary btn-sm" (click)="addMember(member)">Añadir</button>
+          </td>
+        </tr>
     </table>
     <table class="table" *ngIf="!addOrNot">
       <thead>
@@ -44,5 +54,4 @@
       </tbody>
     </table>
   </div>
-
 </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AbilitieListComponent } from './abilitie-list/abilitie-list.component';
 import { AbilitieComponent } from './abilitie/abilitie.component';
 import { AddMembersAbilitieComponent } from './add-members-abilitie/add-members-abilitie.component';
 import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'list-members-phase/:id', component: AddMembersPhaseComponent },
     { path: 'project/:projectId/abilitie/:id', component: AbilitieComponent },
     { path: 'phase/:phaseId/abilitie/:id', component: AbilitieComponent },
+    { path: 'add-abiblitie-phase/:id', component: AbilitieListComponent },
     { path: 'phase/:phaseId/add-members-abilities/:id', component: AddMembersAbilitieComponent },
     { path: 'phase/:phaseId/members-abilities/:id', component: AddMembersAbilitieComponent },
     { path:':id', component: InicioComponent},

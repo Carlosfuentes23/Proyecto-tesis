@@ -173,14 +173,16 @@ func GetProjectMembers(membersId []string) (m.Users, error) {
 func GetProjectPhases(phasesId []string) (m.Phases, error) {
 	var phases m.Phases
 
-	for _, phaseId := range phasesId {
-		phase, err := phase_repository.GetPhaseById(phaseId)
+	if len(phasesId) > 0 {
+		for _, phaseId := range phasesId {
+			phase, err := phase_repository.GetPhaseById(phaseId)
 
-		if err != nil {
-			return phases, err
+			if err != nil {
+				return phases, err
+			}
+
+			phases = append(phases, phase)
 		}
-
-		phases = append(phases, phase)
 	}
 
 	return phases, nil

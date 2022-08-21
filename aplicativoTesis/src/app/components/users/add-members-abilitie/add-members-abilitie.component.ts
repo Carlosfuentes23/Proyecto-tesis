@@ -50,11 +50,13 @@ export class AddMembersAbilitieComponent implements OnInit {
     this.ac.url.subscribe((url) => {
       if(url[2].path === 'add-members-abilities'){
         this.addOrNot = true;
+        console.log(this.addOrNot);
+        this.getNotMembers();
+      }else{
         if(this.id){
+          console.log(this.addOrNot);
           this.getAbilitie(this.id);
         }
-      }else{
-        this.getNotMembers();
       };
     })
   }
@@ -62,7 +64,6 @@ export class AddMembersAbilitieComponent implements OnInit {
   getAbilitie(abilitieId : string) {
     this.abilitieService.getAbilitieById(abilitieId).subscribe((data) => {
       this.abilitie = data;
-      console.log(data.members);
     })
   }
 
@@ -70,9 +71,8 @@ export class AddMembersAbilitieComponent implements OnInit {
     this.phaseService.getPhase(phaseId).subscribe((data) => {
       this.phase = data;
       if(this.phase.projectid){
-        this.getProject(this.phase.projectid)
-      }
-      console.log(data);
+        this.getProject(this.phase.projectid);
+      };
     })
   }
 
@@ -85,6 +85,21 @@ export class AddMembersAbilitieComponent implements OnInit {
   getPhaseMembers(phaseId: string){
     this.phaseService.getPhaseMembers(phaseId).subscribe((data) => {
       this.members = data;
+      console.log(this.members);
+      if(this.abilitie.members  && this.abilitie.members.length > 0 && this.members){
+        this.notMembers = this.members.filter((member) => {
+          if(this.abilitie.members){
+            return !this.abilitie.members.find((abilitieMember) => {
+              return abilitieMember.id_member !== member._id;
+            })
+          }else{
+            return true;
+          }
+        })
+      }else{
+        console.log(this.members);
+        this.notMembers = this.members;
+      }
     })
   }
 
@@ -92,18 +107,9 @@ export class AddMembersAbilitieComponent implements OnInit {
   getNotMembers(){
     if(this.id && this.phaseId){
       this.getAbilitie(this.id);
-      this.getPhase(this.phaseId!);
-      this.getPhaseMembers(this.phaseId!);
+      this.getPhase(this.phaseId);
+      this.getPhaseMembers(this.phaseId);
     }
-    this.members.forEach((member) => {
-      if(this.abilitie.members){
-        this.abilitie.members.forEach((abilitieMember) => {
-          if(member._id !== abilitieMember.id_member){
-            this.notMembers.push(member);
-          }
-        })
-      }
-    })
   }
 
 

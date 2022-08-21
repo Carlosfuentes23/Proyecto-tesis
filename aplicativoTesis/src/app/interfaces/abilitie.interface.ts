@@ -14,6 +14,7 @@ export type members = {
     lastname?:string;
     notes?:notes;
     state?: 'ACTIVE' | 'INACTIVE';
+    activeInPoject?: boolean;
 }
 
 export type notes = {

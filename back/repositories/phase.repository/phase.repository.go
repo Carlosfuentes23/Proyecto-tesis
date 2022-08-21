@@ -103,7 +103,7 @@ func GetPhaseMembers(membersId []string) (m.Users, error) {
 func GetAbilitiesPhase(abilitiesId []string) (m.Abilities, error) {
 	var abilities m.Abilities
 
-	if !(abilitiesId == nil) {
+	if len(abilitiesId) > 0 {
 		for _, abilityId := range abilitiesId {
 			ability, err := abilitie_repository.GetAbilitieById(abilityId)
 
