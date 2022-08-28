@@ -6,9 +6,6 @@
           <div class="col">
             <h2>Datos de La habilidad</h2>
           </div>
-          <div class="col" *ngIf="phaseId">
-            <a class="btn btn-primary btn-sm float-end">Calificar</a>
-          </div>
         </div>
         <div class="mt-4 mb-2">
           <p><strong>Nombre de la habilidad:</strong>  {{ abilitie?.name }}</p>
@@ -24,8 +21,13 @@
                 Integrantes
             </h2>
           </div>
-          <div *ngIf="leader._id === user.user._id && phaseId"  class="col">
-            <a class="btn btn-primary btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id">Agregar</a>
+          <div class="col" *ngIf="leader._id === user.user._id && phaseId" >
+            <div class="col">
+              <a class="btn btn-success btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/members-abilities/'+id">Calificar</a>
+            </div>
+            <div  class="col">
+              <a class="btn btn-primary btn-sm float-end me-2" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id">Agregar</a>
+            </div>
           </div>
         </div>
         <div class="row" *ngIf="!abilitie?.members?.length">
@@ -47,7 +49,6 @@
                 <td>
                   {{inte.name}} {{inte?.lastname}}
                 </td>
-
               </tr>
             </tbody>
           </table>

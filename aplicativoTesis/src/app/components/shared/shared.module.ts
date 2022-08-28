@@ -19,6 +19,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatChipsModule,
     MatAutocompleteModule,
     MatTabsModule,
+    MatSliderModule,
     NgxChartsModule
   ],
   exports: [
@@ -63,6 +65,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatAutocompleteModule,
     MatTabsModule,
     NavbarComponent,
+    MatSliderModule,
     NgxChartsModule
   ]
 })

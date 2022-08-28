@@ -15,8 +15,11 @@
           </mat-form-field>
           <mat-form-field  class="ancho" appearance="fill">
             <mat-label>Contraseña</mat-label>
-            <input type="password" matInput autocomplete="off" formControlName="password">
+            <input [type]=" showPassword ? 'text' : 'password' " matInput autocomplete="off" id="password" formControlName="password">
           </mat-form-field>
+          <br>
+          <a class="mb-2 text-primary int" (click)="seePassword()">ver contraseña</a>
+          <br>
           <button type="submit" mat-raised-button class="ancho button" color="primary" [disabled]="form.invalid">Ingresar</button>
           <hr>
           <button mat-raised-button class="ancho button" routerLink="/signin">Registrar</button>

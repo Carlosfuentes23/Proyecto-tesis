@@ -69,8 +69,9 @@ func UpdateAbilitie(abilite m.Abilitie) error {
 	var err error
 
 	filter := bson.M{"_id": abilite.ID}
+	updated := bson.M{"$set": abilite}
 
-	_, err = collection.UpdateOne(ctx, filter, abilite)
+	_, err = collection.UpdateOne(ctx, filter, updated)
 
 	if err != nil {
 		return err

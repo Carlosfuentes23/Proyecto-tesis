@@ -12,13 +12,13 @@ export type members = {
     id_member?: string;
     name?: string;
     lastname?:string;
-    notes?:notes;
+    notes?:notes[];
     state?: 'ACTIVE' | 'INACTIVE';
     activeInPoject?: boolean;
 }
 
 export type notes = {
-    note: number
-    date: string
-    phaseId: string
+    note?: number
+    date?: string
+    phaseId?: string
 }

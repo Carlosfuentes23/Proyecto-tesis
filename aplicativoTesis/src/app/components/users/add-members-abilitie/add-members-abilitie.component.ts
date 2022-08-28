@@ -1,11 +1,12 @@
+import Swal from 'sweetalert2';
 import { Project } from './../../../interfaces/project.interface';
 import { UsersService } from './../../../services/api/users.service';
 import { ProjectsService } from './../../../services/api/projects.service';
 import { Phase } from './../../../interfaces/phase.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Abilitie, members } from 'src/app/interfaces/abilitie.interface';
+import { faPlus, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Abilitie, members, notes } from 'src/app/interfaces/abilitie.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { AbilitieService } from 'src/app/services/api/abilitie.service';
 import { PhasesService } from 'src/app/services/api/phases.service';
@@ -22,11 +23,15 @@ export class AddMembersAbilitieComponent implements OnInit {
   addOrNot = false;
   faPlus = faPlus;
   faTrash = faTrash;
+  faEdit = faEdit;
   members: User[] = [];
   notMembers: User[] = [];
   phase: Phase = {};
   project: Project = {};
-  abilitie: Abilitie = {}
+  abilitie: Abilitie = {};
+  memberQualify : members = {};
+  activeModal: boolean = false;
+  qualify:number = 0;
   usr = JSON.parse(sessionStorage.getItem('USER')!);
 
   constructor(
@@ -50,12 +55,11 @@ export class AddMembersAbilitieComponent implements OnInit {
     this.ac.url.subscribe((url) => {
       if(url[2].path === 'add-members-abilities'){
         this.addOrNot = true;
-        console.log(this.addOrNot);
         this.getNotMembers();
       }else{
-        if(this.id){
-          console.log(this.addOrNot);
+        if(this.id && this.phaseId){
           this.getAbilitie(this.id);
+          this.getPhase(this.phaseId)
         }
       };
     })
@@ -85,19 +89,17 @@ export class AddMembersAbilitieComponent implements OnInit {
   getPhaseMembers(phaseId: string){
     this.phaseService.getPhaseMembers(phaseId).subscribe((data) => {
       this.members = data;
-      console.log(this.members);
       if(this.abilitie.members  && this.abilitie.members.length > 0 && this.members){
         this.notMembers = this.members.filter((member) => {
           if(this.abilitie.members){
             return !this.abilitie.members.find((abilitieMember) => {
-              return abilitieMember.id_member !== member._id;
+              return abilitieMember.id_member === member._id;
             })
           }else{
             return true;
           }
         })
       }else{
-        console.log(this.members);
         this.notMembers = this.members;
       }
     })
@@ -116,10 +118,100 @@ export class AddMembersAbilitieComponent implements OnInit {
 
   addMember(usr: User){
 
+    if(this.abilitie.members){
+      let newMember: members
+
+      newMember = {
+        id_member: usr._id,
+        name: usr.name,
+        lastname: usr.last_name,
+        notes:[],
+        state: 'ACTIVE',
+
+      }
+      this.abilitie.members.push(newMember);
+      this.abilitieService.updateAbilitie(this.abilitie).subscribe(() => {
+        Swal.fire({
+          title: '¡Hecho!',
+          text: 'Se ha agregado el miembro a la abilidad',
+          icon: 'success',
+        }).then(() => {
+          this.addOrListMembers();
+          if(this.id){
+            this.getAbilitie(this.id);
+          }
+        })
+      });
+    }
   }
 
-  removeMember(usr: members){
-
+  disabledMember(usr: members){
+    if(this.abilitie.members){
+      let index = this.abilitie.members.findIndex((member) => {
+        return member.id_member === usr.id_member;
+      });
+      this.abilitie.members[index].state = 'INACTIVE';
+      this.abilitieService.updateAbilitie(this.abilitie).subscribe(() => {
+        Swal.fire({
+          title: '¡Hecho!',
+          text: 'Se ha desactivado el miembro de la abilidad',
+          icon: 'success',
+        }).then(() => {
+          this.addOrListMembers();
+          if(this.id){
+            this.getAbilitie(this.id);
+          }
+        })
+      });
+    }
   }
 
+  activeMember(usr: members){
+    if(this.abilitie.members){
+      let index = this.abilitie.members.findIndex((member) => {
+        return member.id_member === usr.id_member;
+      });
+      this.abilitie.members[index].state = 'ACTIVE';
+      this.abilitieService.updateAbilitie(this.abilitie).subscribe(() => {
+        Swal.fire({
+          title: '¡Hecho!',
+          text: 'Se ha activado el miembro de la abilidad',
+          icon: 'success',
+        }).then(() => {
+          this.addOrListMembers();
+          if(this.id){
+            this.getAbilitie(this.id);
+          }
+        })
+      });
+    }
+  }
+
+  showModal(usr: members){
+    this.memberQualify = usr
+    this.activeModal = true
+  }
+
+  qualifyMember(usr: members){
+    const fecha = new Date();
+    if(this.phaseId){
+      var note : notes ={
+        note: this.qualify,
+        date: fecha.toString(),
+        phaseId: this.phaseId
+      }
+      if(usr.notes){
+        usr.notes.push(note);
+        console.log(usr)
+      }
+    }
+  }
+
+
+  formatLabel(value: number) {
+    return Math.round(value);
+  }
+  getValue(event:any){
+    this.qualify = event.value
+  }
 }

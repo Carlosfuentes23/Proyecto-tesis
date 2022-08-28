@@ -12,6 +12,7 @@ import Swal from 'sweetalert2'
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  showPassword: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService,) {
     this.form = this.fb.group({
@@ -50,5 +51,9 @@ export class LoginComponent implements OnInit {
 
   succes(url:string){
     this.router.navigate([url]);
+  }
+
+  seePassword(){
+    this.showPassword = !this.showPassword;
   }
 }

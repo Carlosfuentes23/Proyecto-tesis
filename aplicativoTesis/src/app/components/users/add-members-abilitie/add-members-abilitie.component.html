@@ -3,22 +3,22 @@
     <span *ngIf="addOrNot">Agregar Integrantes</span>
     <span *ngIf="!addOrNot">Lista de Integrantes</span>
   </div>
-  <div class="h3 mt-2" *ngIf="!members">
+  <div class="h3 mt-2" *ngIf="!notMembers">
     No hay integrantes para agregar a esta habilidad
   </div>
-  <div class="table-respnsive">
-    <table  class="table"  *ngIf="addOrNot">
+  <div class="row table-respnsive">
+    <table class="table" *ngIf="addOrNot">
       <thead>
         <tr>
           <th scope="col">Nombres</th>
           <th scope="col">Email</th>
           <th scope="col">Skills</th>
           <th scope="col" class="text-center">No. Proyectos</th>
-          <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Añadir</th>
+          <th scope="col" *ngIf="usr.user._id === project.leaderid" class="text-center">Añadir</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let member of members">
+        <tr *ngFor="let member of notMembers">
           <td>{{member.name}}</td>
           <td>{{member.email}}</td>
           <td>{{member.skills?.length}}</td>
@@ -32,26 +32,88 @@
       <thead>
         <tr>
           <th scope="col">Nombres</th>
-          <th scope="col">Nota</th>
           <th scope="col">Estado</th>
-          <th scope="col">Calificar</th>
-          <th scope="col" *ngIf="usr.user._id === project.leaderid"  class="text-center">Eliminar</th>
+          <th scope="col" class="text-center" *ngIf="usr.user._id === project.leaderid">Calificar</th>
+          <th scope="col" class="text-center" *ngIf="usr.user._id === project.leaderid" class="text-center">Desactivar</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let usr of abilitie.members">
-          <th>{{usr.name + ' ' + usr.lastname }}</th>
-          <th>{{usr.notes}}</th>
-          <th>{{usr.state}}</th>
-          <th>
-            <div *ngIf="usr.id_member">
-              <button type="button"class="btn btn-sm rounded-circle btn-danger" (click)="removeMember(usr)">
+        <tr *ngFor="let mem of abilitie.members">
+          <th>{{mem.name + ' ' + mem.lastname }}</th>
+          <td>
+            <span *ngIf="mem.state === 'ACTIVE'">
+              Activo
+            </span>
+            <span *ngIf="mem.state !== 'ACTIVE'">
+              Inactivo
+            </span>
+          </td>
+          <td class="text-center">
+            <button type="button" class="btn btn-sm rounded-circle btn-primary" (click)="showModal(mem)">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+          </td>
+          <td class="text-center">
+            <div *ngIf="usr.user._id === project.leaderid">
+              <button *ngIf="mem.id_member !== project.leaderid" type="button" class="btn btn-sm rounded-circle btn-danger" (click)="disabledMember(usr)">
                 <fa-icon [icon]="faTrash"></fa-icon>
               </button>
             </div>
-          </th>
+          </td>
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="d-none d-xl-block" *ngIf="activeModal">
+    <div class="d-flex w-100 h-100 justify-content-center align-items-center overflow-auto position-absolute"
+    style="top:0%; left: 0%; background: rgba( 0, 0, 0, 0.5); z-index: 9999;">
+      <div class="row">
+        <mat-card class="card" >
+          <h1>Calificar</h1>
+          <div class="row">
+            <div class="col-6">
+              <span class="fw-bold">Nombres:</span>
+              <br>
+              <span>{{memberQualify.name +''+memberQualify.lastname}}</span>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="fw-bold d-flex align-items-center col-3 text-nowrap">
+                  <span>Nota:</span>
+                </div>
+                <div class="col-9">
+                  <span [class.red]="qualify >= 1 && qualify < 5" [class.yellow]="qualify >= 5 && qualify < 8"  [class.green]="qualify >= 8" class="h1">
+                    {{ qualify }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1"
+            step="1"
+            min="0"
+            max="10"
+            color="primary"
+            aria-label="units"
+            #gridsize
+            (change)="getValue($event)"></mat-slider>
+          <div class="row">
+            <div class="col">
+              <button (click)="activeModal = false" class="btn btn-danger btn-sm float-start">
+                Cancelar
+              </button>
+            </div>
+            <div class="col">
+              <button  [disabled]="qualify === 0" (click)="qualifyMember(memberQualify)" class="btn btn-success btn-sm float-end">
+                Calificar
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>
