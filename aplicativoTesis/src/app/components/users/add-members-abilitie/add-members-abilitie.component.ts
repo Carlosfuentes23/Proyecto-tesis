@@ -196,21 +196,47 @@ export class AddMembersAbilitieComponent implements OnInit {
     const fecha = new Date();
     if(this.phaseId){
       var note : notes ={
-        note: this.qualify,
+        note: this.qualify.toString(),
         date: fecha.toString(),
         phaseId: this.phaseId
       }
-      if(usr.notes){
-        usr.notes.push(note);
-        console.log(usr)
+
+      if(usr.notes && usr.notes.length>0){
+        let index = usr.notes.findIndex((note: notes) =>{
+          return note.phaseId === this.phaseId
+        })
+        console.log(index)
+        usr.notes[index]= note
+        this.saveQualify()
+      }else{
+        if(usr.notes){
+          usr.notes.push(note);
+          this.saveQualify()
+        }
       }
     }
   }
 
+  saveQualify(){
+    this.abilitieService.updateAbilitie(this.abilitie).subscribe(()=>{
+      Swal.fire({
+        title: '¡Hecho!',
+        text: 'Se ha calificado al integrante exitosamente',
+        icon: 'success',
+      }).then(() => {
+        this.activeModal = false;
+        this.addOrListMembers();
+        if(this.id){
+          this.getAbilitie(this.id);
+        }
+      })
+    })
+  }
 
   formatLabel(value: number) {
     return Math.round(value);
   }
+
   getValue(event:any){
     this.qualify = event.value
   }

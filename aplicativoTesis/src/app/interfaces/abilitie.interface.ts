@@ -18,7 +18,7 @@ export type members = {
 }
 
 export type notes = {
-    note?: number
+    note?: string
     date?: string
     phaseId?: string
 }
