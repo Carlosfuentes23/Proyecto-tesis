@@ -20,6 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MatSliderModule } from '@angular/material/slider';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatAutocompleteModule,
     MatTabsModule,
     MatSliderModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgChartsModule
   ],
   exports: [
     MatFormFieldModule,
@@ -66,7 +68,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatTabsModule,
     NavbarComponent,
     MatSliderModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgChartsModule
   ]
 })
 export class SharedModule { }

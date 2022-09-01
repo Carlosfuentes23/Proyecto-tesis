@@ -1,7 +1,7 @@
 <div class="cont">
   <div class="row mt-3">
     <div class="col-md-6 col-12" style="height: 220px;">
-      <mat-card class="tergeta">
+      <mat-card class="tergeta"  style=" height: 100%;overflow: auto;">
         <div class="row">
           <div class="col">
             <h2>Datos de La habilidad</h2>
@@ -14,7 +14,7 @@
       </mat-card>
     </div>
     <div class="col-md-6 col-12 mt-md-0 mt-2" style="height: 220px;">
-      <mat-card class="tergeta">
+      <mat-card class="tergeta"  style=" height: 100%;overflow: auto;">
         <div class="row">
           <div class="col">
             <h2 class="int">
@@ -23,10 +23,10 @@
           </div>
           <div class="col" *ngIf="leader._id === user.user._id && phaseId" >
             <div class="col">
-              <a class="btn btn-success btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/members-abilities/'+id">Calificar</a>
+              <a title='Calificar' class="btn btn-success btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/members-abilities/'+id"><fa-icon [icon]="faEdit"></fa-icon></a>
             </div>
-            <div  class="col">
-              <a class="btn btn-primary btn-sm float-end me-2" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id">Agregar</a>
+            <div class="col">
+              <button title='Agregar' class="btn btn-primary btn-sm float-end me-2" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id"><fa-icon [icon]="faPlus"></fa-icon></button>
             </div>
           </div>
         </div>
@@ -58,50 +58,18 @@
   </div>
   <hr>
   <div class="row mt-3">
-    <div class="col">
+    <div *ngIf="seeCart" class="col">
       <mat-card class="tergeta">
         <h3>Estadisticas</h3>
         <div class="row">
-          <canvas id="myChart" width="400" height="400">
-
+          <canvas baseChart
+                [legend]="true"
+                [type]="'bar'"
+                [options]="barChartOptions"
+                [datasets]="chartData"
+                [labels]="chartLabels"
+                [options]="chartOptions">
           </canvas>
-          <script>
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            </script>
         </div>
       </mat-card>
     </div>

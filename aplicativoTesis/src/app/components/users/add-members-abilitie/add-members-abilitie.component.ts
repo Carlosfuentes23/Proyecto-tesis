@@ -205,7 +205,6 @@ export class AddMembersAbilitieComponent implements OnInit {
         let index = usr.notes.findIndex((note: notes) =>{
           return note.phaseId === this.phaseId
         })
-        console.log(index)
         usr.notes[index]= note
         this.saveQualify()
       }else{

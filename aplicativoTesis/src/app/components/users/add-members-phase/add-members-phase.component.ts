@@ -81,7 +81,6 @@ export class AddMembersPhaseComponent implements OnInit {
         this.users = users.filter((user) => {
           return !res.some((member) => member._id === user._id);
         });
-        //console.log(this.users);
     });
 
   }

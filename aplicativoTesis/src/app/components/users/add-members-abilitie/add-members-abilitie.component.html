@@ -24,7 +24,7 @@
           <td>{{member.skills?.length}}</td>
           <td class="text-center">{{member.projects?.length}}</td>
           <td *ngIf="usr.user._id === project.leaderid" class="text-center">
-            <button class="btn btn-primary btn-sm" (click)="addMember(member)">Añadir</button>
+            <button class="btn btn-primary btn-sm" (click)="addMember(member)"><fa-icon [icon]="faPlus"></fa-icon></button>
           </td>
         </tr>
     </table>

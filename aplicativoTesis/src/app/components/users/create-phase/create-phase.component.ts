@@ -57,15 +57,9 @@ export class CreatePhaseComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.id){
-      console.log(this.id);
       this.getAbilitesProject(this.id);
     }
   }
-
-  seeAbilitie() {
-    console.log(this.form.get('abilitie')?.value.name);
-  }
-
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -202,7 +196,6 @@ export class CreatePhaseComponent implements OnInit {
   getAbilitesProject(projectId: string) {
     this.abilitieService.getAbilitieByProjectId(projectId).subscribe((res: Abilitie[]) => {
       this.abilitieList = res;
-      console.log(res);
     });
   }
 }
