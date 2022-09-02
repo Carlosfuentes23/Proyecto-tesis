@@ -15,7 +15,7 @@
       </mat-card>
     </div>
     <div class="col-md-6 col-12 mt-md-0 mt-2" style="height: 220px;">
-      <mat-card class="tergeta">
+      <mat-card class="tergeta" style=" height: 100%;overflow: auto;">
         <div class="row">
           <div class="col">
             <h2 class="int">
@@ -61,7 +61,7 @@
   <hr />
   <div class="row my-3" style="height: 220px;">
     <div class="col-md-6 col-12">
-      <mat-card class="tergeta">
+      <mat-card class="tergeta" style=" height: 100%;overflow: auto;">
         <div class="row">
           <div class="col">
             <h2>
@@ -96,11 +96,14 @@
     <div class="col-md-6 col-12 mt-md-0 mt-2 pb-md-0 pb-3">
       <mat-card class="tergeta">
         <h2>Estadisticas</h2>
-        <div class="col">
-          <mat-card>
-            Estadistica 1
-            <img src="assets/img/tarta_1_0.png" style="height: 165px" />
-          </mat-card>
+        <div *ngIf="seeCart" class="col">
+          <canvas baseChart
+                [legend]="true"
+                [type]="'bar'"
+                [options]="barChartOptions"
+                [datasets]="chartData"
+                [labels]="chartLabels">
+          </canvas>
         </div>
       </mat-card>
     </div>

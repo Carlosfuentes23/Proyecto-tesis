@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Abilitie } from 'src/app/interfaces/abilitie.interface';
+import { faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Abilitie, notes, members } from 'src/app/interfaces/abilitie.interface';
 import { Phase } from 'src/app/interfaces/phase.interface';
 import { Project } from 'src/app/interfaces/project.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -21,6 +22,41 @@ export class PhaseComponent implements OnInit {
   phaseMembers: User[] = [];
   abilities: Abilitie[] = [];
   user = JSON.parse(sessionStorage.getItem("USER")!);
+  faPlus = faPlus;
+  faEdit = faEdit;
+  notes: number [] = []
+  bgColors: string[] = []
+  hoverBgColors: string[] = []
+  seeCart = false;
+
+  chartData = [
+    {
+      data: this.notes,
+      label: 'Habilidades',
+      backgroundColor: this.bgColors,
+      hoverBackgroundColor: this.hoverBgColors,
+      borderColor: 'black',
+    }
+  ];
+
+  chartLabels: string[] =[];
+
+  public barChartOptions = {
+    responsive: true,
+    scales: {
+      x: {},
+      y: {
+        min:0,
+        max: 10
+      }
+    },
+    backgroundColor: 'rgba(255,0,0,0,0.3)',
+    borderColor: 'black',
+    labels: {
+      boxWidth: 80,
+      fontColor: 'black'
+    }
+  }
 
 
   constructor(
@@ -69,6 +105,44 @@ export class PhaseComponent implements OnInit {
   getAbilities(phaseId: string): void {
     this.phaseService.getPhaseAbilities(phaseId).subscribe((data: Abilitie[]) => {
       this.abilities = data;
+      this.getChartData(data);
     });
+  }
+
+  getChartData(data:Abilitie[]){
+    data.forEach(abilitie =>{
+      if(abilitie.name){
+        this.chartLabels.push(abilitie.name)
+      }
+      if(abilitie.members){
+        this.notePromAbilitie(abilitie.members)
+      }
+    })
+    this.seeCart = true;
+    console.log(this.chartLabels)
+    console.log(this.notes)
+  }
+
+  notePromAbilitie(data: members[]){
+    let prom = 0
+    data.forEach(member=>{
+      member.notes?.forEach(note =>{
+        if(note.phaseId === this.id && note.note){
+          prom = prom + Number(note.note)
+        }
+      })
+    })
+    console.log(1)
+    this.notes.push(prom/data.length)
+    if((prom/data.length) >= 1 && (prom/data.length) < 5){
+      this.hoverBgColors.push('#ff3232')
+      this.bgColors.push('#fe6160')
+    }else if((prom/data.length) >= 5 && (prom/data.length) < 8){
+      this.bgColors.push('#fdff82')
+      this.hoverBgColors.push('#f9fc3f')
+    }else{
+      this.bgColors.push('#9acfa3')
+      this.hoverBgColors.push('#71cf80')
+    }
   }
 }

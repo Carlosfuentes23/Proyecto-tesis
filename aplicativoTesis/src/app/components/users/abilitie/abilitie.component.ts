@@ -44,6 +44,7 @@ export class AbilitieComponent implements OnInit {
   chartLabels: string[] =[];
 
   public barChartOptions = {
+    responsive: true,
     scales: {
       x: {},
       y: {
