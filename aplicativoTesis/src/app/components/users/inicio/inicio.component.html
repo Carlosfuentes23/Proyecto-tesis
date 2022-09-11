@@ -105,13 +105,13 @@
     <div class="col">
       <mat-card>
         <div class="row">
-          <div class="col-6">
+          <div class="col-12 col-sm-6">
             <h2>Estadisticas</h2>
           </div>
-          <div class="col-6">
-            <div class="d-flex float-end">
+          <div class="col-12 col-sm-6">
+            <div class="d-flex float-sm-end">
               <span class="pt-2" style="font-weight: 500;"> Proyecto: </span>  &nbsp;
-              <select [formControl]="select" name="" id="" class="form-select" (change)="getAbilitiesByProject(select.value)">
+              <select style="width: 300px;" [formControl]="select" name="" id="" class="form-select" (change)="getAbilitiesByProject(select.value)">
                 <option *ngFor="let project of selectProjects" [value]="project._id">
                   {{ project.name | titlecase }}
                 </option>
