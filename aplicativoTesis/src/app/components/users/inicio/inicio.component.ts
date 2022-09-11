@@ -21,7 +21,7 @@ export class InicioComponent implements OnInit {
   id: string | null;
   selectedTab: 'lead' | 'dev' = 'lead';
   userAbilities: Abilitie[] = [];
-  selectProjects: Project[] =[]
+  selectProjects: Project[] = [];
   select = new FormControl;
 
   notes: number [] = []
@@ -153,7 +153,7 @@ export class InicioComponent implements OnInit {
     if(abilities){
       abilities.forEach(element => {
         element.members?.forEach(member =>{
-          if(member.id_member === this.id){
+          if(member.id_member === this.id ){
             this.userAbilities.push(element);
             this.setNotesAbilite(member)
             if(element.name)

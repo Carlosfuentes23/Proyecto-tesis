@@ -106,16 +106,23 @@
       <mat-card>
         <div class="row">
           <div class="col-6">
-            <h3>Estadisticas</h3>
+            <h2>Estadisticas</h2>
           </div>
           <div class="col-6">
-            <div class="float-end">
+            <div class="d-flex float-end">
+              <span class="pt-2" style="font-weight: 500;"> Proyecto: </span>  &nbsp;
               <select [formControl]="select" name="" id="" class="form-select" (change)="getAbilitiesByProject(select.value)">
                 <option *ngFor="let project of selectProjects" [value]="project._id">
                   {{ project.name | titlecase }}
                 </option>
               </select>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="p-3" *ngIf="!seeCart">
+            <div class="h5">El usuario no cuenta</div>
+            <div class="h7">con ninguna estadistica en este proyecto</div>
           </div>
         </div>
         <div *ngIf="seeCart" class="row pt-5">
