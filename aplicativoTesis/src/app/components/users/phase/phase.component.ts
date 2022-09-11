@@ -119,8 +119,6 @@ export class PhaseComponent implements OnInit {
       }
     })
     this.seeCart = true;
-    console.log(this.chartLabels)
-    console.log(this.notes)
   }
 
   notePromAbilitie(data: members[]){
@@ -132,7 +130,6 @@ export class PhaseComponent implements OnInit {
         }
       })
     })
-    console.log(1)
     this.notes.push(prom/data.length)
     if((prom/data.length) >= 1 && (prom/data.length) < 5){
       this.hoverBgColors.push('#ff3232')

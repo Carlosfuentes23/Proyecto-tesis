@@ -105,24 +105,27 @@
     <div class="col">
       <mat-card>
         <div class="row">
-          <div class="col">
-            <mat-card>
-              Estadistica 1
-              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
-            </mat-card>
+          <div class="col-6">
+            <h3>Estadisticas</h3>
           </div>
-          <div class="col">
-            <mat-card>
-              Estadistica 2
-              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
-            </mat-card>
+          <div class="col-6">
+            <div class="float-end">
+              <select [formControl]="select" name="" id="" class="form-select" (change)="getAbilitiesByProject(select.value)">
+                <option *ngFor="let project of selectProjects" [value]="project._id">
+                  {{ project.name | titlecase }}
+                </option>
+              </select>
+            </div>
           </div>
-          <div class="col">
-            <mat-card>
-              Estadistica 3
-              <img src="assets/img/tarta_1_0.png" style="height: 165px" />
-            </mat-card>
-          </div>
+        </div>
+        <div *ngIf="seeCart" class="row pt-5">
+          <canvas baseChart
+                [legend]="true"
+                [type]="'bar'"
+                [options]="barChartOptions"
+                [datasets]="chartData"
+                [labels]="chartLabels">
+          </canvas>
         </div>
       </mat-card>
     </div>

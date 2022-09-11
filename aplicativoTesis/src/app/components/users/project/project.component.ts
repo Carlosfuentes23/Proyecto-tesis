@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Abilitie } from 'src/app/interfaces/abilitie.interface';
+import { Abilitie, members } from 'src/app/interfaces/abilitie.interface';
 import { Phase } from 'src/app/interfaces/phase.interface';
 
 import { Project } from 'src/app/interfaces/project.interface';
@@ -22,6 +22,43 @@ export class ProjectComponent implements OnInit {
   projectPhases: Phase[] = [];
   projectAbilities: Abilitie[] = [];
   user = JSON.parse(sessionStorage.getItem("USER")!);
+  notes: number [] = []
+  bgColors: string[] = []
+  hoverBgColors: string[] = []
+  seeCart = false;
+
+  chartData = [
+    {
+      data: this.notes,
+      label: '',
+      backgroundColor: this.bgColors,
+      hoverBackgroundColor: this.hoverBgColors,
+      borderColor: 'black',
+    }
+  ];
+
+  chartLabels: string[] =[];
+
+  public barChartOptions = {
+    responsive: true,
+    scales: {
+      x: {},
+      y: {
+        min:0,
+        max: 10
+      }
+    },
+    backgroundColor: 'rgba(255,0,0,0,0.3)',
+    borderColor: 'black',
+    labels: {
+      boxWidth: 80,
+      fontColor: 'black'
+    }
+  }
+
+  chartOptions = {
+    responsive: true
+  };
 
   constructor(
     private userService: UsersService,
@@ -72,6 +109,39 @@ export class ProjectComponent implements OnInit {
   getAbilitie(id: string): void {
     this.abilitieService.getAbilitieByProjectId(id).subscribe((data: Abilitie[]) => {
       this.projectAbilities = data;
+      data.forEach(abilitie =>{
+        this.getChartDdata(abilitie)
+      })
     });
+  }
+
+  getChartDdata(abi: Abilitie){
+    if(abi.name){
+      this.chartLabels.push(abi.name)
+    }
+    if(abi.members){
+      this.getPromAbilitie(abi.members)
+      this.seeCart=true;
+    }
+  }
+
+  getPromAbilitie(members:members[]){
+    let prom = 0
+    members.forEach(element => {
+      element.notes?.forEach(element => {
+        prom = prom + Number(element.note)
+      });
+    });
+    this.notes.push(prom/members.length)
+    if((prom/members.length) >= 1 && (prom/members.length) < 5){
+      this.hoverBgColors.push('#ff3232')
+      this.bgColors.push('#fe6160')
+    }else if((prom/members.length) >= 5 && (prom/members.length) < 8){
+      this.bgColors.push('#fdff82')
+      this.hoverBgColors.push('#f9fc3f')
+    }else{
+      this.bgColors.push('#9acfa3')
+      this.hoverBgColors.push('#71cf80')
+    }
   }
 }

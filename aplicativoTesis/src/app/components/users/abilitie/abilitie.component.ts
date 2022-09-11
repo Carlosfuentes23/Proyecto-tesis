@@ -60,10 +60,6 @@ export class AbilitieComponent implements OnInit {
     }
   }
 
-  chartOptions = {
-    responsive: true
-  };
-
   constructor(
     private aRoute : ActivatedRoute,
     private projectService: ProjectsService,
