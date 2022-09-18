@@ -27,6 +27,7 @@ export class AbilitieComponent implements OnInit {
   notes: number [] = []
   bgColors: string[] = []
   hoverBgColors: string[] = []
+  projectState: string =''
   seeCart = false;
   faPlus = faPlus;
   faEdit = faEdit;
@@ -55,7 +56,7 @@ export class AbilitieComponent implements OnInit {
     backgroundColor: 'rgba(255,0,0,0,0.3)',
     borderColor: 'black',
     labels: {
-      boxWidth: 80,
+      boxWidth: 0,
       fontColor: 'black'
     }
   }
@@ -88,6 +89,8 @@ export class AbilitieComponent implements OnInit {
   getAbilitiesById(userId: string): void {
     this.abilitieService.getAbilitieById(userId).subscribe((data: Abilitie) => {
       this.abilitie = data;
+      if(data.name)
+        this.chartData[0].label = data.name
       if(data.members)
         this.getChartData(data.members)
     })
@@ -119,9 +122,6 @@ export class AbilitieComponent implements OnInit {
   getPhase(id: string): void {
     this.phaseService.getPhase(id).subscribe((data: Phase) => {
       this.phase = data;
-      if(this.phase.name){
-        this.chartData[0].label = this.phase.name
-      }
       if(this.phase.projectid){
         this.getLeader(this.phase.projectid);
       }
@@ -130,7 +130,8 @@ export class AbilitieComponent implements OnInit {
 
   getLeader(projectId:string): void  {
     this.projectService.getProject(projectId).subscribe((data: Project) => {
-      if (data.leaderid) {
+      if (data.leaderid && data.state) {
+        this.projectState = data.state
         this.userService.getUser(data.leaderid).subscribe((data: User) => {
           this.leader = data;
         })

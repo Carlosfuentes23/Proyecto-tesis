@@ -24,7 +24,7 @@
           <td>{{member.skills?.length}}</td>
           <td class="text-center">{{member.projects?.length}}</td>
           <td *ngIf="usr.user._id === project.leaderid" class="text-center">
-            <button class="btn btn-primary btn-sm" (click)="addMember(member)"><fa-icon [icon]="faPlus"></fa-icon></button>
+            <button [disabled]="phase.state === 'CLOSE' || project.state === 'CLOSE'" class="btn btn-primary btn-sm" (click)="addMember(member)"><fa-icon [icon]="faPlus"></fa-icon></button>
           </td>
         </tr>
     </table>
@@ -49,13 +49,13 @@
             </span>
           </td>
           <td class="text-center">
-            <button type="button" class="btn btn-sm rounded-circle btn-primary" (click)="showModal(mem)">
+            <button type="button" class="btn btn-sm rounded-circle btn-primary" [disabled]="phase.state === 'CLOSE' || project.state === 'CLOSE'" (click)="showModal(mem)">
               <fa-icon [icon]="faEdit"></fa-icon>
             </button>
           </td>
           <td class="text-center">
             <div *ngIf="usr.user._id === project.leaderid">
-              <button *ngIf="mem.id_member !== project.leaderid" type="button" class="btn btn-sm rounded-circle btn-danger" (click)="disabledMember(usr)">
+              <button *ngIf="mem.id_member !== project.leaderid" [disabled]="phase.state === 'CLOSE' || project.state === 'CLOSE'" type="button" class="btn btn-sm rounded-circle btn-danger" (click)="disabledMember(usr)">
                 <fa-icon [icon]="faTrash"></fa-icon>
               </button>
             </div>

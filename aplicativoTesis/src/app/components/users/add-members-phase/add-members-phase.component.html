@@ -30,12 +30,12 @@
         <td class="text-center" *ngIf="!user.projects?.length">0</td>
         <td class="text-center" *ngIf="usr.user._id === project.leaderid">
           <div>
-            <button *ngIf="addOrNot" type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)">
+            <button *ngIf="addOrNot" [disabled]="pashe.state === 'CLOSE' || project.state === 'CLOSE'" type="button" class="btn btn-sm rounded-circle btn-primary" (click)="addMember(user)">
               <fa-icon class="fs-14" [icon]="faPlus"></fa-icon>
             </button>
           </div>
           <div *ngIf="user._id !== project.leaderid">
-            <button *ngIf="!addOrNot" type="button"class="btn btn-sm rounded-circle btn-danger" (click)="removeMember(user)">
+            <button *ngIf="!addOrNot" [disabled]="pashe.state === 'CLOSE' || project.state === 'CLOSE'" type="button"class="btn btn-sm rounded-circle btn-danger" (click)="removeMember(user)">
               <fa-icon [icon]="faTrash"></fa-icon>
             </button>
           </div>

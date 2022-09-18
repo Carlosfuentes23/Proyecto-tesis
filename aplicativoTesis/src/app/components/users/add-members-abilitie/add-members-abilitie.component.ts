@@ -1,6 +1,5 @@
 import Swal from 'sweetalert2';
 import { Project } from './../../../interfaces/project.interface';
-import { UsersService } from './../../../services/api/users.service';
 import { ProjectsService } from './../../../services/api/projects.service';
 import { Phase } from './../../../interfaces/phase.interface';
 import { Component, OnInit } from '@angular/core';

@@ -1,3 +1,4 @@
+import Swal  from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Abilitie, members } from 'src/app/interfaces/abilitie.interface';
@@ -30,7 +31,7 @@ export class ProjectComponent implements OnInit {
   chartData = [
     {
       data: this.notes,
-      label: '',
+      label: 'Habilidades',
       backgroundColor: this.bgColors,
       hoverBackgroundColor: this.hoverBgColors,
       borderColor: 'black',
@@ -143,5 +144,24 @@ export class ProjectComponent implements OnInit {
       this.bgColors.push('#9acfa3')
       this.hoverBgColors.push('#71cf80')
     }
+  }
+
+  closeProject(){
+    Swal.fire({
+      icon:'warning',
+      title:'¿Seguro que desea cerrar el pryecto?',
+      text: 'Si cierra el pryecto no padra editarlo de nuevo',
+      showCancelButton: true,
+      cancelButtonColor: 'red',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        this.project.state = 'CLOSE'
+        this.projectService.updateProject(this.project).subscribe(()=>{
+          this.ngOnInit();
+        })
+      }
+    })
   }
 }

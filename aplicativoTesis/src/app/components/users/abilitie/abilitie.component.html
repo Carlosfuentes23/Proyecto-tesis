@@ -23,16 +23,17 @@
           </div>
           <div class="col" *ngIf="leader._id === user.user._id && phaseId" >
             <div class="col">
-              <a title='Calificar' class="btn btn-success btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/members-abilities/'+id"><fa-icon [icon]="faEdit"></fa-icon></a>
+              <button title='Calificar' [disabled]="phase.state === 'CLOSE' || projectState === 'CLOSE'" class="btn btn-success btn-sm float-end" [routerLink]="'/user/phase/'+phaseId+'/members-abilities/'+id"><fa-icon [icon]="faEdit"></fa-icon></button>
             </div>
             <div class="col">
-              <button title='Agregar' class="btn btn-primary btn-sm float-end me-2" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id"><fa-icon [icon]="faPlus"></fa-icon></button>
+              <button [disabled]="phase.state === 'CLOSE' || projectState === 'CLOSE'" title='Agregar' class="btn btn-primary btn-sm float-end me-2" [routerLink]="'/user/phase/'+phaseId+'/add-members-abilities/'+id"><fa-icon [icon]="faPlus"></fa-icon></button>
             </div>
           </div>
         </div>
         <div class="row" *ngIf="!abilitie?.members?.length">
-          <div class="h3">
-            Esta habilidad aun no cuenta con mienbros asignados
+          <div class="p-3">
+            <div class="h5">La Habilidad no cuenta</div>
+            <div class="h7">con integrantes asignados</div>
           </div>
         </div>
         <div class="table-responsive" *ngIf="abilitie?.members?.length">

@@ -8,6 +8,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { PhasesService } from 'src/app/services/api/phases.service';
 import { ProjectsService } from 'src/app/services/api/projects.service';
 import { UsersService } from 'src/app/services/api/users.service';
+import Swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-phase',
@@ -28,6 +29,7 @@ export class PhaseComponent implements OnInit {
   bgColors: string[] = []
   hoverBgColors: string[] = []
   seeCart = false;
+  projectState: string ='';
 
   chartData = [
     {
@@ -94,7 +96,8 @@ export class PhaseComponent implements OnInit {
 
   getLeader(projectId:string): void  {
     this.projectService.getProject(projectId).subscribe((data: Project) => {
-      if (data.leaderid) {
+      if (data.leaderid && data.state) {
+        this.projectState = data.state;
         this.userService.getUser(data.leaderid).subscribe((data: User) => {
           this.leader = data;
         });
@@ -141,5 +144,24 @@ export class PhaseComponent implements OnInit {
       this.bgColors.push('#9acfa3')
       this.hoverBgColors.push('#71cf80')
     }
+  }
+
+  closePhase(){
+    Swal.fire({
+      icon:'warning',
+      title:'¿Seguro que desea cerrar el pryecto?',
+      text: 'Si cierra el pryecto no padra editarlo de nuevo',
+      showCancelButton: true,
+      cancelButtonColor: 'red',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar'
+    }).then((result)=>{
+      if(result.isConfirmed && this.phase._id){
+        this.phase.state = 'CLOSE'
+        this.phaseService.updatePhase(this.phase, this.phase._id).subscribe(()=>{
+          this.ngOnInit();
+        })
+      }
+    })
   }
 }

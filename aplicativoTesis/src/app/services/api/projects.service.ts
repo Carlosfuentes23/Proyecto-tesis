@@ -28,7 +28,7 @@ export class ProjectsService {
   }
 
   updateProject(project: Project): Observable<Project> {
-    return this.httpClient.put<Project>(this.api_url + 'updateproject', project);
+    return this.httpClient.post<Project>(this.api_url + 'updateproject/' +project._id, project);
   }
 
   getProjectMembers(id: string): Observable<User[]> {
