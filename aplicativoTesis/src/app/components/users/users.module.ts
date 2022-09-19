@@ -13,7 +13,6 @@ import { CreatePhaseComponent } from './create-phase/create-phase.component';
 import { ProjectComponent } from './project/project.component';
 import { PhaseComponent } from './phase/phase.component';
 import { SelectRoleComponent } from './select-role/select-role.component';
-import { SelectProjectComponent } from './select-project/select-project.component';
 import { AddMembersProyectComponent } from './add-members-proyect/add-members-proyect.component';
 import { AddMembersPhaseComponent } from './add-members-phase/add-members-phase.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -33,7 +32,6 @@ import { AddMembersAbilitieComponent } from './add-members-abilitie/add-members-
     ProjectComponent,
     PhaseComponent,
     SelectRoleComponent,
-    SelectProjectComponent,
     AddMembersProyectComponent,
     AddMembersPhaseComponent,
     CreateAbilitieComponent,
