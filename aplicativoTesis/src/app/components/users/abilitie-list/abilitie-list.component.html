@@ -1,10 +1,17 @@
 <div class="cont">
   <div class="row h1">
-    Agregar habilidad
+    <div class="h1 col-6">
+      Agregar habilidad
+    </div>
+    <div class="col-6">
+      <button class="btn btn-danger float-end" [routerLink]="['/user/phase', this.id]">
+        volver
+      </button>
+    </div>
   </div>
   <div class="row mt-2">
     <div class="col table-resonsive">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>Habilidad</th>

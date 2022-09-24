@@ -36,7 +36,7 @@
             <div class="h7">con fases creadas</div>
           </div>
         </div>
-        <table class="table table-striped"  *ngIf="projectPhases && projectPhases.length > 0">
+        <table class="table table-hover  table-striped"  *ngIf="projectPhases && projectPhases.length > 0">
           <thead>
             <tr>
               <th scope="col">No.</th>
@@ -82,7 +82,7 @@
             <div class="h7">con integrantes asignados</div>
           </div>
         </div>
-        <table class="table table-striped" *ngIf="projectMembers.length > 0">
+        <table class="table table-hover table-striped" *ngIf="projectMembers.length > 0">
           <thead>
             <tr>
               <th scope="col">No.</th>
@@ -123,5 +123,11 @@
       </mat-card>
     </div>
   </div>
-  <hr>
+  <div class="row mt-3">
+    <div class="col">
+      <button class="btn btn-danger float-end" [routerLink]="['/user']">
+        volver
+      </button>
+    </div>
+  </div>
 </div>

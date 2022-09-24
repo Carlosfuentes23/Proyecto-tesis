@@ -115,7 +115,7 @@ export class CreateAbilitieComponent implements OnInit {
     if(this.abilitieMembers.length > 0){
       Swal.fire({
         title: '¿Estas seguro?',
-        text: `¿Deseas guardar la abilidad?`,
+        text: `¿Deseas guardar la habilidad?`,
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

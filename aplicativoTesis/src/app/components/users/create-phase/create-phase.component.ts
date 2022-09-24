@@ -111,7 +111,7 @@ export class CreatePhaseComponent implements OnInit {
       this.phaseService.createPhase(this.phase).subscribe(() => {
         Swal.fire({
           icon: 'success',
-          title: 'Fase Creada con exitosamente',
+          title: 'Fase creada con exitosamente',
           text: this.form.value.namePhase,
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
@@ -159,7 +159,7 @@ export class CreatePhaseComponent implements OnInit {
     }else{
       Swal.fire({
         title: '¿Estas seguro?',
-        text: `¿Deseas guardar la fase sin abilidades?`,
+        text: `¿Deseas guardar la fase sin habilidades?`,
         icon: 'question',
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',

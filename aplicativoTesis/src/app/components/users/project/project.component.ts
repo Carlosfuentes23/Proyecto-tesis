@@ -149,8 +149,8 @@ export class ProjectComponent implements OnInit {
   closeProject(){
     Swal.fire({
       icon:'warning',
-      title:'¿Seguro que desea cerrar el pryecto?',
-      text: 'Si cierra el pryecto no padra editarlo de nuevo',
+      title:'¿Seguro que desea cerrar el proyecto?',
+      text: 'Si cierra el pryecto no padra editarlo nuevamete',
       showCancelButton: true,
       cancelButtonColor: 'red',
       cancelButtonText: 'Cancelar',

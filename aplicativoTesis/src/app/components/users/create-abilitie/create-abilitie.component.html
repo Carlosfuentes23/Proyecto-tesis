@@ -1,6 +1,6 @@
 <div class="cont">
     <div class="row h1">
-        <span>Crear Abilidad</span>
+        <span>Crear Habilidad</span>
     </div>
     <form  [formGroup]="form">
       <div class="form">
@@ -32,7 +32,7 @@
       </div>
     </form>
     <div class="pt-3">
-        <table class="table table-responsive">
+        <table class="table table-hover table-responsive">
             <thead>
                 <tr>
                     <th scope="col">Nombres</th>
@@ -54,7 +54,15 @@
                 </tr>
         </table>
     </div>
-    <div>
-        <button class="btn btn-primary float-end" [disabled]="this.form.invalid" (click)="saveAbilitie()">Crear abilidad</button>
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-danger float-start" [routerLink]="['/user/phase', this.id]">
+          volver
+        </button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-primary float-end" [disabled]="this.form.invalid" (click)="saveAbilitie()">Crear habilidad</button>
+      </div>
+
     </div>
 </div>

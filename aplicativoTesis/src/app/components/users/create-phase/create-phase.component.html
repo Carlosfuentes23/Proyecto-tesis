@@ -53,7 +53,7 @@
               </span>
             </div>
             <div class="table-responsive">
-              <table class="table table-striped"  *ngIf="abilitieList.length">
+              <table class="table table-hover table-striped"  *ngIf="abilitieList.length">
                 <thead>
                   <tr>
                     <th>Habilidad</th>
@@ -78,7 +78,7 @@
         </div>
         <div class="row">
           <div class="col">
-              <button [routerLink]="['/User']" type="button"  mat-raised-button color="warn" class="float-star">
+              <button [routerLink]="['/user/project/' + this.id]" type="button"  mat-raised-button color="warn" class="float-star">
                   Volver
               </button>
           </div>

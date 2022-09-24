@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="table-responsive" *ngIf="abilitie?.members?.length">
-          <table class="table table-striped">
+          <table class="table  table-hover table-striped">
             <thead>
               <tr>
                 <th scope="col">No.</th>
@@ -72,6 +72,13 @@
           </canvas>
         </div>
       </mat-card>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <button class="btn btn-danger float-end" [routerLink]="['/user/phase', phaseId]">
+        volver
+      </button>
     </div>
   </div>
 </div>

@@ -1,12 +1,19 @@
 <div class="cont">
   <div class="row h1">
-    <span  *ngIf="addOrNot">Agregar Integrantes</span>
-    <span *ngIf="!addOrNot">Lista de Integrantes</span>
+    <div class="col-6 h1">
+      <span *ngIf="addOrNot">Agregar Integrantes</span>
+      <span *ngIf="!addOrNot">Lista de Integrantes</span>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-danger float-end">
+        volver
+      </button>
+    </div>
   </div>
   <div class="h3 mt-2" *ngIf="!users">
     No hay integrantes para agregar a este proyecto
   </div>
-  <table class="table"  *ngIf="users">
+  <table class="table table-hover"  *ngIf="users">
       <thead>
         <tr>
           <th scope="col">Nombres</th>
