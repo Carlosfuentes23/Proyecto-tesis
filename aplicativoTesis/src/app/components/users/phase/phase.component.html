@@ -83,7 +83,7 @@
             <button [disabled]="projectState === 'CLOSE' || phase.state ===  'CLOSE'"  class="btn btn-success btn-sm float-end" [routerLink]="'/user/add-abiblitie-phase/'+ this.id"> Añadir</button>
           </div>
         </div>
-        <div class="table-responsive" *ngIf="abilities.length > 0">
+        <div class="table-responsive" *ngIf="abilities && abilities.length > 0">
           <table class="table table-hover table-striped table-responsive">
             <thead>
               <tr>
@@ -101,7 +101,7 @@
             </tbody>
           </table>
         </div>
-        <div class="row" *ngIf="abilities.length ===0">
+        <div class="row" *ngIf="!abilities">
           <div class="p-3">
             <div class="h5">La fase no cuenta</div>
             <div class="h7">con abilidades creadas o asignadas</div>

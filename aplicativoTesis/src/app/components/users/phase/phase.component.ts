@@ -113,15 +113,17 @@ export class PhaseComponent implements OnInit {
   }
 
   getChartData(data:Abilitie[]){
-    data.forEach(abilitie =>{
-      if(abilitie.name){
-        this.chartLabels.push(abilitie.name)
-      }
-      if(abilitie.members){
-        this.notePromAbilitie(abilitie.members)
-      }
-    })
-    this.seeCart = true;
+    if(data){
+      data.forEach(abilitie =>{
+        if(abilitie.name){
+          this.chartLabels.push(abilitie.name)
+        }
+        if(abilitie.members){
+          this.notePromAbilitie(abilitie.members)
+        }
+      })
+      this.seeCart = true;
+    }
   }
 
   notePromAbilitie(data: members[]){

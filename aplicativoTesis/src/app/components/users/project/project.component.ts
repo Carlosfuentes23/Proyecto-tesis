@@ -110,6 +110,7 @@ export class ProjectComponent implements OnInit {
   getAbilitie(id: string): void {
     this.abilitieService.getAbilitieByProjectId(id).subscribe((data: Abilitie[]) => {
       this.projectAbilities = data;
+      if(data)
       data.forEach(abilitie =>{
         this.getChartDdata(abilitie)
       })

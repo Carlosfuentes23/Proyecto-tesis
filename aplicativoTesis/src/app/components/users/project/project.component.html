@@ -10,7 +10,7 @@
             <button [disabled]="project.state === 'CLOSE'" class="btn btn-danger btn-sm float-end" (click)="closeProject()">Cerrar proyecto</button>
           </div>
         </div>
-        <div class="mt-4 mb-2">
+        <div class="mt-2 mb-2">
           <p><strong>Nombre del projecto:</strong> {{ project.name }}</p>
           <p><strong>Lider del projecto:</strong> {{ leader.name +" "+leader.last_name | titlecase}} </p>
           <p><strong>Fecha de inicio de Proyecto:</strong> {{ project.created_at| date: 'M/d/yyyy'}}</p>
@@ -19,7 +19,7 @@
       </mat-card>
     </div>
     <div class="col-md-6 col-12 mt-md-0 mt-2" style="height: 220px;">
-      <mat-card class="tergeta">
+      <mat-card class="tergeta"  style=" height: 100%;overflow: auto;">
         <div class="row">
           <div class="col">
             <h2>
