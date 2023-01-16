@@ -128,11 +128,16 @@ export class ProjectComponent implements OnInit {
   }
 
   getPromAbilitie(members:members[]){
+    let sum = 0
     let prom = 0
     members.forEach(element => {
       element.notes?.forEach(element => {
-        prom = prom + Number(element.note)
+        sum = sum + Number(element.note)
       });
+
+      if(element.notes)
+        prom = prom + (sum / element.notes.length)
+        sum = 0;
     });
     this.notes.push(prom/members.length)
     if((prom/members.length) >= 1 && (prom/members.length) < 5){

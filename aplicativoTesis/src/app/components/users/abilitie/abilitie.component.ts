@@ -98,6 +98,7 @@ export class AbilitieComponent implements OnInit {
 
   getChartData(data:members[]){
     this.seeCart = true;
+    console.log(data)
     data.forEach(element => {
       this.chartLabels.push(element.name+''+element.lastname)
       element.notes?.forEach(note =>{
@@ -116,6 +117,8 @@ export class AbilitieComponent implements OnInit {
         }
       })
     });
+
+    console.log(this.notes)
 
   }
 

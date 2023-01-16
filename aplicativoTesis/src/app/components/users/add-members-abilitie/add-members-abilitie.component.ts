@@ -192,6 +192,7 @@ export class AddMembersAbilitieComponent implements OnInit {
   }
 
   qualifyMember(usr: members){
+    console.log(this.phaseId)
     const fecha = new Date();
     if(this.phaseId){
       var note : notes ={
@@ -200,17 +201,24 @@ export class AddMembersAbilitieComponent implements OnInit {
         phaseId: this.phaseId
       }
 
-      if(usr.notes && usr.notes.length>0){
+      if(usr.notes && usr.notes.length){
+
         let index = usr.notes.findIndex((note: notes) =>{
           return note.phaseId === this.phaseId
         })
-        usr.notes[index]= note
-        this.saveQualify()
-      }else{
-        if(usr.notes){
-          usr.notes.push(note);
+        if(index != -1){
+          usr.notes[index]= note
+          this.saveQualify()
+        }else{
+          console.log('hola')
+          usr.notes.push(note)
           this.saveQualify()
         }
+      }else{
+          let notes: notes[] = []
+          notes.push(note)
+          usr.notes = notes
+          this.saveQualify()
       }
     }
   }
